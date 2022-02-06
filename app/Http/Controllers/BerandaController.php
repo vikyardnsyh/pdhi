@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Constants;
+use Illuminate\Http\Request;
+use App\Models\Dokter;
+use Illuminate\Support\Facades\Auth;
+
+class BerandaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $Akun = Auth::user()->username;
+        $IdKelasPengguna = Auth::user()->id_kelas_pengguna;
+
+        if ($IdKelasPengguna == Constants::ID_KELAS_PENGGUNA_ADMIN) {
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $AnggotaTerdaftar = Dokter::count();
+            $AnggotaTetap = "3";
+            $AnggotaTamu = "2";
+            $AnggotaAktif = "3";
+            $AnggotaNonaktif = "2";
+            return view('HalamanAdmin.beranda', compact('AnggotaTerdaftar','AnggotaTetap','AnggotaTamu','NamaAdmin','AnggotaAktif','AnggotaNonaktif'));
+        } else {
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $AnggotaTerdaftar = Dokter::count();
+            $AnggotaTetap = "3";
+            $AnggotaTamu = "2";
+            $AnggotaAktif = "3";
+            $AnggotaNonaktif = "2";
+            return view('HalamanAdmin.beranda', compact('AnggotaTerdaftar','AnggotaTetap','AnggotaTamu','NamaAdmin','AnggotaAktif','AnggotaNonaktif'));
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
