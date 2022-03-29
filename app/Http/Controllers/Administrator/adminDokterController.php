@@ -1,11 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Pengguna;;
+use Illuminate\Support\Facades\DB;
+use App\Models\Pengguna;
+use App\Models\Dokter;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redirect;
 
-class AdminAkunController extends Controller
+class adminDokterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +19,11 @@ class AdminAkunController extends Controller
      */
     public function index()
     {
-        $data = pengguna::all();
-        return view('HalamanAdmin.akun', compact ('data'));
+        $data = DB::table('dokter')
+                ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+                ->get();
+            
+        return view('Administrator.adminDokter.dataDokter', compact('data'));
     }
 
     /**

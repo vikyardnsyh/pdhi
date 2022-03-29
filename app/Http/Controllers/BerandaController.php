@@ -22,23 +22,17 @@ class BerandaController extends Controller
         if ($IdKelasPengguna == Constants::ID_KELAS_PENGGUNA_ADMIN) {
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
             $AnggotaTerdaftar = Dokter::count();
-            $AnggotaTetap = "3";
-            $AnggotaTamu = "2";
-            $AnggotaAktif = "3";
-            $AnggotaNonaktif = "2";
-            return view('HalamanAdmin.beranda', compact('AnggotaTerdaftar','AnggotaTetap','AnggotaTamu','NamaAdmin','AnggotaAktif','AnggotaNonaktif'));
+            $AnggotaTetap = "DUMMY";
+            $AnggotaTamu = "DUMMY";
+            $AnggotaAktif = "DUMMY";
+            $AnggotaNonaktif = "DUMMY";
+            return view('Administrator.beranda', compact('AnggotaTerdaftar','AnggotaTetap','AnggotaTamu','NamaAdmin','AnggotaAktif','AnggotaNonaktif'));
         } else {
-            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-            $AnggotaTerdaftar = Dokter::count();
-            $AnggotaTetap = "3";
-            $AnggotaTamu = "2";
-            $AnggotaAktif = "3";
-            $AnggotaNonaktif = "2";
-            return view('HalamanAdmin.beranda', compact('AnggotaTerdaftar','AnggotaTetap','AnggotaTamu','NamaAdmin','AnggotaAktif','AnggotaNonaktif'));
+            return view('Dokter.index');
         }
     }
 
-    /**
+        /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

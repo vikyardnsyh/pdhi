@@ -27,6 +27,7 @@
         @elseif ($value->status_pengguna === 2)
             @php $status = "Non Aktif" @endphp
         @endif
+        
             <td>{{ $value->username }}</td>
             <td>{{ $value->password }}</td>
             <td>{{$status}}</td>

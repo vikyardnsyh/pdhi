@@ -4,9 +4,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BerandaController;
-use App\Http\Controllers\AdminAkunController;
+use App\Http\Controllers\Administrator\AdminAkunController;
+use App\Http\Controllers\Administrator\AdminDokterController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PenggunaController;
+
 
 // Auth
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -16,8 +18,11 @@ Route::post('/login', [LoginController::class, 'login']);
 // Beranda
 Route::get('/', [BerandaController::class, 'index'])->name('home')->middleware('autentikasi');
 
-// // Data Akun
-Route::get('/AdminAkun', [AdminAkunController::class,'index']);
+// Data Akun
+Route::resource('/AdminAkun', AdminAkunController::class);
+
+// Data Dokter
+Route::resource('/adminDokter', adminDokterController::class);
 
 
 

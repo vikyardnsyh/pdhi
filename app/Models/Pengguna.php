@@ -17,4 +17,5 @@ class Pengguna extends Authenticatable
     protected $keyType = 'string';
     public $timestamps = false;
     
+    
 }
