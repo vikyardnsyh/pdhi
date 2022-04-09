@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pengguna;
 use App\Models\Dokter;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\UpdateAkunRequest;
+use App\Http\Requests\StoreAkunRequest;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class adminAkunController extends Controller
 {
@@ -18,18 +20,32 @@ class adminAkunController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Akun = Auth::user()->username;
-        $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-        $data = DB::table('pengguna')
-                ->join('dokter', 'pengguna.username', '=', 'dokter.username')
-                ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
-                ->orderBy('dokter.nama_lengkap')->get();
+        if($request->has('cariAkun'))
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = Pengguna::select('Pengguna.*')
+            ->join('Dokter', 'dokter.username', '=', 'pengguna.username')
+            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
+            ->where('Pengguna.username','LIKE','%' .$request->cariAkun. '%')
+            ->get();
             
-        return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
+            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
+        }
+        else
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('pengguna')
+            ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
+            ->orderBy('dokter.nama_lengkap')->get();
+        
+            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
+        }
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -49,22 +65,22 @@ class adminAkunController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAkunRequest $request)
     {
-        $penggunaBaru = new pengguna;
+        $penggunaBaru = new Pengguna();
         $penggunaBaru->username = $request->username;
         $penggunaBaru->password = bcrypt($request->password);
         $penggunaBaru->status_pengguna = "1";
         $penggunaBaru->id_kelas_pengguna = $request->id_kelas_pengguna;
 
-        $dokterBaru = new dokter;
-        $dokterBaru->username = $request->username;
+        $dokterBaru = new Dokter(); 
+        $dokterBaru->username =$request->username;
         $dokterBaru->nama_lengkap = $request->nama_lengkap;
 
         $penggunaBaru->save();
         $dokterBaru->save();
-
-        return redirect('/AdminAkun')->with('success', "Akun berhasil ditambahkan");
+        Alert::success('Selesai!', 'Data akun baru sudah ditambahkan');
+        return redirect('/AdminAkun');
     }
 
     /**
@@ -103,7 +119,7 @@ class adminAkunController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $username)
+    public function update(UpdateAkunRequest $request, $username)
     {
         $penggunaBaru = pengguna::find($username);
         $penggunaBaru->username = $request->username;
@@ -117,8 +133,8 @@ class adminAkunController extends Controller
         $dokterBaru->nama_lengkap = $request->nama_lengkap;
         
         $dokterBaru->save();
-        
-        return redirect('/AdminAkun')->with('success', "Akun berhasil diubah");
+        Alert::success('Selesai!', 'Data akun yang dipilih sudah diubah');
+        return redirect('/AdminAkun');
     }
 
     /**
@@ -133,7 +149,7 @@ class adminAkunController extends Controller
         $dokterBaru = dokter::where('username', $username)->first();
         $dokterBaru->delete();
         $penggunaBaru->delete();
-
-        return redirect('/AdminAkun')->with('success', "Akun berhasil dihapus");
+        Alert::success('Selesai!', 'Data akun yang dipilih sudah dihapus');
+        return redirect('/AdminAkun');
     }
 }

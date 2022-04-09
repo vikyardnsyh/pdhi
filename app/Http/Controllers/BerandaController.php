@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Constants;
 use Illuminate\Http\Request;
 use App\Models\Dokter;
+use App\Models\Pengguna;
 use Illuminate\Support\Facades\Auth;
 
 class BerandaController extends Controller
@@ -21,14 +22,18 @@ class BerandaController extends Controller
 
         if ($IdKelasPengguna == Constants::ID_KELAS_PENGGUNA_ADMIN) {
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-            $AnggotaTerdaftar = Dokter::count();
-            $AnggotaTetap = "DUMMY";
-            $AnggotaTamu = "DUMMY";
-            $AnggotaAktif = "DUMMY";
-            $AnggotaNonaktif = "DUMMY";
-            return view('Administrator.beranda', compact('AnggotaTerdaftar','AnggotaTetap','AnggotaTamu','NamaAdmin','AnggotaAktif','AnggotaNonaktif'));
+            $totalAnggota = Dokter::count();
+            $anggotaTetap = "DUMMY";
+            $anggotaTamu = "DUMMY";
+            $anggotaAktif = "DUMMY";
+            $anggotaNonAktif = "DUMMY";
+            $akunAdmin = Pengguna::where('id_kelas_pengguna', '2')->count();
+            $akunUser = Pengguna::where('id_kelas_pengguna', '1')->count();
+            return view('Administrator.beranda', compact('totalAnggota','anggotaTetap','anggotaTamu','NamaAdmin','anggotaAktif','anggotaNonAktif','akunAdmin','akunUser'));
         } else {
-            return view('Dokter.index');
+            $Akun = Auth::user()->username;
+            $NamaDokter = Dokter::where('username', $Akun)->value('nama_lengkap');
+            return view('Dokter.index', compact('NamaDokter'));
         }
     }
 
