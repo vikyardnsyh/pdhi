@@ -2,13 +2,20 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+//General
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BerandaController;
+//Admin
 use App\Http\Controllers\Administrator\AdminAkunController;
 use App\Http\Controllers\Administrator\AdminDokterController;
 use App\Http\Controllers\Administrator\AdminKeanggotaanController;
 use App\Http\Controllers\Administrator\AdminBerkasController;
+//User
+use App\Http\Controllers\Dokter\formRegistrasiController;
 use App\Http\Controllers\Dokter\uploadBerkasController;
+use App\Http\Controllers\Dokter\syaratPendaftaranController;
+
+
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PenggunaController;
 
@@ -29,10 +36,14 @@ Route::resource('/adminDokter', adminDokterController::class);
 // Data Berkas
 Route::resource('/adminBerkas', adminBerkasController::class);
 
-
 // User
+// Form Registrasi
+Route::resource('/formRegistrasi', formRegistrasiController::class);
 // Upload Berkas
 Route::resource('/uploadBerkas', uploadBerkasController::class);
+// Syarat Pendaftaran
+Route::resource('/syaratPendaftaran', syaratPendaftaranController::class);
+
 
 
 //lokasi regsister : C:\laragon\www\pdhi-banten\app\Http\Controllers\Auth\RegisterController.php

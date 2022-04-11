@@ -67,15 +67,15 @@
                         </div>
                         <ul class="sidebar-menu">
                             <li class="menu-header">Beranda</li>
-                            <li><a class="nav-link" href="/"><i class="fa fa-home"></i>
+                            <li><a class="nav-link" href="/"><i class="fa fa-home mr-2"></i>
                                     <span>Home</span></a></li>
                             <li class="menu-header">Keanggotaan</li>
-                            <li><a class="nav-link" href="/"><i class="fa fa-address-card"></i>
+                            <li><a class="nav-link" href="/formRegistrasi"><i class="fa fa-address-card mr-2"></i>
                                     <span>Form Registrasi Anggota</span></a></li>
-                            <li><a class="nav-link" href="/uploadBerkas"><i class="fa fa-upload"></i>
+                            <li><a class="nav-link" href="/uploadBerkas"><i class="fa fa-upload mr-2"></i>
                                     <span>Upload Berkas</span></a></li>
                             <li class="menu-header">Info</li>
-                            <li><a class="nav-link" href="/"><i class="fa fa-info-circle"></i> <span>Syarat
+                            <li><a href="/syaratPendaftaran" class="nav-link" href="/"><i class="fa fa-info-circle mr-2"></i> <span>Syarat
                                         Pendaftaran Anggota</span></a></li>
                             <div class="mt-5 mb-5 p-3 hide-sidebar-mini">
                                 <a href="/logout" class="btn btn-primary btn-lg btn-block btn-icon-split">
@@ -111,9 +111,6 @@
         <!-- Template JS File -->
         <script src="{{ asset('stisla/js/scripts.js') }}"></script>
         <script src="{{ asset('stisla/js/custom.js') }}"></script>
-
-         <!-- JS Libraies -->
-        {{-- <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js')}}"></script> --}}
 
         @include('sweetalert::alert')
     </body>
