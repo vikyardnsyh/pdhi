@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pengguna;
 use App\Models\Dokter;
+use App\Models\Berkas;
+use App\Models\Keanggotaan;
 use App\Http\Requests\UpdateAkunRequest;
 use App\Http\Requests\StoreAkunRequest;
+use App\Models\Klinik;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -31,7 +34,7 @@ class adminAkunController extends Controller
             ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
             ->where('Pengguna.username','LIKE','%' .$request->cariAkun. '%')
             ->get();
-            
+
             return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
         }
         else
@@ -67,6 +70,12 @@ class adminAkunController extends Controller
      */
     public function store(StoreAkunRequest $request)
     {
+        $klinikBaru = new Klinik();
+        $klinikBaru->save();
+
+        $anggota = new Keanggotaan();
+        $anggota->save();
+
         $penggunaBaru = new Pengguna();
         $penggunaBaru->username = $request->username;
         $penggunaBaru->password = bcrypt($request->password);
@@ -74,11 +83,20 @@ class adminAkunController extends Controller
         $penggunaBaru->id_kelas_pengguna = $request->id_kelas_pengguna;
 
         $dokterBaru = new Dokter(); 
-        $dokterBaru->username =$request->username;
+        $dokterBaru->id_klinik = $klinikBaru->id;
+        $dokterBaru->id_keanggotaan = $anggota->id;
+        $dokterBaru->username = $request->username;
         $dokterBaru->nama_lengkap = $request->nama_lengkap;
 
         $penggunaBaru->save();
         $dokterBaru->save();
+
+        $klinikBaru = new Klinik();
+        $klinikBaru->id_dokter = Dokter::where('username', $request->username)->value('id');
+
+        $anggota = new Keanggotaan();
+        $anggota->id_dokter = Dokter::where('username', $request->username)->value('id');
+
         Alert::success('Selesai!', 'Data akun baru sudah ditambahkan');
         return redirect('/AdminAkun');
     }
@@ -145,8 +163,14 @@ class adminAkunController extends Controller
      */
     public function destroy($username)
     {
-        $penggunaBaru = pengguna::find($username);
-        $dokterBaru = dokter::where('username', $username)->first();
+        $penggunaBaru = Pengguna::find($username);
+        $dokterBaru = Dokter::where('username', $username)->first();
+        $idDokter = Dokter::where('username', $username)->value('id');
+        $idKlinik = Dokter::where('username', $username)->value('id_klinik');
+        $klinikBaru = Klinik::where('id', $idKlinik);
+        $berkasBaru = Berkas::where('id_dokter', $idDokter);
+        $berkasBaru->delete();
+        $klinikBaru->delete();
         $dokterBaru->delete();
         $penggunaBaru->delete();
         Alert::success('Selesai!', 'Data akun yang dipilih sudah dihapus');

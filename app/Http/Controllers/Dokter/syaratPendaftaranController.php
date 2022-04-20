@@ -18,7 +18,7 @@ class syaratPendaftaranController extends Controller
     public function index()
     {
         $Akun = Auth::user()->username;
-        $NamaDokter = Dokter::where('username', $Akun)->value('nama_lengkap');
+        $NamaDokter = Dokter::where('username', $Akun)->value('nama_panggilan');
         return view('Dokter.syaratPendaftaran', compact('NamaDokter'));
     }
 

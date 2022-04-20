@@ -40,7 +40,9 @@ Route::resource('/adminBerkas', adminBerkasController::class);
 // Form Registrasi
 Route::resource('/formRegistrasi', formRegistrasiController::class);
 // Upload Berkas
+Route::get('/uploadBerkas/download', [uploadBerkasController::class, 'download']);
 Route::resource('/uploadBerkas', uploadBerkasController::class);
+// Route::get('/uploadBerkas/download',['as'=>'uploadBerkas.download','uses'=>'@download']);
 // Syarat Pendaftaran
 Route::resource('/syaratPendaftaran', syaratPendaftaranController::class);
 

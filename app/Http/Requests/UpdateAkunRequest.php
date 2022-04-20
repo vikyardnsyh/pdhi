@@ -25,10 +25,7 @@ class UpdateAkunRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'username' => ['required',Rule::unique('pengguna','username')->ignore($this->username)],
-            // 'username' => 'required|unique:username'.$username,
             'username' => ['required',Rule::unique('pengguna','username')->ignore($this->username,'username')],
-            // 'username' => 'required|unique:username'.$user->id',username',
             'password' => 'required',
             'id_kelas_pengguna' => 'required',
             'nama_lengkap' => 'required'

@@ -16,6 +16,8 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('common/css/bootstrap-datepicker3.css') }}">
+
 
 </head>
 
@@ -37,7 +39,7 @@
                     <ul class="navbar-nav navbar-right">
                         <li class="dropdown"><a href="#" data-toggle="dropdown"
                                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                                <div class="d-sm-none d-lg-inline-block">Hallo Dokter, {{ $NamaDokter }}</div>
+                                <div class="d-sm-none d-lg-inline-block">Selamat Datang Dokter, {{ $NamaDokter }}</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-title">Logged in 5 min ago</div>
@@ -75,7 +77,8 @@
                             <li><a class="nav-link" href="/uploadBerkas"><i class="fa fa-upload mr-2"></i>
                                     <span>Upload Berkas</span></a></li>
                             <li class="menu-header">Info</li>
-                            <li><a href="/syaratPendaftaran" class="nav-link" href="/"><i class="fa fa-info-circle mr-2"></i> <span>Syarat
+                            <li><a href="/syaratPendaftaran" class="nav-link" href="/"><i
+                                        class="fa fa-info-circle mr-2"></i> <span>Syarat
                                         Pendaftaran Anggota</span></a></li>
                             <div class="mt-5 mb-5 p-3 hide-sidebar-mini">
                                 <a href="/logout" class="btn btn-primary btn-lg btn-block btn-icon-split">
@@ -104,6 +107,7 @@
         <script src="{{ asset('common/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('common/js/jquery.nicescroll.min.js') }}"></script>
         <script src="{{ asset('common/js/moment.min.js') }}"></script>
+        <script src="{{ asset('common/js/bootstrap-datepicker.min.js') }}"></script>
 
         <script src="{{ asset('fontawesome/js/all.min.js') }}"></script>
         <script src="{{ asset('stisla/js/stisla.js') }}"></script>

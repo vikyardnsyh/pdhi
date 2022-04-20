@@ -44,7 +44,6 @@
                                     <option value="1">User</option>
                                     <option value="2">Admin</option>
                                 </select>
-
                             </div>
                             <a class="btn btn-primary" href="/AdminAkun" role="button">Kembali</a>
                             <button type="submit" class="btn btn-primary">Tambahkan</button>

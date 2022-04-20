@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pengguna;
 use App\Models\Dokter;
+use App\Models\Berkas;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -26,24 +27,28 @@ class adminBerkasController extends Controller
         {
             $Akun = Auth::user()->username;
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-            $data = Pengguna::select('Pengguna.*')
-            ->join('Dokter', 'dokter.username', '=', 'pengguna.username')
-            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
-            ->where('dokter.nama_lengkap','LIKE','%' .$request->cariDokter. '%')
-            ->get();
             
-            return view('Administrator.adminBerkas.index', compact('data','NamaAdmin'));
+            $data = DB::table('berkas_dokter')     
+            ->join('dokter','berkas_dokter.id_dokter','=','dokter.id')
+            ->select('id_dokter','nama_lengkap','id_jenis_berkas','nama_berkas')
+            ->where('nama_lengkap','LIKE','%' .$request->cariDokter. '%')
+            ->get()
+            ->groupBy('nama_lengkap');
+
+            return view('Administrator.adminBerkas.index', compact('NamaAdmin','data')); 
         }
         else
         {
             $Akun = Auth::user()->username;
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-            $data = DB::table('dokter')
-                    ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
-                    ->orderBy('dokter.nama_lengkap')
-                    ->get();
-                
-            return view('Administrator.adminBerkas.index', compact('data','NamaAdmin'));
+            
+            $data = DB::table('berkas_dokter')     
+            ->join('dokter','berkas_dokter.id_dokter','=','dokter.id')
+            ->select('id_dokter','nama_lengkap','id_jenis_berkas','nama_berkas')
+            ->get()
+            ->groupBy('nama_lengkap');
+
+            return view('Administrator.adminBerkas.index', compact('NamaAdmin','data'));
         }
     }
 
