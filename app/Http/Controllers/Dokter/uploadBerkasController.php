@@ -210,8 +210,6 @@ class uploadBerkasController extends Controller
     // Download Berkas
     public function download(Request $request)
     {
-        // $filePath = public_path("dummy.pdf");
-    	// $headers = ['Content-Type: application/pdf'];
     	$namaFile = $request->namaFile;
         $pathToFile = public_path('img\\berkas_dokter\\' . $namaFile);
         return response()->download($pathToFile);

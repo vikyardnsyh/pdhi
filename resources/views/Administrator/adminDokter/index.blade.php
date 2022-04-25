@@ -24,67 +24,151 @@
                         </form>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a class="btn btn-primary" href="/AdminAkun" role="button" data-toggle="tooltip"
+                        <a class="btn btn-primary" href="/adminDokter" role="button" data-toggle="tooltip"
                             data-placement="top" title data-original-title="Reset Pencarian"><i
                                 class="fa fa-power-off"></i></a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <a class="btn btn-primary mb-2" href="/AdminAkun/create" role="button"><i class="fa fa-plus-circle"></i>
-                        Tambah Dokter</a>
-                    <table class="table table-hover text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama Lengkap</th>
-                                <th scope="col">Telepon</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Status Keanggotaan</th>
-                                <th scope="col">Masa Aktif</th>
-                                <th scope="col">Domisili Keanggotaan</th>
-                                {{-- <th colspan="2" scope="colgroup"></th> --}}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $key => $value)
-                                {{-- @if ($value->status_pengguna === 1)
-                                    @php $status = '<span class="badge badge-pill badge-success">Aktif</span>' @endphp
-                                @elseif ($value->status_pengguna === 2)
-                                    @php $status = '<span class="badge badge-pill badge-danger">Non Aktif</span>' @endphp
-                                @endif
-                                @if ($value->id_kelas_pengguna === 1)
-                                    @php $kelas = "User" @endphp
-                                @elseif ($value->id_kelas_pengguna === 2)
-                                    @php $kelas = "Admin" @endphp
-                                @endif --}}
+                    <form action="{{ url('adminDokter/') }}" method="GET">
+                        <div class="btn-group float-right mb-2">
+                            <button class="btn btn-sm btn-light" type="submit" name="semua"
+                                value="semua">Semua</button>
+                            <button class="btn btn-sm btn-light" type="submit" name="terdaftar"
+                                value="terdaftar">Terdaftar</button>
+                            <button class="btn btn-sm btn-light" type="submit" name="belumterdaftar"
+                                value="belumterdaftar">Belum Terdaftar</button>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                            <thead>
                                 <tr>
-                                    <td>{{ ++$key }}</td>
-                                    <td class="text-left">{{ $value->nama_lengkap }}</td>
-                                    <td>{{ $value->no_telp }}</td>
-                                    {{-- <td><a class="btn btn-primary"
-                                            href="{{ url('AdminAkun/' . $value->username . '/edit') }}"
-                                            data-toggle="tooltip" data-placement="top" title
-                                            data-original-title="Edit Data Akun"><i class="far fa-edit"></i></a></td>
-                                    <td>
-                                        <form action="{{ url('AdminAkun/' . $value->username) }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button
-                                                onclick="return confirm('Data yang dihapus tidak dapat dikembalikan, tetap hapus?')"
-                                                class="btn btn-danger" type="submit" data-toggle="tooltip"
-                                                data-placement="top" title data-original-title="Hapus Data Akun"><i
-                                                    class="fas fa-trash"></i></button> --}}
-                                        </form>
-                                    </td>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama Lengkap</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Nama Panggilan</th>
+                                    <th scope="col">Tempat Lahir</th>
+                                    <th scope="col">Tanggal Lahir</th>
+                                    <th scope="col">Jenis Kelamin</th>
+                                    <th scope="col">Alumni</th>
+                                    <th scope="col">Tahun Alumni</th>
+                                    <th scope="col">Nama Pasangan</th>
+                                    <th scope="col">Alamat Rumah</th>
+                                    <th scope="col">No. Telp</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Bidang Kerja Vet.</th>
+                                    <th scope="col">Nama Klinik</th>
+                                    <th scope="col">Alamat Klinik</th>
+                                    <th scope="col">No. / Fax Klinik</th>
+                                    <th scope="col"></th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $key => $value)
+                                    <tr>
+                                        <td>{{ ++$key }}</td>
+                                        <td class="text-left">{{ $value->nama_lengkap }}</td>
+                                        @if(is_null($value->tanggal_terdaftar))
+                                            <td class="text-center"><span class="badge badge-pill badge-danger">Belum Terdaftar</span></td>
+                                            @else
+                                            <td class="text-center"><span class="badge badge-pill badge-success">Terdaftar</span></td>
+                                            @endif
+                                        
+                                            @if(is_null($value->nama_panggilan))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->nama_panggilan }}</td>
+                                            @endif
+
+                                            @if(is_null($value->tempat_lahir))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->tempat_lahir }}</td>
+                                            @endif
+                                        
+                                            @if(is_null($value->tanggal_lahir))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ date('d-M-Y', strtotime($value->tanggal_lahir)) }}</td>
+                                            @endif
+
+                                            @if(is_null($value->jenis_kelamin))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->jenis_kelamin }}</td>
+                                            @endif
+
+                                            @if(is_null($value->alumni))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->alumni }}</td>
+                                            @endif
+
+                                            @if(is_null($value->tahun_alumni))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->tahun_alumni }}</td>
+                                            @endif
+
+                                            @if(is_null($value->nama_pasangan))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->nama_pasangan }}</td>
+                                            @endif
+
+                                            @if(is_null($value->alamat_rumah))
+                                            <td class="text-left">-</td>
+                                            @else
+                                            <td class="text-left">{{ $value->alamat_rumah }}</td>
+                                            @endif
+
+                                            @if(is_null($value->no_telp))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->no_telp }}</td>
+                                            @endif
+
+                                            @if(is_null($value->email))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->email }}</td>
+                                            @endif
+
+                                            @if(is_null($value->bidang_kerja))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->bidang_kerja }}</td>
+                                            @endif
+
+                                            @if(is_null($value->nama_klinik))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->nama_klinik }}</td>
+                                            @endif
+
+                                            @if(is_null($value->alamat_klinik))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->alamat_klinik }}</td>
+                                            @endif
+
+                                            @if(is_null($value->no_telp_klinik))
+                                            <td class="text-center">-</td>
+                                            @else
+                                            <td class="text-center">{{ $value->no_telp_klinik }}</td>
+                                            @endif
+                                        
+                                        <td><a class="btn btn-primary" href="" data-toggle="tooltip" data-placement="top"
+                                                title data-original-title="Lihat Detail Dokter"><i class="far fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+        </section>
     </div>
-    </div>
-    </section>
-    </div>
-
 @endsection

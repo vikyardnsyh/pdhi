@@ -19,9 +19,70 @@ class adminKeanggotaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->has('cariDokter'))
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('dokter')
+            ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+            ->where('id_kelas_pengguna','1')
+            ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
+            ->whereNotNull('tanggal_terdaftar')
+            ->where('dokter.nama_lengkap','LIKE','%' .$request->cariDokter. '%')
+            ->orderBy('dokter.nama_lengkap')
+            ->get();
+            
+            return view('Administrator.adminAnggota.index', compact('data','NamaAdmin'));
+        }
+        elseif($request->has('aktif'))
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('dokter')
+            ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+            ->where('id_kelas_pengguna','1')
+            ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
+            ->whereNotNull('tanggal_terdaftar')
+            ->where('dokter.nama_lengkap','LIKE','%' .$request->cariDokter. '%')
+            ->where('masa_aktif','>', date('Y-m-d'))
+            ->orderBy('dokter.nama_lengkap')
+            ->get();
+            
+            return view('Administrator.adminAnggota.index', compact('data','NamaAdmin'));
+        }
+        elseif($request->has('nonaktif'))
+        {
+            date_default_timezone_set('Asia/jakarta');
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('dokter')
+            ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+            ->where('id_kelas_pengguna','1')
+            ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
+            ->whereNotNull('tanggal_terdaftar')
+            ->where('dokter.nama_lengkap','LIKE','%' .$request->cariDokter. '%')
+            ->where('masa_aktif','<', date('Y-m-d'))
+            ->orderBy('dokter.nama_lengkap')
+            ->get();
+            
+            return view('Administrator.adminAnggota.index', compact('data','NamaAdmin'));
+        }
+        else
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('dokter')
+                    ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+                    ->where('id_kelas_pengguna','1')
+                    ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
+                    ->whereNotNull('tanggal_terdaftar')
+                    ->orderBy('dokter.nama_lengkap')
+                    ->get();
+                
+            return view('Administrator.adminAnggota.index', compact('data','NamaAdmin'));
+        }
     }
 
     /**

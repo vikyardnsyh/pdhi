@@ -26,15 +26,23 @@
                                         <div class="profile-widget-items">
                                             <div class="profile-widget-item">
                                                 <div class="profile-widget-item-label">Status</div>
-                                                <div class="profile-widget-item-value">Perpanjang Keanggotaan</div>
+                                                <div class="profile-widget-item-value">Dummy</div>
                                             </div>
                                             <div class="profile-widget-item">
                                                 <div class="profile-widget-item-label">Priode Aktif</div>
-                                                <div class="profile-widget-item-value">02/08/2024</div>
+                                                @if(is_null($value->masa_aktif))
+                                                <div class="profile-widget-item-value">-</div>
+                                                @else
+                                                <div class="profile-widget-item-value">{{ date('d-M-Y', strtotime($value->masa_aktif)) }}</div>
+                                                @endif
                                             </div>
                                             <div class="profile-widget-item">
                                                 <div class="profile-widget-item-label">Keanggotaan</div>
-                                                <div class="profile-widget-item-value">Tetap</div>
+                                                @if(is_null($value->domisili_anggota))
+                                                <div class="profile-widget-item-value">-</div>
+                                                @else
+                                                <div class="profile-widget-item-value">{{ $value->domisili_anggota }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +81,11 @@
                                             <tr>
                                                 <td>Tanggal Lahir</td>
                                                 <td>:</td>
-                                                <td>{{$convertTanggal}}</td>
+                                                @if (is_null($value->tanggal_lahir))
+                                                <td>-</td>
+                                                @else
+                                                <td>{{ date('d-M-Y', strtotime($value->tanggal_lahir)) }}</td>
+                                                @endif
                                             </tr>
                                             <tr>
                                                 <td>Alumni</td>

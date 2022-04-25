@@ -30,7 +30,40 @@ class adminDokterController extends Controller
             ->join('Dokter', 'dokter.username', '=', 'pengguna.username')
             ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
             ->where('dokter.nama_lengkap','LIKE','%' .$request->cariDokter. '%')
+            ->where('id_kelas_pengguna','1')
+            ->join('klinik','dokter.id_klinik','=','klinik.id')
+            ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
             ->get();
+            
+            return view('Administrator.adminDokter.index', compact('data','NamaAdmin'));
+        }
+        elseif($request->has('terdaftar'))
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('dokter')
+                    ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+                    ->where('id_kelas_pengguna','1')
+                    ->join('klinik','dokter.id_klinik','=','klinik.id')
+                    ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
+                    ->whereNotNull('tanggal_terdaftar')
+                    ->orderBy('dokter.nama_lengkap')
+                    ->get();
+            
+            return view('Administrator.adminDokter.index', compact('data','NamaAdmin'));
+        }
+        elseif($request->has('belumterdaftar'))
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('dokter')
+                    ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+                    ->where('id_kelas_pengguna','1')
+                    ->join('klinik','dokter.id_klinik','=','klinik.id')
+                    ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
+                    ->whereNull('tanggal_terdaftar')
+                    ->orderBy('dokter.nama_lengkap')
+                    ->get();
             
             return view('Administrator.adminDokter.index', compact('data','NamaAdmin'));
         }
@@ -40,9 +73,12 @@ class adminDokterController extends Controller
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
             $data = DB::table('dokter')
                     ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+                    ->where('id_kelas_pengguna','1')
+                    ->join('klinik','dokter.id_klinik','=','klinik.id')
+                    ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
                     ->orderBy('dokter.nama_lengkap')
                     ->get();
-                
+            
             return view('Administrator.adminDokter.index', compact('data','NamaAdmin'));
         }
     }

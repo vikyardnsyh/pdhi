@@ -16,6 +16,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('common/css/bootstrap-datepicker3.css') }}">
 
 </head>
 
@@ -69,16 +70,16 @@
                             <li class="menu-header">Beranda</li>
                             <li><a class="nav-link" href="/"><i class="fa fa-briefcase mr-2"></i>
                                     <span>Dashboard</span></a></li>
-                            <li class="menu-header">Administrasi Anggota</li>
-                            <li><a class="nav-link" href="/AdminAkun"><i class="fa fa-user-circle mr-2"></i>
-                                    <span>Administrasi Akun</span></a></li>
-                            <li><a class="nav-link" href="/adminDokter"><i class="fa fa-address-card mr-2"></i>
-                                    <span>Administrasi Dokter</span></a></li>
-                            <li><a class="nav-link" href="/"><i class="fa fa-address-book mr-2"></i> <span>Administrasi
-                                        Keanggotaan</span></a></li>
-                            <li class="menu-header">Berkas</li>
-                            <li><a class="nav-link" href="/adminBerkas"><i class="fa fa-folder-open mr-2"></i> <span>Berkas
-                                        Anggota</span></a></li>
+                            <li class="menu-header">Administrasi Data</li>
+                            <li><a class="nav-link" href="/AdminAkun"><i class="fa fa-key mr-2"></i>
+                                    <span>Administrasi Data Akun</span></a></li>
+                            <li><a class="nav-link" href="/adminDokter"><i class="fa fa-folder-open mr-2"></i>
+                                    <span>Administrasi Data Dokter</span></a></li>
+                            <li class="menu-header">Administrasi Keanggotaan</li>
+                            <li><a class="nav-link" href="/adminKeanggotaan"><i class="fa fa-user-circle mr-2"></i>
+                                    <span>Administrasi Anggota</span></a></li>
+                            <li><a class="nav-link" href="/adminPendaftaran"><i class="fa fa-address-book mr-2"></i>
+                                    <span>Administrasi Pendaftaran</span></a></li>
                             <li class="menu-header">Laporan</li>
                             <li><a class="nav-link" href="/"><i class="fa fa-book mr-2"></i> <span>Download
                                         Laporan</span></a></li>
@@ -109,6 +110,7 @@
         <script src="{{ asset('common/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('common/js/jquery.nicescroll.min.js') }}"></script>
         <script src="{{ asset('common/js/moment.min.js') }}"></script>
+        <script src="{{ asset('common/js/bootstrap-datepicker.min.js') }}"></script>
 
         <script src="{{ asset('fontawesome/js/all.min.js') }}"></script>
         <script src="{{ asset('stisla/js/stisla.js') }}"></script>
