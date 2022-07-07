@@ -20,7 +20,7 @@
         <div class="main-content">
             <div class="row">
                 <div class="col-md-9">
-                    <div class="card card-primary">
+                    <div class="card card-primary mt-n3 shadow p-3 mb-5 bg-white rounded">
                         <div class="card header">
                             <div class="row">
                                 <div class="col-12 col-sm-6 col-lg-2">
@@ -41,7 +41,7 @@
                         <div class="card body">
                             <div class="row justify-content-center">
                                 <div class="col-md-11">
-                                    <p>Untuk mengajukan pembuatan akun akses ke sistem pendaftaran anggota PDHI Cabang Banten II :</p>
+                                    <p>Persyaratan dan tata cara untuk mengajukan pembuatan akun akses ke sistem pendaftaran anggota PDHI Cabang Banten II :</p>
                                     <ul>
                                         <li>
                                             Calon anggota diharuskan sudah terdaftar dalam sistem KTA Online PDHI Pusat
@@ -53,15 +53,15 @@
                                             Melampirkan nomor KTA online sesuai dengan data yang terdaftar pada sistem KTA Online
                                         </li>
                                         <li>
-                                            Menghubungi whatsapp sekertariat PDHI Cabang Banten II di nomor <a href="https://wa.me/62895346222492">0895346222492</a> <br> (Klik nomor untuk direct ke whatsapp web anda)
-                                        </li>
-                                        <li>
                                             Format pengajuan melalui whatsapp sekertariat PDHI Cabang Banten II :
                                         </li>
                                         <div class="text text-muted">
                                             Nama lengkap   : ex. Dr. drh ... ... <br>
                                             No. KTA Online : 034xxxxxx
                                         </div>
+                                        <li>
+                                            Menghubungi whatsapp sekertariat PDHI Cabang Banten II di nomor <a href="https://wa.me/62895346222492">0895346222492</a> <br> <b>(Klik nomor untuk direct ke whatsapp web anda)</b> 
+                                        </li>
                                         <li>
                                             Sekertariat mungkin membutuhkan waktu untuk melakukan verifikasi data anda, setelah mendapatkan akses berupa username dan password, gunakan untuk mengakses sistem pendaftaran aggota PDHI Cabang Banten II
                                         </li>

@@ -47,7 +47,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-12 col-sm-6 col-lg-6">
-                            <div class="card card-dark">
+                            <div class="card shadow p-3 mb-5 bg-white rounded">
                                 <h6 class="text-center text-dark p-3"><u>ANGGOTA TETAP</u></h6>
                                 <ol>
                                     <li>Mengisi formulir keanggotaan</li>
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-6">
-                            <div class="card card-dark">
+                            <div class="card shadow p-3 mb-5 bg-white rounded">
                                 <h6 class="text-center text-dark p-3"><u>ANGGOTA TAMU</u></h6>
                                 <ol>
                                     <li>Mengisi formulir keanggotaan</li>

@@ -36,7 +36,7 @@
                             class="shadow-lg bg-white rounded-circle mb-2 mt-2">
                         <h4 class="text-dark font-weight-normal">Selamat datang, di <span class="font-weight-bold">PDHI
                                 Banten II</span></h4>
-                        <div class="text-muted">Mohon untuk login dulu ya, atau ajukan akun anda jika belum memiliki
+                        <div class="text-muted">Silahkan login terlebih dahulu, atau ajukan akun anda jika belum memiliki
                             akun PDHI Banten II dengan link yang tersedia dibawah</div>
 
                         @if (session('gagal_login'))
@@ -97,18 +97,13 @@
                                 </button>
                             </div>
 
-                            <div class="mt-5 text-center mt-n3 pr-1">
+                            <div class="mt-5 text-center mt-n1 pr-1">
                                 Belum memiliki akun? <a href="{{ route('pengajuanAkun') }}">Ajukan akun</a>
                             </div>
                         </form>
                         <div class="text-center mt-3 text-small">
                             Copyright &copy; PDHI Banten II <br>
-                            Oleh 💙 Viky Ardiansyah
-                            <div class="mt-2">
-                                <a href="#">Kebijakan Privasi</a>
-                                <div class="bullet"></div>
-                                <a href="#">Ketentuan Layanan</a>
-                            </div>
+                            Oleh <div class="bullet"></div> Viky Ardiansyah
                         </div>
                     </div>
                 </div>
@@ -117,13 +112,13 @@
                     <div class="absolute-bottom-left index-2">
                         <div class="text-light p-5 pb-2 mt-2">
                             <div class="mb-1 pb-1">
-                                <h1 class="mb-2 display-4 font-weight-bold">
+                                <h1 class="mb-2 display-4 font-weight-bold" style="text-shadow: 2px 2px 3px #424ea5">
                                     {{ ucapan(date_default_timezone_set('Asia/Bangkok')) }}
                                 </h1>
-                                <h2 class="font-weight-normal text-light-transparent">
+                                <h2 class="font-weight-normal text-light-transparent" style="text-shadow: 2px 2px 2px #424ea5">
                                     {{ tanggal() }}
                                 </h2>
-                                <h4 class="font-weight-normal text-light-transparent">
+                                <h4 class="font-weight-normal text-light-transparent" style="text-shadow: 2px 2px 2px #424ea5">
                                     {{ jam() }}
                                 </h4>
                             </div>

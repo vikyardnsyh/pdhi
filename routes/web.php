@@ -10,6 +10,7 @@ use App\Http\Controllers\Administrator\AdminAkunController;
 use App\Http\Controllers\Administrator\AdminDokterController;
 use App\Http\Controllers\Administrator\AdminKeanggotaanController;
 use App\Http\Controllers\Administrator\adminPendaftaranController;
+use App\Http\Controllers\Administrator\adminLaporanController;
 //User
 use App\Http\Controllers\Dokter\formRegistrasiController;
 use App\Http\Controllers\Dokter\uploadBerkasController;
@@ -36,6 +37,8 @@ Route::get('/adminPendaftaran/download', [adminPendaftaranController::class, 'do
 Route::resource('/adminPendaftaran', adminPendaftaranController::class)->middleware('autentikasi:2');
 // Admin Keanggotaan
 Route::resource('/adminKeanggotaan', adminKeanggotaanController::class)->middleware('autentikasi:2');
+// Admin Laporan
+Route::resource('/adminLaporan', adminLaporanController::class)->middleware('autentikasi:2');
 
 // #User
 // Form Registrasi

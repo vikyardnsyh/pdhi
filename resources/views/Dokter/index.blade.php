@@ -14,7 +14,7 @@
                     @foreach ($DataDokter as $key => $value)
                         <div class="row">
                             <div class="col-12 col-sm-12 col-lg-7">
-                                <div class="card profile-widget card-primary">
+                                <div class="card profile-widget card-primary shadow p-3 mb-5 bg-white rounded">
                                     <div class="profile-widget-header">
                                         @if(is_null($pasFoto))
                                             <img alt="image" src="{{ asset('img/no_image.jpg') }}" height="110"
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-5 mt-4 pt-2">
-                                <div class="card card-primary pt-4">
+                                <div class="card card-primary pt-4 shadow p-3 mb-5 bg-white rounded">
                                     <table class="table">
                                         <tr>
                                             <td>No. Telp / HP</td>
@@ -158,7 +158,7 @@
                                         <div class="font-weight-bold mb-2 text-small">Kontak Dokter</div>
                                     </div>
                                 </div>
-                                <div class="card card-primary pt-4">
+                                <div class="card card-primary pt-4 shadow p-3 mb-5 bg-white rounded">
                                     <table class="table">
                                         <tr>
                                             <td>Bidang Kerja Veteriner</td>
@@ -204,7 +204,7 @@
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="card col-12 col-md-6 col-lg-11 card-primary mt-n3">
+                            <div class="card col-12 col-md-6 col-lg-11 card-primary mt-n3 shadow p-3 mb-5 bg-white rounded">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="thead-dark">

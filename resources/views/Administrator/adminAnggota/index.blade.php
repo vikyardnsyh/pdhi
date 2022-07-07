@@ -29,17 +29,24 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/adminKeanggotaan') }}" method="GET">
-                        <div class="btn-group float-right mb-2">
-                            <button class="btn btn-sm btn-light" type="submit" name="semua"
-                                value="semua">Semua</button>
-                            <button class="btn btn-sm btn-light" type="submit" name="aktif"
-                                value="aktif">Aktif</button>
-                            <button class="btn btn-sm btn-light" type="submit" name="nonaktif"
-                                value="nonaktif">Non Aktif</button>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <form action="{{ url('/adminKeanggotaan') }}" method="GET">
+                                <div class="btn-group float-right mb-2">
+                                    <button class="btn btn-sm btn-light" type="submit" name="semua"
+                                        value="semua">Semua</button>
+                                    <button class="btn btn-sm btn-light" type="submit" name="aktif"
+                                        value="aktif">Aktif</button>
+                                    <button class="btn btn-sm btn-light" type="submit" name="nonaktif"
+                                        value="nonaktif">Non Aktif</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                    <div class="table-responsive">
+                        <div class="col d-flex justify-content-end">
+                            Total data ditemukan : {{ $data->total()}}
+                        </div>
+                    </div>
+                    <div class="table-responsive text-nowrap">
                         <table class="table table-hover text-center">
                             <thead>
                                 <tr>
@@ -57,24 +64,23 @@
                             <tbody>
                                 @foreach ($data as $key => $value)
                                     <tr>
-                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $data->firstItem() + $key }}</td>
                                         <td class="text-left">{{ $value->nama_lengkap }}</td>
                                         <td>{{ $value->no_telp }}</td>
                                         <td>{{ $value->email }}</td>
                                         
-                                        {{-- @if($value->tanggal_terdaftar ) --}}
                                         @php
                                          date_default_timezone_set('Asia/jakarta');
                                          $now = new DateTime(date('Y-M-d'));
                                          $expired = new DateTime($value->masa_aktif);
 
                                          if ($now > $expired) {
-                                             $status = 'Non Aktif';
+                                             $status = '<span class="badge badge-pill badge-danger">Non Aktif</span>';
                                          } else {
-                                            $status = 'Aktif';
+                                            $status = '<span class="badge badge-pill badge-success">Aktif</span>';
                                          }
                                         @endphp
-                                        <td>{{$status}}</td>
+                                        <td>{!! $status !!}</td>
 
                                         @if(is_null($value->tanggal_terdaftar))
                                         <td>-</td>
@@ -97,14 +103,11 @@
                                         <td><a class="btn btn-primary" href="" data-toggle="tooltip" data-placement="top"
                                                 title data-original-title="Lihat Berkas"><i class="far fa-edit"></i></a>
                                         </td>
-                                        {{-- <td><a class="btn btn-primary"
-                                            href="{{ url('AdminAkun/' . $value->username . '/edit') }}"
-                                            data-toggle="tooltip" data-placement="top" title
-                                            data-original-title="Edit Data Akun"><i class="far fa-edit"></i></a></td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        {{$data->links()}}
                     </div>
                 </div>
             </div>

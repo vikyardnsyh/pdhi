@@ -33,7 +33,7 @@ class adminAkunController extends Controller
             ->join('Dokter', 'dokter.username', '=', 'pengguna.username')
             ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
             ->where('Pengguna.username','LIKE','%' .$request->cariAkun. '%')
-            ->get();
+            ->paginate(10);
 
             return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
         }
@@ -44,7 +44,8 @@ class adminAkunController extends Controller
             $data = DB::table('pengguna')
             ->join('dokter', 'pengguna.username', '=', 'dokter.username')
             ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
-            ->orderBy('dokter.nama_lengkap')->get();
+            ->orderBy('dokter.nama_lengkap')
+            ->paginate(10);
         
             return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
         }

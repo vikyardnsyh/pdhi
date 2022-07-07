@@ -26,7 +26,7 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>Nama Lengkap (Dengan Gelar Sesuai KTA)</label><span
-                                            class="text danger">*</span>
+                                            class="text-danger">*</span>
                                         <input type="text" class="form-control" name="nama_lengkap"
                                             value="{{ $DataDokter }}">
                                         @foreach ($errors->get('nama_lengkap') as $msg)
@@ -34,7 +34,7 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group">
-                                        <label>Nama Panggilan</label><span class="text danger">*</span>
+                                        <label>Nama Panggilan</label><span class="text-danger">*</span>
                                         <input type="text" class="form-control" placeholder="Ex : Budi Hermawan"
                                             name="nama_panggilan" value="{{ $value->nama_panggilan }}">
                                         @foreach ($errors->get('nama_panggilan') as $msg)
@@ -42,7 +42,7 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group">
-                                        <label>Tempat Lahir</label><span class="text danger">*</span>
+                                        <label>Tempat Lahir</label><span class="text-danger">*</span>
                                         <input type="text" class="form-control" placeholder="Ex : Surabaya"
                                             name="tempat_lahir" value="{{ $value->tempat_lahir }}">
                                         @foreach ($errors->get('tempat_lahir') as $msg)
@@ -50,7 +50,7 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group">
-                                        <label>Tanggal Lahir</label><span class="text danger">*</span>
+                                        <label>Tanggal Lahir</label><span class="text-danger">*</span>
                                         <div class="input-group date" data-provide="datepicker"
                                             data-date-format="dd-mm-yyyy">
                                             <input type="text" class="form-control" name="tanggal_lahir"
@@ -64,7 +64,7 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group">
-                                        <label>Jenis Kelamin</label><span class="text danger">*</span>
+                                        <label>Jenis Kelamin</label><span class="text-danger">*</span>
                                         <select name="jenis_kelamin" class="form-control">
                                             <option
                                                 {{ old('jenis_kelamin', $value->jenis_kelamin) == 'Laki-Laki' ? 'selected' : '' }}
@@ -75,7 +75,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Alumni</label><span class="text danger">*</span>
+                                        <label>Alumni</label><span class="text-danger">*</span>
                                         <input type="text" class="form-control" placeholder="Ex : Universitas Brawijaya"
                                             name="alumni" value="{{ $value->alumni }}">
                                         @foreach ($errors->get('alumni') as $msg)
@@ -83,7 +83,7 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group">
-                                        <label>Tahun Alumni</label><span class="text danger">*</span>
+                                        <label>Tahun Alumni</label><span class="text-danger">*</span>
                                         <input type="text" class="form-control" placeholder="Ex : 2009"
                                             name="tahun_alumni" value="{{ $value->tahun_alumni }}">
                                         @foreach ($errors->get('tahun_alumni') as $msg)
@@ -96,7 +96,7 @@
                                             name="nama_pasangan" value="{{ $value->nama_pasangan }}">
                                     </div>
                                     <div class="form-group">
-                                        <label>Alamat Rumah</label><span class="text danger">*</span>
+                                        <label>Alamat Rumah</label><span class="text-danger">*</span>
                                         <input type="text" class="form-control"
                                             placeholder="Ex : Jl. Baru 1 No.95, RT.01/RW.02, Poris Plawad Utara, Cipondoh, Tangerang, Banten"
                                             name="alamat_rumah" value="{{ $value->alamat_rumah }}">
@@ -105,7 +105,7 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group">
-                                        <label>No. Telp / HP</label><span class="text danger">*</span>
+                                        <label>No. Telp / HP</label><span class="text-danger">*</span>
                                         <input type="text" class="form-control" placeholder="Ex : 081247526640"
                                             name="no_telp" value="{{ $value->no_telp }}">
                                         @foreach ($errors->get('no_telp') as $msg)
@@ -113,7 +113,7 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group">
-                                        <label>Email</label><span class="text danger">*</span>
+                                        <label>Email</label><span class="text-danger">*</span>
                                         <input type="text" class="form-control"
                                             placeholder="Ex : budihermawan15@gmail.com" name="email"
                                             value="{{ $value->email }}">
@@ -122,7 +122,7 @@
                                         @endforeach
                                     </div>
                                     <div class="form-group">
-                                        <label>Bidang Kerja Veteriner</label><span class="text danger">*</span>
+                                        <label>Bidang Kerja Veteriner</label><span class="text-danger">*</span>
                                         <select name="bidang_kerja" class="form-control">
                                             <option
                                                 {{ old('bidang_kerja', $value->bidang_kerja) == 'Praktek Dokter Hewan' ? 'selected' : '' }}

@@ -32,7 +32,7 @@ class adminKeanggotaanController extends Controller
             ->whereNotNull('tanggal_terdaftar')
             ->where('dokter.nama_lengkap','LIKE','%' .$request->cariDokter. '%')
             ->orderBy('dokter.nama_lengkap')
-            ->get();
+            ->paginate(10);
             
             return view('Administrator.adminAnggota.index', compact('data','NamaAdmin'));
         }
@@ -48,7 +48,7 @@ class adminKeanggotaanController extends Controller
             ->where('dokter.nama_lengkap','LIKE','%' .$request->cariDokter. '%')
             ->where('masa_aktif','>', date('Y-m-d'))
             ->orderBy('dokter.nama_lengkap')
-            ->get();
+            ->paginate(10);
             
             return view('Administrator.adminAnggota.index', compact('data','NamaAdmin'));
         }
@@ -65,7 +65,7 @@ class adminKeanggotaanController extends Controller
             ->where('dokter.nama_lengkap','LIKE','%' .$request->cariDokter. '%')
             ->where('masa_aktif','<', date('Y-m-d'))
             ->orderBy('dokter.nama_lengkap')
-            ->get();
+            ->paginate(10);
             
             return view('Administrator.adminAnggota.index', compact('data','NamaAdmin'));
         }
@@ -79,7 +79,7 @@ class adminKeanggotaanController extends Controller
                     ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
                     ->whereNotNull('tanggal_terdaftar')
                     ->orderBy('dokter.nama_lengkap')
-                    ->get();
+                    ->paginate(10);
                 
             return view('Administrator.adminAnggota.index', compact('data','NamaAdmin'));
         }

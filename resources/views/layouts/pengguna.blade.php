@@ -64,7 +64,7 @@
                     <aside id="sidebar-wrapper">
                         <div class="sidebar-brand">
                             <a href="#"><img src="{{ asset('img/pdhi_logo.jpg') }}" alt="logo" width="60"
-                                    class="shadow-lg bg-white rounded-circle mb-2 mt-2"></a>
+                                    class="shadow p-1 bg-white rounded-circle mb-2 mt-2"></a>
                             <p class="font-weight-bold">PDHI Banten II</p>
                         </div>
                         <ul class="sidebar-menu">

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pengguna;
 use App\Models\Dokter;
+use App\Models\Berkas;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +34,9 @@ class adminDokterController extends Controller
             ->where('id_kelas_pengguna','1')
             ->join('klinik','dokter.id_klinik','=','klinik.id')
             ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
-            ->get();
-            
+            ->select('dokter.id','nama_lengkap','nama_panggilan','tempat_lahir','tanggal_lahir','jenis_kelamin','alumni','tahun_alumni','nama_pasangan','alamat_rumah','no_telp','email','bidang_kerja','nama_klinik','alamat_klinik','no_telp_klinik','domisili_anggota','tanggal_terdaftar','masa_aktif')
+            ->paginate(10);
+
             return view('Administrator.adminDokter.index', compact('data','NamaAdmin'));
         }
         elseif($request->has('terdaftar'))
@@ -48,7 +50,9 @@ class adminDokterController extends Controller
                     ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
                     ->whereNotNull('tanggal_terdaftar')
                     ->orderBy('dokter.nama_lengkap')
-                    ->get();
+                    ->select('dokter.id','nama_lengkap','nama_panggilan','tempat_lahir','tanggal_lahir','jenis_kelamin','alumni','tahun_alumni','nama_pasangan','alamat_rumah','no_telp','email','bidang_kerja','nama_klinik','alamat_klinik','no_telp_klinik','domisili_anggota','tanggal_terdaftar','masa_aktif')
+                    ->paginate(10);
+                    
             
             return view('Administrator.adminDokter.index', compact('data','NamaAdmin'));
         }
@@ -63,7 +67,8 @@ class adminDokterController extends Controller
                     ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
                     ->whereNull('tanggal_terdaftar')
                     ->orderBy('dokter.nama_lengkap')
-                    ->get();
+                    ->select('dokter.id','nama_lengkap','nama_panggilan','tempat_lahir','tanggal_lahir','jenis_kelamin','alumni','tahun_alumni','nama_pasangan','alamat_rumah','no_telp','email','bidang_kerja','nama_klinik','alamat_klinik','no_telp_klinik','domisili_anggota','tanggal_terdaftar','masa_aktif')
+                    ->paginate(10);
             
             return view('Administrator.adminDokter.index', compact('data','NamaAdmin'));
         }
@@ -71,13 +76,14 @@ class adminDokterController extends Controller
         {
             $Akun = Auth::user()->username;
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-            $data = DB::table('dokter')
-                    ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+            $data = DB::table('pengguna')
+                    ->join('dokter', 'pengguna.username', '=', 'dokter.username')
                     ->where('id_kelas_pengguna','1')
                     ->join('klinik','dokter.id_klinik','=','klinik.id')
                     ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
                     ->orderBy('dokter.nama_lengkap')
-                    ->get();
+                    ->select('dokter.id','nama_lengkap','nama_panggilan','tempat_lahir','tanggal_lahir','jenis_kelamin','alumni','tahun_alumni','nama_pasangan','alamat_rumah','no_telp','email','bidang_kerja','nama_klinik','alamat_klinik','no_telp_klinik','domisili_anggota','tanggal_terdaftar','masa_aktif')
+                    ->paginate(10);
             
             return view('Administrator.adminDokter.index', compact('data','NamaAdmin'));
         }
@@ -123,7 +129,18 @@ class adminDokterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Akun = Auth::user()->username;
+        $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+
+        $DataDokter = DB::table('dokter')
+        ->where('dokter.id',$id)
+        ->join('klinik', 'dokter.id_klinik', '=', 'klinik.id')
+        ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
+        ->get();
+
+        $pasFoto = Berkas::where('id_dokter',$id)->where('id_jenis_berkas', '1')->value('nama_berkas');
+        
+        return view('Administrator.adminDokter.detailDokter',compact('NamaAdmin','DataDokter','pasFoto'));
     }
 
     /**

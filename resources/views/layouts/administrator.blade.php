@@ -62,8 +62,8 @@
                 <div class="main-sidebar">
                     <aside id="sidebar-wrapper">
                         <div class="sidebar-brand">
-                            <a href="#"><img src="{{ asset('img/pdhi_logo.jpg') }}" alt="logo" width="60"
-                                    class="shadow-lg bg-white rounded-circle mb-2 mt-2"></a>
+                            <a href="/"><img src="{{ asset('img/pdhi_logo.jpg') }}" alt="logo" width="60"
+                                    class="shadow p-1 bg-white rounded-circle mb-2 mt-2"></a>
                             <p class="font-weight-bold">PDHI Banten II</p>
                         </div>
                         <ul class="sidebar-menu">
@@ -81,7 +81,7 @@
                             <li><a class="nav-link" href="/adminPendaftaran"><i class="fa fa-address-book mr-2"></i>
                                     <span>Administrasi Pendaftaran</span></a></li>
                             <li class="menu-header">Laporan</li>
-                            <li><a class="nav-link" href="/"><i class="fa fa-book mr-2"></i> <span>Download
+                            <li><a class="nav-link" href="/adminLaporan"><i class="fa fa-book mr-2"></i> <span>Download
                                         Laporan</span></a></li>
                             <div class="mt-5 mb-5 p-3 hide-sidebar-mini">
                                 <a href="/logout" class="btn btn-primary btn-lg btn-block btn-icon-split">

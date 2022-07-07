@@ -20,23 +20,23 @@
                                 <span class="mb-2">Kolom dengan tanda * wajib terisi</span>
                                 <div class="form-group">
                                     <label class="mt-3">Nama Lengkap (Dengan Gelar Sesuai KTA)</label><span
-                                        class="text danger">*</span>
+                                        class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="nama_panggilan"
                                         value="{{ $value->nama_lengkap }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama Panggilan</label><span class="text danger">*</span>
+                                    <label>Nama Panggilan</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="nama_panggilan"
                                         value="{{ $value->nama_panggilan }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Tempat Lahir</label><span class="text danger">*</span>
+                                    <label>Tempat Lahir</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="tempat_lahir"
                                         value="{{ $value->tempat_lahir }}">
 
                                 </div>
                                 <div class="form-group">
-                                    <label>Tanggal Lahir</label><span class="text danger">*</span>
+                                    <label>Tanggal Lahir</label><span class="text-danger">*</span>
                                     <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
                                         <input readonly type="text" class="form-control" name="tanggal_lahir"
                                             value="{{ $value->tanggal_lahir }}" placeholder="-">
@@ -46,17 +46,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Jenis Kelamin</label><span class="text danger">*</span>
+                                    <label>Jenis Kelamin</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="jenis_kelamin"
                                         value="{{ $value->jenis_kelamin }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Alumni</label><span class="text danger">*</span>
+                                    <label>Alumni</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="alumni"
                                         value="{{ $value->alumni }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Tahun Alumni</label><span class="text danger">*</span>
+                                    <label>Tahun Alumni</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="tahun_alumni"
                                         value="{{ $value->tahun_alumni }}">
                                 </div>
@@ -66,22 +66,22 @@
                                         value="{{ $value->nama_pasangan }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Alamat Rumah</label><span class="text danger">*</span>
+                                    <label>Alamat Rumah</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="alamat_rumah"
                                         value="{{ $value->alamat_rumah }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>No. Telp / HP</label><span class="text danger">*</span>
+                                    <label>No. Telp / HP</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="no_telp"
                                         value="{{ $value->no_telp }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Email</label><span class="text danger">*</span>
+                                    <label>Email</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="email"
                                         value="{{ $value->email }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Bidang Kerja Veteriner</label><span class="text danger">*</span>
+                                    <label>Bidang Kerja Veteriner</label><span class="text-danger">*</span>
                                     <input readonly type="text" class="form-control" placeholder="-" name="bidang_kerja"
                                         value="{{ $value->bidang_kerja }}">
                                 </div>
@@ -546,7 +546,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label class="mt-3">Tanggal Terdaftar</label><span class="text danger">*</span>
+                                    <label class="mt-3">Tanggal Terdaftar</label><span class="text-danger">*</span>
                                     <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
                                         <input type="text" class="form-control" name="tanggal_terdaftar">
                                         <div class="input-group-addon">
@@ -555,14 +555,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Masa Aktif</label><span class="text danger">*</span>
+                                    <label>Masa Aktif</label><span class="text-danger">*</span>
                                     <select name="masa_aktif" class="form-control">
                                         <option value="4">4 Tahun</option>>
                                         <option value="2">2 Tahun</option>>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Domisili Keanggotaan</label><span class="text danger">*</span>
+                                    <label>Domisili Keanggotaan</label><span class="text-danger">*</span>
                                     <select name="domisili_anggota" class="form-control">
                                         <option value="Tetap">Tetap</option>>
                                         <option value="Tamu">Tamu</option>>

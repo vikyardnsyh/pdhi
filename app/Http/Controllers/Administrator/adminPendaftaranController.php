@@ -37,7 +37,8 @@ class adminPendaftaranController extends Controller
             ->select('dokter.id','nama_lengkap','nama_panggilan','id_dokter','nama_berkas','tanggal_terdaftar')
             ->where('nama_lengkap','LIKE','%' .$request->cariDokter. '%')
             ->get()
-            ->groupBy('nama_lengkap');
+            ->groupBy('nama_lengkap')
+            ->paginate(10);
             
             return view('Administrator.adminPendaftaran.index', compact('NamaAdmin','data')); 
         }
@@ -54,7 +55,8 @@ class adminPendaftaranController extends Controller
             ->select('dokter.id','nama_lengkap','nama_panggilan','id_dokter','nama_berkas','tanggal_terdaftar')
             ->whereNotNull('tanggal_terdaftar')
             ->get()
-            ->groupBy('nama_lengkap');
+            ->groupBy('nama_lengkap')
+            ->paginate(10);
 
             return view('Administrator.adminPendaftaran.index', compact('NamaAdmin','data'));
         }
@@ -71,7 +73,8 @@ class adminPendaftaranController extends Controller
             ->select('dokter.id','nama_lengkap','nama_panggilan','id_dokter','nama_berkas','tanggal_terdaftar')
             ->whereNull('tanggal_terdaftar')
             ->get()
-            ->groupBy('nama_lengkap');
+            ->groupBy('nama_lengkap')
+            ->paginate(10);
 
             return view('Administrator.adminPendaftaran.index', compact('NamaAdmin','data'));
         }
@@ -87,7 +90,8 @@ class adminPendaftaranController extends Controller
             ->leftJoin('keanggotaan','id_keanggotaan','=','keanggotaan.id')
             ->select('dokter.id','nama_lengkap','nama_panggilan','id_dokter','nama_berkas','tanggal_terdaftar')
             ->get()
-            ->groupBy('nama_lengkap');
+            ->groupBy('nama_lengkap')
+            ->paginate(10);
 
             return view('Administrator.adminPendaftaran.index', compact('NamaAdmin','data'));
         }

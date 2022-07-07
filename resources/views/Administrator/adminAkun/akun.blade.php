@@ -29,8 +29,15 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a class="btn btn-primary mb-2" href="/AdminAkun/create" role="button"><i class="fa fa-plus-circle"></i>
-                        Tambah Akun</a>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-primary mb-2" href="/AdminAkun/create" role="button"><i class="fa fa-plus-circle"></i>
+                                Tambah Akun</a>
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            Total data ditemukan : {{ $data->total()}}
+                        </div>
+                    </div>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -55,7 +62,7 @@
                                     @php $kelas = "Admin" @endphp
                                 @endif
                                 <tr>
-                                    <td>{{ ++$key }}</td>
+                                    <td>{{ $data->firstItem() + $key }}</td>
                                     <td>{{ $value->nama_lengkap }}</td>
                                     <td>{{ $value->username }}</td>
                                     <td>{{ $kelas }}</td>
@@ -77,6 +84,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex">
+                    {{ $data->links() }}
+                    </div>
                 </div>
             </div>
     </div>
