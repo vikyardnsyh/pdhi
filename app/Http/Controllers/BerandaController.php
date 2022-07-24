@@ -28,7 +28,8 @@ class BerandaController extends Controller
         if ($IdKelasPengguna == Constants::ID_KELAS_PENGGUNA_ADMIN) {
             date_default_timezone_set('Asia/jakarta');
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-            $totalAnggota = Pengguna::where('id_kelas_pengguna', '1')->count();
+            $totalAnggota = Pengguna::where('id_kelas_pengguna','1')->join('dokter','pengguna.username','=','dokter.username')->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')->whereNotNull('tanggal_terdaftar')->count();
+            $totalNonAnggota = Pengguna::where('id_kelas_pengguna','1')->join('dokter','pengguna.username','=','dokter.username')->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')->whereNull('tanggal_terdaftar')->count();
             $anggotaTetap = Keanggotaan::where('domisili_anggota', 'tetap')->count();
             $anggotaTamu = Keanggotaan::where('domisili_anggota', 'tamu')->count();
             $anggotaAktif = Keanggotaan::where('masa_aktif','>', date('Y-m-d'))->count();
@@ -36,7 +37,7 @@ class BerandaController extends Controller
             $akunAdmin = Pengguna::where('id_kelas_pengguna', '2')->count();
             $akunUser = Pengguna::where('id_kelas_pengguna', '1')->count();
             
-            return view('Administrator.beranda', compact('totalAnggota','anggotaTetap','anggotaTamu','NamaAdmin','anggotaAktif','anggotaNonAktif','akunAdmin','akunUser'));
+            return view('Administrator.beranda', compact('totalAnggota','totalNonAnggota','anggotaTetap','anggotaTamu','NamaAdmin','anggotaAktif','anggotaNonAktif','akunAdmin','akunUser'));
         } else {
             $Akun = Auth::user()->username;
             $NamaDokter = Dokter::where('username', $Akun)->value('nama_panggilan');

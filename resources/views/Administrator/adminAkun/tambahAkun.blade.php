@@ -26,7 +26,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" name="username" class="form-control">
+                                <input type="text" name="username" class="form-control" value="{{ old('username') }}">
                                 @foreach($errors->get('username') as $msg)
                                     <p class="text-danger">{{$msg}}</p>
                                 @endforeach

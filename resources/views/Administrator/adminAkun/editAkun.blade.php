@@ -36,14 +36,6 @@
                                 @endforeach
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
-                            <input type="text" name="password" value="{{ $penggunaBaru->password }}"
-                                class="form-control">
-                                @foreach($errors->get('password') as $msg)
-                                    <p class="text-danger">{{$msg}}</p>
-                                @endforeach
-                        </div>
-                        <div class="form-group">
                             <label>Status Akun</label>
                             <select name="status_pengguna" id="" class="form-control">
                                 <option

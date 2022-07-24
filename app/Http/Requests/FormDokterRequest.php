@@ -26,7 +26,7 @@ class FormDokterRequest extends FormRequest
         return [
             'nama_lengkap' => 'required',
             'nama_panggilan' => 'required',
-            'tempat_lahir' => 'required',
+            'tempat_lahir' => 'required|alpha',
             'tanggal_lahir' => 'required',
             'alumni' => ['required','starts_with:universitas,Universitas,institut,Institut,Sekolah Tinggi,sekolah tinggi,Sekolah tinggi,akademi,Akademi'],
             'tahun_alumni' => 'required|numeric|digits:4',

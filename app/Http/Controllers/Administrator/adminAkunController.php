@@ -37,6 +37,44 @@ class adminAkunController extends Controller
 
             return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
         }
+        elseif($request->has('semua'))
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('pengguna')
+            ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
+            ->orderBy('dokter.nama_lengkap')
+            ->paginate(10);
+
+            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
+        }
+        elseif($request->has('admin'))
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('pengguna')
+            ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
+            ->where('id_kelas_pengguna','2')
+            ->orderBy('dokter.nama_lengkap')
+            ->paginate(10);
+
+            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
+        }
+        elseif($request->has('user'))
+        {
+            $Akun = Auth::user()->username;
+            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+            $data = DB::table('pengguna')
+            ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
+            ->where('id_kelas_pengguna','1')
+            ->orderBy('dokter.nama_lengkap')
+            ->paginate(10);
+
+            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
+        }
         else
         {
             $Akun = Auth::user()->username;
@@ -140,9 +178,10 @@ class adminAkunController extends Controller
      */
     public function update(UpdateAkunRequest $request, $username)
     {
+    
         $penggunaBaru = pengguna::find($username);
         $penggunaBaru->username = $request->username;
-        $penggunaBaru->password = bcrypt($request->password);   
+        // $penggunaBaru->password = bcrypt($request->password);   
         $penggunaBaru->status_pengguna = $request->status_pengguna;
         $penggunaBaru->id_kelas_pengguna = $request->id_kelas_pengguna;
 
@@ -153,6 +192,17 @@ class adminAkunController extends Controller
         
         $dokterBaru->save();
         Alert::success('Selesai!', 'Data akun yang dipilih sudah diubah');
+        return redirect('/AdminAkun');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $username = $request->username;
+        $passwordBaru = pengguna::find($username);
+        $passwordBaru->password = bcrypt('PdhiBanten2!');
+        $passwordBaru->save();
+
+        Alert::success('Selesai!', 'Password akun yang dipilih telah diubah');
         return redirect('/AdminAkun');
     }
 
@@ -168,12 +218,16 @@ class adminAkunController extends Controller
         $dokterBaru = Dokter::where('username', $username)->first();
         $idDokter = Dokter::where('username', $username)->value('id');
         $idKlinik = Dokter::where('username', $username)->value('id_klinik');
+        $idKeanggotaan = Dokter::where('username', $username)->value('id_keanggotaan');
         $klinikBaru = Klinik::where('id', $idKlinik);
         $berkasBaru = Berkas::where('id_dokter', $idDokter);
-        $berkasBaru->delete();
-        $klinikBaru->delete();
+        $keanggotaanBaru = Keanggotaan::where('id', $idKeanggotaan);
         $dokterBaru->delete();
         $penggunaBaru->delete();
+        $keanggotaanBaru->delete();
+        $berkasBaru->delete();
+        $klinikBaru->delete();
+        
         Alert::success('Selesai!', 'Data akun yang dipilih sudah dihapus');
         return redirect('/AdminAkun');
     }

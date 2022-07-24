@@ -28,8 +28,9 @@ Route::get('/', [BerandaController::class, 'index'])->name('home')->middleware('
 Route::get('/pengajuanAkun', function(){return view('auth.pengajuanAkun');})->name('pengajuanAkun');
 
 // #Admin
-// Admin Pendaftaran
-Route::resource('/AdminAkun', AdminAkunController::class)->middleware('autentikasi:2');
+// Admin Akun
+Route::get('/AdminAkun/resetPassword', [adminAkunController::class,'resetPassword'])->middleware('autentikasi:2');  
+Route::resource('/AdminAkun', adminAkunController::class)->middleware('autentikasi:2');
 // Admin Dokter
 Route::resource('/adminDokter', adminDokterController::class)->middleware('autentikasi:2');
 // Admin Pendaftaran
@@ -38,6 +39,8 @@ Route::resource('/adminPendaftaran', adminPendaftaranController::class)->middlew
 // Admin Keanggotaan
 Route::resource('/adminKeanggotaan', adminKeanggotaanController::class)->middleware('autentikasi:2');
 // Admin Laporan
+Route::get('/adminLaporan/generate-pdf',[adminLaporanController::class,'generatePDF'])->middleware('autentikasi:2');
+Route::get('/adminLaporan/export', [adminLaporanController::class,'export'])->middleware('autentikasi:2');
 Route::resource('/adminLaporan', adminLaporanController::class)->middleware('autentikasi:2');
 
 // #User
