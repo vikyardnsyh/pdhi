@@ -78,20 +78,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group mt-n4">
-                                <div class="custom-control custom-checkbox">
+                            <div class="form-group mt-5">
+                                <!-- <div class="custom-control custom-checkbox">
                                     <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
                                         id="remember-me" {{ old('remember') ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="remember-me">Ingat akun saya</label>
-                                </div>
+                                </div> -->
+                                <a href="{{ route('lupaPassword') }}" class="float-left mt-n5">
+                                        Lupa Password?
+                                    </a>
                             </div>
-                            <div class="form-group text-right">
-                                @if (Route::has('password.request'))
+                            <div class="form-group text-right mt-4">
+                                <!-- @if (Route::has('password.request'))
                                     <a href="{{ route('password.request') }}" class="float-left mt-3">
                                         {{ __('Lupa Password?') }}
                                     </a>
-                                @endif
-
+                                @endif -->
+                                
                                 <button type="submit" class="btn btn-primary btn-icon icon-right mt-n4" tabindex="4">
                                     Login
                                 </button>

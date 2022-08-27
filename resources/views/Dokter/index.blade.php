@@ -7,7 +7,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Beranda Dokter Status(Terdaftar, Belum Terdaftar, Perpanjangan)</h1>
+            <h1>Home</h1>
         </div>
         <div class="section-body">
             <div class="card">

@@ -3,11 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateAkunRequest extends FormRequest
+class ubahPasswordRequest extends FormRequest
 {
-    /** 
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -25,9 +24,9 @@ class UpdateAkunRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => ['required',Rule::unique('pengguna')->ignore($this->username,'username')],
-            'id_kelas_pengguna' => 'required',
-            'nama_lengkap' => 'required'
+            'password_saat_ini' => 'required',
+            'password_baru' => 'required',
+            'konfirmasi_password_baru' => 'required|same:password_baru'
         ];
     }
 }

@@ -82,8 +82,8 @@
                                 <option value="2">2 Tahun</option>>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
                         <a class="btn btn-primary" href="/adminKeanggotaan" role="button">Kembali</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                 </div>
             </div>

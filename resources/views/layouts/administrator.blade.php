@@ -120,6 +120,51 @@
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js') }}"></script>
     <script src="{{ asset('stisla/js/custom.js') }}"></script>
+    <script src="{{ asset('common/js/sweetalert.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $('.show-alert-delete-confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Hapus Akun Ini?",
+                text: "Seluruh data terkait akun yang dipilih akan dihapus",
+                icon: "warning",
+                type: "warning",
+                buttons: ["Batal", "Hapus"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('.show-alert-password-confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Reset Password Akun Ini?",
+                text: "Password Akan Diubah Menjadi : PdhiBanten2!",
+                icon: "info",
+                type: "info",
+                buttons: ["Batal", "Reset"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 
     @include('sweetalert::alert')
 </body>

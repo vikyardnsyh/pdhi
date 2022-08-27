@@ -60,12 +60,13 @@
                                             No. KTA Online : 034xxxxxx
                                         </div>
                                         <li>
-                                            Menghubungi whatsapp sekertariat PDHI Cabang Banten II di nomor <a href="https://wa.me/62895346222492">0895346222492</a> <br> <b>(Klik nomor untuk direct ke whatsapp web anda)</b> 
+                                            Menghubungi whatsapp sekertariat PDHI Cabang Banten II di nomor <a href="https://wa.me/62895346222492">0895346222492</a> <br> <b>(Klik nomor untuk direct ke whatsapp web anda)*</b> 
                                         </li>
                                         <li>
                                             Sekertariat mungkin membutuhkan waktu untuk melakukan verifikasi data anda, setelah mendapatkan akses berupa username dan password, gunakan untuk mengakses sistem pendaftaran aggota PDHI Cabang Banten II
                                         </li>
                                     </ul>
+                                    <p>*Sudah menggunakan dan login dengan whatsapp web atau menginstall whatsapp desktop</p>
                                 </div>
                             </div>
                         </div>

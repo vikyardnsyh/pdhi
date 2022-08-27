@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UploadBerkasRequest;
 use Illuminate\Http\Request;
 use App\Models\Dokter;
 use App\Models\Pengguna;
@@ -10,6 +11,7 @@ use App\Models\Berkas;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -25,16 +27,12 @@ class uploadBerkasController extends Controller
         $Akun = Auth::user()->username;
         $NamaDokter = Dokter::where('username', $Akun)->value('nama_panggilan');
         $idDokter = Dokter::where('username', $Akun)->value('id');
-        $pasFoto = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '1')->value('nama_berkas');
-        $ijazah = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '2')->value('nama_berkas');
-        $ktp = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '3')->value('nama_berkas');
-        $kta = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '4')->value('nama_berkas');
-        $strv = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '5')->value('nama_berkas');
-        $skdhi = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '6')->value('nama_berkas');
-        $tf_daftar = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '7')->value('nama_berkas');
-        $tf_registrasi = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '8')->value('nama_berkas');
-        
-        return view('Dokter.uploadBerkas', compact('NamaDokter','pasFoto','ijazah','ktp','kta','strv','skdhi','tf_daftar','tf_registrasi'));
+        $dataBerkas = DB::table('jenis_berkas_dokter')->leftJoin('berkas_dokter', function ($leftjoin) use ($idDokter) {
+            $leftjoin->on('jenis_berkas_dokter.id', '=', 'berkas_dokter.id_jenis_berkas')
+                ->where('berkas_dokter.id_dokter', $idDokter);
+        })->get();
+
+        return view('Dokter.uploadBerkas', compact('NamaDokter', 'dataBerkas', 'idDokter'));
     }
 
     /**
@@ -55,10 +53,10 @@ class uploadBerkasController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->file('pas_foto')){
+        if ($request->file('pas_foto')) {
             $file = $request->file('pas_foto');
-            $namaFile = str_replace("-","",str::uuid()).".jpeg";
-            $file->move('img/berkas_dokter',$namaFile);
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
             $Akun = Auth::user()->username;
             $idDokter = Dokter::where('username', $Akun)->value('id');
             $berkasBaru = new Berkas;
@@ -68,10 +66,10 @@ class uploadBerkasController extends Controller
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Ditambahkan');
             return redirect('/uploadBerkas');
-        }elseif($request->file('ijazah_drh')){
+        } elseif ($request->file('ijazah_drh')) {
             $file = $request->file('ijazah_drh');
-            $namaFile = str_replace("-","",str::uuid()).".jpeg";
-            $file->move('img/berkas_dokter',$namaFile);
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
             $Akun = Auth::user()->username;
             $idDokter = Dokter::where('username', $Akun)->value('id');
             $berkasBaru = new Berkas;
@@ -81,10 +79,10 @@ class uploadBerkasController extends Controller
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas Ijazah Sudah Ditambahkan');
             return redirect('/uploadBerkas');
-        }elseif($request->file('ktp')){
+        } elseif ($request->file('ktp')) {
             $file = $request->file('ktp');
-            $namaFile = str_replace("-","",str::uuid()).".jpeg";
-            $file->move('img/berkas_dokter',$namaFile);
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
             $Akun = Auth::user()->username;
             $idDokter = Dokter::where('username', $Akun)->value('id');
             $berkasBaru = new Berkas;
@@ -94,10 +92,10 @@ class uploadBerkasController extends Controller
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas KTP Sudah Ditambahkan');
             return redirect('/uploadBerkas');
-        }elseif($request->file('kta')){
+        } elseif ($request->file('kta')) {
             $file = $request->file('kta');
-            $namaFile = str_replace("-","",str::uuid()).".jpeg";
-            $file->move('img/berkas_dokter',$namaFile);
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
             $Akun = Auth::user()->username;
             $idDokter = Dokter::where('username', $Akun)->value('id');
             $berkasBaru = new Berkas;
@@ -107,10 +105,10 @@ class uploadBerkasController extends Controller
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas KTA Sudah Ditambahkan');
             return redirect('/uploadBerkas');
-        }elseif($request->file('strv')){
+        } elseif ($request->file('strv')) {
             $file = $request->file('strv');
-            $namaFile = str_replace("-","",str::uuid()).".jpeg";
-            $file->move('img/berkas_dokter',$namaFile);
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
             $Akun = Auth::user()->username;
             $idDokter = Dokter::where('username', $Akun)->value('id');
             $berkasBaru = new Berkas;
@@ -120,10 +118,10 @@ class uploadBerkasController extends Controller
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas STRV Sudah Ditambahkan');
             return redirect('/uploadBerkas');
-        }elseif($request->file('skdhi')){
+        } elseif ($request->file('skdhi')) {
             $file = $request->file('skdhi');
-            $namaFile = str_replace("-","",str::uuid()).".jpeg";
-            $file->move('img/berkas_dokter',$namaFile);
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
             $Akun = Auth::user()->username;
             $idDokter = Dokter::where('username', $Akun)->value('id');
             $berkasBaru = new Berkas;
@@ -133,10 +131,10 @@ class uploadBerkasController extends Controller
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas SKDHI Sudah Ditambahkan');
             return redirect('/uploadBerkas');
-        }elseif($request->file('tf_daftar')){
+        } elseif ($request->file('tf_daftar')) {
             $file = $request->file('tf_daftar');
-            $namaFile = str_replace("-","",str::uuid()).".jpeg";
-            $file->move('img/berkas_dokter',$namaFile);
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
             $Akun = Auth::user()->username;
             $idDokter = Dokter::where('username', $Akun)->value('id');
             $berkasBaru = new Berkas;
@@ -146,10 +144,10 @@ class uploadBerkasController extends Controller
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas Bukti Transfer Pendaftaran Sudah Ditambahkan');
             return redirect('/uploadBerkas');
-        }elseif($request->file('tf_registrasi')){
+        } elseif ($request->file('tf_registrasi')) {
             $file = $request->file('tf_registrasi');
-            $namaFile = str_replace("-","",str::uuid()).".jpeg";
-            $file->move('img/berkas_dokter',$namaFile);
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
             $Akun = Auth::user()->username;
             $idDokter = Dokter::where('username', $Akun)->value('id');
             $berkasBaru = new Berkas;
@@ -158,6 +156,9 @@ class uploadBerkasController extends Controller
             $berkasBaru->id_dokter = $idDokter;
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas Bukti Transfer Anggota Sudah Ditambahkan');
+            return redirect('/uploadBerkas');
+        } else {
+            Alert::error('File Belum Dipilih', 'Mohon upload file yang ada di perangkat anda');
             return redirect('/uploadBerkas');
         }
     }
@@ -181,7 +182,7 @@ class uploadBerkasController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 
     }
 
     /**
@@ -191,9 +192,92 @@ class uploadBerkasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idDokter)
     {
-        //
+        if ($request->file('pas_foto')){
+            $file = $request->file('pas_foto');
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
+            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','1')->first();
+            $berkasBaru->nama_berkas = $namaFile;
+            $berkasBaru->save();
+            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
+            return redirect('/uploadBerkas');
+        }
+        elseif($request->file('ijazah_drh')){
+            $file = $request->file('ijazah_drh');
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
+            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','2')->first();
+            $berkasBaru->nama_berkas = $namaFile;
+            $berkasBaru->save();
+            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
+            return redirect('/uploadBerkas');
+        }
+        elseif($request->file('ktp')){
+            $file = $request->file('ktp');
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
+            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','3')->first();
+            $berkasBaru->nama_berkas = $namaFile;
+            $berkasBaru->save();
+            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
+            return redirect('/uploadBerkas');
+        }
+        elseif($request->file('kta')){
+            $file = $request->file('kta');
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
+            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','4')->first();
+            $berkasBaru->nama_berkas = $namaFile;
+            $berkasBaru->save();
+            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
+            return redirect('/uploadBerkas');
+        }
+        elseif($request->file('strv')){
+            $file = $request->file('strv');
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
+            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','5')->first();
+            $berkasBaru->nama_berkas = $namaFile;
+            $berkasBaru->save();
+            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
+            return redirect('/uploadBerkas');
+        }
+        elseif($request->file('skdhi')){
+            $file = $request->file('skdhi');
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
+            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','6')->first();
+            $berkasBaru->nama_berkas = $namaFile;
+            $berkasBaru->save();
+            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
+            return redirect('/uploadBerkas');
+        }
+        elseif($request->file('tf_daftar')){
+            $file = $request->file('tf_daftar');
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
+            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','7')->first();
+            $berkasBaru->nama_berkas = $namaFile;
+            $berkasBaru->save();
+            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
+            return redirect('/uploadBerkas');
+        }
+        elseif($request->file('tf_registrasi')){
+            $file = $request->file('tf_registrasi');
+            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
+            $file->move('img/berkas_dokter', $namaFile);
+            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','8')->first();
+            $berkasBaru->nama_berkas = $namaFile;
+            $berkasBaru->save();
+            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
+            return redirect('/uploadBerkas');
+        }
+        else {
+            Alert::error('File Belum Dipilih', 'Mohon upload file yang ada di perangkat anda');
+            return redirect('/uploadBerkas');
+        }
     }
 
     /**
@@ -210,7 +294,7 @@ class uploadBerkasController extends Controller
     // Download Berkas
     public function download(Request $request)
     {
-    	$namaFile = $request->namaFile;
+        $namaFile = $request->namaFile;
         $pathToFile = public_path('img\\berkas_dokter\\' . $namaFile);
         return response()->download($pathToFile);
     }

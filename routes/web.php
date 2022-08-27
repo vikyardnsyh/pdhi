@@ -15,6 +15,7 @@ use App\Http\Controllers\Administrator\adminLaporanController;
 use App\Http\Controllers\Dokter\formRegistrasiController;
 use App\Http\Controllers\Dokter\uploadBerkasController;
 use App\Http\Controllers\Dokter\syaratPendaftaranController;
+use App\Http\Controllers\Dokter\ubahPasswordController;
 
 
 // Auth
@@ -26,6 +27,8 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/', [BerandaController::class, 'index'])->name('home')->middleware('autentikasi');
 // Pengajuan Akun (General)
 Route::get('/pengajuanAkun', function(){return view('auth.pengajuanAkun');})->name('pengajuanAkun');
+// Lupa Password (General)
+Route::get('/lupaPassword', function(){return view('auth.lupaPassword');})->name('lupaPassword');
 
 // #Admin
 // Admin Akun
@@ -51,8 +54,11 @@ Route::get('/uploadBerkas/download', [uploadBerkasController::class, 'download']
 Route::resource('/uploadBerkas', uploadBerkasController::class)->middleware('autentikasi:1');
 // Syarat Pendaftaran
 Route::resource('/syaratPendaftaran', syaratPendaftaranController::class)->middleware('autentikasi:1');
+// Ubah Password
+Route::resource('/ubahPassword', ubahPasswordController::class)->middleware('autentikasi:1');
 
-//lokasi regsister : C:\laragon\www\pdhi-banten\app\Http\Controllers\Auth\RegisterController.php
+
+//lokasi register : C:\laragon\www\pdhi-banten\app\Http\Controllers\Auth\RegisterController.php
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
 Route::resource('/pengguna', PenggunaController::class);

@@ -9,7 +9,6 @@ use App\Models\Pengguna;
 use App\Models\Dokter;
 use App\Models\Berkas;
 use App\Models\Keanggotaan;
-use App\Http\Requests\UpdateAkunRequest;
 use App\Http\Requests\StoreAkunRequest;
 use App\Models\Klinik;
 use Illuminate\Support\Facades\Auth;
@@ -25,67 +24,58 @@ class adminAkunController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('cariAkun'))
-        {
+        if ($request->has('cariAkun')) {
             $Akun = Auth::user()->username;
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
             $data = Pengguna::select('Pengguna.*')
-            ->join('Dokter', 'dokter.username', '=', 'pengguna.username')
-            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
-            ->where('Pengguna.username','LIKE','%' .$request->cariAkun. '%')
-            ->paginate(10);
+                ->join('Dokter', 'dokter.username', '=', 'pengguna.username')
+                ->select('pengguna.username', 'pengguna.status_pengguna', 'pengguna.id_kelas_pengguna', 'dokter.nama_lengkap')
+                ->where('Pengguna.username', 'LIKE', '%' . $request->cariAkun . '%')
+                ->paginate(10);
 
-            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
-        }
-        elseif($request->has('semua'))
-        {
+            return view('Administrator.adminAkun.akun', compact('data', 'NamaAdmin'));
+        } elseif ($request->has('semua')) {
             $Akun = Auth::user()->username;
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
             $data = DB::table('pengguna')
-            ->join('dokter', 'pengguna.username', '=', 'dokter.username')
-            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
-            ->orderBy('dokter.nama_lengkap')
-            ->paginate(10);
+                ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+                ->select('pengguna.username', 'pengguna.status_pengguna', 'pengguna.id_kelas_pengguna', 'dokter.nama_lengkap')
+                ->orderBy('dokter.nama_lengkap')
+                ->paginate(10);
 
-            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
-        }
-        elseif($request->has('admin'))
-        {
+            return view('Administrator.adminAkun.akun', compact('data', 'NamaAdmin'));
+        } elseif ($request->has('admin')) {
             $Akun = Auth::user()->username;
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
             $data = DB::table('pengguna')
-            ->join('dokter', 'pengguna.username', '=', 'dokter.username')
-            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
-            ->where('id_kelas_pengguna','2')
-            ->orderBy('dokter.nama_lengkap')
-            ->paginate(10);
+                ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+                ->select('pengguna.username', 'pengguna.status_pengguna', 'pengguna.id_kelas_pengguna', 'dokter.nama_lengkap')
+                ->where('id_kelas_pengguna', '2')
+                ->orderBy('dokter.nama_lengkap')
+                ->paginate(10);
 
-            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
-        }
-        elseif($request->has('user'))
-        {
+            return view('Administrator.adminAkun.akun', compact('data', 'NamaAdmin'));
+        } elseif ($request->has('user')) {
             $Akun = Auth::user()->username;
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
             $data = DB::table('pengguna')
-            ->join('dokter', 'pengguna.username', '=', 'dokter.username')
-            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
-            ->where('id_kelas_pengguna','1')
-            ->orderBy('dokter.nama_lengkap')
-            ->paginate(10);
+                ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+                ->select('pengguna.username', 'pengguna.status_pengguna', 'pengguna.id_kelas_pengguna', 'dokter.nama_lengkap')
+                ->where('id_kelas_pengguna', '1')
+                ->orderBy('dokter.nama_lengkap')
+                ->paginate(10);
 
-            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
-        }
-        else
-        {
+            return view('Administrator.adminAkun.akun', compact('data', 'NamaAdmin'));
+        } else {
             $Akun = Auth::user()->username;
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
             $data = DB::table('pengguna')
-            ->join('dokter', 'pengguna.username', '=', 'dokter.username')
-            ->select('pengguna.username','pengguna.status_pengguna','pengguna.id_kelas_pengguna','dokter.nama_lengkap')
-            ->orderBy('dokter.nama_lengkap')
-            ->paginate(10);
-        
-            return view('Administrator.adminAkun.akun', compact('data','NamaAdmin'));
+                ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+                ->select('pengguna.username', 'pengguna.status_pengguna', 'pengguna.id_kelas_pengguna', 'dokter.nama_lengkap')
+                ->orderBy('dokter.nama_lengkap')
+                ->paginate(10);
+
+            return view('Administrator.adminAkun.akun', compact('data', 'NamaAdmin'));
         }
     }
     /**
@@ -94,11 +84,11 @@ class adminAkunController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $Akun = Auth::user()->username;
         $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
         $penggunaBaru = new pengguna;
-        return view('Administrator.adminAkun.tambahAkun',compact('penggunaBaru','NamaAdmin'));
+        return view('Administrator.adminAkun.tambahAkun', compact('penggunaBaru', 'NamaAdmin'));
     }
 
     /**
@@ -121,7 +111,7 @@ class adminAkunController extends Controller
         $penggunaBaru->status_pengguna = "1";
         $penggunaBaru->id_kelas_pengguna = $request->id_kelas_pengguna;
 
-        $dokterBaru = new Dokter(); 
+        $dokterBaru = new Dokter();
         $dokterBaru->id_klinik = $klinikBaru->id;
         $dokterBaru->id_keanggotaan = $anggota->id;
         $dokterBaru->username = $request->username;
@@ -166,7 +156,7 @@ class adminAkunController extends Controller
         if (is_null($dokterBaru)) {
             return abort(404);
         }
-        return view('Administrator.adminAkun.editAkun',compact('penggunaBaru','dokterBaru','NamaAdmin'));
+        return view('Administrator.adminAkun.editAkun', compact('penggunaBaru', 'dokterBaru', 'NamaAdmin'));
     }
 
     /**
@@ -176,23 +166,47 @@ class adminAkunController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAkunRequest $request, $username)
+    public function update(Request $request, $username)
     {
-    
-        $penggunaBaru = pengguna::find($username);
-        $penggunaBaru->username = $request->username;
-        // $penggunaBaru->password = bcrypt($request->password);   
-        $penggunaBaru->status_pengguna = $request->status_pengguna;
-        $penggunaBaru->id_kelas_pengguna = $request->id_kelas_pengguna;
+        if ($username != $request->username) {
+            $request->validate([
+                'nama_lengkap' => 'required',
+                'username' => 'required|unique:App\Models\Pengguna,username',
+                'status_pengguna' => 'required',
+                'id_kelas_pengguna' => 'required'
+            ]);
+            $penggunaBaru = pengguna::find($username);
+            $penggunaBaru->username = $request->username;
+            $penggunaBaru->status_pengguna = $request->status_pengguna;
+            $penggunaBaru->id_kelas_pengguna = $request->id_kelas_pengguna;
+            $penggunaBaru->save();
 
-        $penggunaBaru->save();
+            $dokterBaru = dokter::where('username', $request->username)->first();
+            $dokterBaru->nama_lengkap = $request->nama_lengkap;
+            $dokterBaru->save();
 
-        $dokterBaru = dokter::where('username', $request->username)->first();
-        $dokterBaru->nama_lengkap = $request->nama_lengkap;
-        
-        $dokterBaru->save();
-        Alert::success('Selesai!', 'Data akun yang dipilih sudah diubah');
-        return redirect('/AdminAkun');
+            Alert::success('Selesai!', 'Data akun yang dipilih sudah diubah');
+            return redirect('/AdminAkun');
+        } 
+        else {
+            $request->validate([
+                'nama_lengkap' => 'required',
+                'username' => 'required',
+                'status_pengguna' => 'required',
+                'id_kelas_pengguna' => 'required'
+            ]);
+            $penggunaBaru = pengguna::find($username);
+            $penggunaBaru->status_pengguna = $request->status_pengguna;
+            $penggunaBaru->id_kelas_pengguna = $request->id_kelas_pengguna;
+            $penggunaBaru->save();
+
+            $dokterBaru = dokter::where('username', $request->username)->first();
+            $dokterBaru->nama_lengkap = $request->nama_lengkap;
+            $dokterBaru->save();
+
+            Alert::success('Selesai!', 'Data akun yang dipilih sudah diubah');
+            return redirect('/AdminAkun');
+        }
     }
 
     public function resetPassword(Request $request)
@@ -227,7 +241,7 @@ class adminAkunController extends Controller
         $keanggotaanBaru->delete();
         $berkasBaru->delete();
         $klinikBaru->delete();
-        
+
         Alert::success('Selesai!', 'Data akun yang dipilih sudah dihapus');
         return redirect('/AdminAkun');
     }

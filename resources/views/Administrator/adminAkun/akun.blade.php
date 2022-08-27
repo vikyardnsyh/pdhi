@@ -83,7 +83,7 @@
                                 <form method="GET" action="{{ url('AdminAkun/resetPassword') }}">
                                     @csrf
                                     <input type="hidden" value="{{$value->username}}" name="username">
-                                    <button class="btn btn-primary" type="submit" data-toggle="tooltip" data-placement="top" title data-original-title="Reset Password">
+                                    <button class="btn btn-primary show-alert-password-confirm" type="submit" data-toggle="tooltip" data-placement="top" title data-original-title="Reset Password">
                                         <i class="fas fa-key"></i>
                                     </button>
                                 </form>
@@ -92,7 +92,7 @@
                                 <form action="{{ url('AdminAkun/' . $value->username) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger ml-n5" type="submit" data-toggle="tooltip" data-placement="top" title data-original-title="Hapus Data Akun" title="Delete"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-danger ml-n5 show-alert-delete-confirm" type="submit" data-toggle="tooltip" data-placement="top" title data-original-title="Hapus Data Akun" title="Delete"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

@@ -29,6 +29,7 @@ class formRegistrasiController extends Controller
         $data = DB::table('dokter')
                 ->where('dokter.id',$id)
                 ->join('klinik', 'dokter.id_klinik', '=', 'klinik.id')
+                ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
                 ->get();
         return view('Dokter.formRegistrasi', compact('NamaDokter','id','DataDokter','data'));
     }

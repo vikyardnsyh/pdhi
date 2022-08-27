@@ -10,6 +10,7 @@ use App\Models\Pengguna;
 use App\Models\Berkas;
 use App\Models\Keanggotaan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use function PHPUnit\Framework\isNull;
 
@@ -36,7 +37,6 @@ class BerandaController extends Controller
             $anggotaNonAktif = Keanggotaan::where('masa_aktif','<', date('Y-m-d'))->count();
             $akunAdmin = Pengguna::where('id_kelas_pengguna', '2')->count();
             $akunUser = Pengguna::where('id_kelas_pengguna', '1')->count();
-            
             return view('Administrator.beranda', compact('totalAnggota','totalNonAnggota','anggotaTetap','anggotaTamu','NamaAdmin','anggotaAktif','anggotaNonAktif','akunAdmin','akunUser'));
         } else {
             $Akun = Auth::user()->username;
