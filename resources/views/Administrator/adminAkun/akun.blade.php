@@ -13,17 +13,17 @@
             <div class="card-header">
                 <h4>Tabel Akun Dokter</h4>
                 <div class="card-header-action">
-                    <form action="{{ url('AdminAkun/') }}" method="GET">
-                        <div class="input-group">
-                            <input type="search" class="form-control" name="cariAkun" placeholder="Cari username">
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    <div class="row ml-1">
+                        <form action="{{ url('AdminAkun/') }}" method="GET">
+                            <div class="input-group">
+                                <input type="search" class="form-control" name="cariAkun" placeholder="Cari username">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a class="btn btn-primary" href="/AdminAkun" role="button" data-toggle="tooltip" data-placement="top" title data-original-title="Reset Pencarian"><i class="fa fa-power-off"></i></a>
+                        </form>
+                        <a class="btn btn-primary" href="/AdminAkun" role="button" data-toggle="tooltip" data-placement="top" title data-original-title="Reset Pencarian"><i class="fa fa-power-off"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -41,11 +41,13 @@
                             <a class="btn btn-sm btn-primary" href="/AdminAkun/create" role="button">Tambah Akun</a>
                         </div>
                     </div>
-                    <div class="col d-flex justify-content-end">
-                        Total data ditemukan : {{ $data->total()}}
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-start">
+                        Total data ditemukan : {{ $data->total() }}
                     </div>
                 </div>
-                <table class="table table-hover">
+                <table class="table table-responsive text-nowrap">
                     <thead>
                         <tr>
                             <th scope="col">No</th>

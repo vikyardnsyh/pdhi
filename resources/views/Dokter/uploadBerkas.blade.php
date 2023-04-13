@@ -27,7 +27,7 @@
                                     <div class="card-body">
                                         <div class="gallery gallery-fw" data-item-height="200">
                                             @if (is_null($dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first()))
-                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="No Image"></div>
                                             @else
                                             <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first()) }}" data-title="Pas Foto"></div>
                                             @endif
@@ -43,6 +43,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('pas_foto'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('pas_foto') }}
+                                                </div>
+                                                @endif
                                             </form>
                                             <div>
                                                 <p class="text-muted">Anda belum mengupload berkas
@@ -50,14 +55,14 @@
                                             </div>
                                             @else
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#pasFoto">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('uploadBerkas/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{$dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first()}}" name="namaFile">
@@ -66,18 +71,22 @@
                                                         </button>
                                                     </form>
                                                 </div>
-
                                             </div>
                                             <div>
                                                 <p class="text-muted">Anda sudah mengupload berkas
                                                 </p>
                                             </div>
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsePasFoto" aria-expanded="false" aria-controls="collapsePasFoto">
+                                                    Upload ulang berkas
+                                                </button>
+                                            </div>
+                                            @if ($errors->first('pas_foto'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('pas_foto') }}
+                                            </div>
                                             @endif
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsePasFoto" aria-expanded="false" aria-controls="collapsePasFoto">
-                                                Upload ulang berkas
-                                            </button>
+                                            @endif
                                         </div>
                                         <div class="collapse" id="collapsePasFoto">
                                             <form method="POST" action="{{ url('uploadBerkas/' . $idDokter) }}" enctype="multipart/form-data">
@@ -111,9 +120,9 @@
                                     <div class="card-body">
                                         <div class="gallery gallery-fw" data-item-height="200">
                                             @if (is_null($dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()))
-                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="No Image"></div>
                                             @else
-                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" data-title="Ijazah drh."></div>
                                             @endif
                                             @if(is_null($dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()))
                                             <form method="POST" action="{{ url('uploadBerkas') }}" enctype="multipart/form-data">
@@ -127,6 +136,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('ijazah_drh'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('ijazah_drh') }}
+                                                </div>
+                                                @endif
                                             </form>
                                             <div>
                                                 <p class="text-muted">Anda belum mengupload berkas
@@ -134,14 +148,14 @@
                                             </div>
                                             @else
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#ijazah">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('uploadBerkas/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{$dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()}}" name="namaFile">
@@ -156,12 +170,17 @@
                                                 <p class="text-muted">Anda sudah mengupload berkas
                                                 </p>
                                             </div>
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseIjazah" aria-expanded="false" aria-controls="collapseIjazah">
+                                                    Upload ulang berkas
+                                                </button>
+                                            </div>
+                                            @if ($errors->first('ijazah_drh'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('ijazah_drh') }}
+                                            </div>
                                             @endif
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseIjazah" aria-expanded="false" aria-controls="collapseIjazah">
-                                                Upload ulang berkas
-                                            </button>
+                                            @endif
                                         </div>
                                         <div class="collapse" id="collapseIjazah">
                                             <form method="POST" action="{{ url('uploadBerkas/' . $idDokter) }}" enctype="multipart/form-data">
@@ -178,6 +197,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('ijazah'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('ijazah') }}
+                                                </div>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
@@ -195,9 +219,9 @@
                                     <div class="card-body">
                                         <div class="gallery gallery-fw" data-item-height="200">
                                             @if (is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="No Image"></div>
                                             @else
-                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()) }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()) }}" data-title="KTP"></div>
                                             @endif
                                             @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
                                             <form method="POST" action="{{ url('uploadBerkas') }}" enctype="multipart/form-data">
@@ -211,6 +235,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('ktp'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('ktp') }}
+                                                </div>
+                                                @endif
                                             </form>
                                             <div>
                                                 <p class="text-muted">Anda belum mengupload berkas
@@ -218,14 +247,14 @@
                                             </div>
                                             @else
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#ktp">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('uploadBerkas/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{$dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()}}" name="namaFile">
@@ -239,12 +268,17 @@
                                                 <p class="text-muted">Anda sudah mengupload berkas
                                                 </p>
                                             </div>
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseKtp" aria-expanded="false" aria-controls="collapseKtp">
+                                                    Upload ulang berkas
+                                                </button>
+                                            </div>
+                                            @if ($errors->first('ktp'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('ktp') }}
+                                            </div>
                                             @endif
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseKtp" aria-expanded="false" aria-controls="collapseKtp">
-                                                Upload ulang berkas
-                                            </button>
+                                            @endif
                                         </div>
                                         <div class="collapse" id="collapseKtp">
                                             <form method="POST" action="{{ url('uploadBerkas/' . $idDokter) }}" enctype="multipart/form-data">
@@ -261,6 +295,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('ktp'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('ktp') }}
+                                                </div>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
@@ -280,9 +319,9 @@
                                     <div class="card-body">
                                         <div class="gallery gallery-fw" data-item-height="200">
                                             @if (is_null($dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()))
-                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="No Image"></div>
                                             @else
-                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()) }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()) }}" data-title="KTA"></div>
                                             @endif
                                             @if(is_null($dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()))
                                             <form method="POST" action="{{ url('uploadBerkas') }}" enctype="multipart/form-data">
@@ -296,6 +335,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('kta'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('kta') }}
+                                                </div>
+                                                @endif
                                             </form>
                                             <div>
                                                 <p class="text-muted">Anda belum mengupload berkas
@@ -303,14 +347,14 @@
                                             </div>
                                             @else
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#kta">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('uploadBerkas/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{$dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()}}" name="namaFile">
@@ -324,12 +368,17 @@
                                                 <p class="text-muted">Anda sudah mengupload berkas
                                                 </p>
                                             </div>
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseKta" aria-expanded="false" aria-controls="collapseKta">
+                                                    Upload ulang berkas
+                                                </button>
+                                            </div>
+                                            @if ($errors->first('kta'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('kta') }}
+                                            </div>
                                             @endif
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseKta" aria-expanded="false" aria-controls="collapseKta">
-                                                Upload ulang berkas
-                                            </button>
+                                            @endif
                                         </div>
                                         <div class="collapse" id="collapseKta">
                                             <form method="POST" action="{{ url('uploadBerkas/' . $idDokter) }}" enctype="multipart/form-data">
@@ -346,6 +395,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('kta'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('kta') }}
+                                                </div>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
@@ -363,9 +417,9 @@
                                     <div class="card-body">
                                         <div class="gallery gallery-fw" data-item-height="200">
                                             @if (is_null($dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()))
-                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="No Image"></div>
                                             @else
-                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()) }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()) }}" data-title="STRV"></div>
                                             @endif
                                             @if(is_null($dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()))
                                             <form method="POST" action="{{ url('uploadBerkas') }}" enctype="multipart/form-data">
@@ -379,6 +433,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('strv'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('strv') }}
+                                                </div>
+                                                @endif
                                             </form>
                                             <div>
                                                 <p class="text-muted">Anda belum mengupload berkas
@@ -386,14 +445,14 @@
                                             </div>
                                             @else
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#strv">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('uploadBerkas/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{$dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()}}" name="namaFile">
@@ -407,12 +466,17 @@
                                                 <p class="text-muted">Anda sudah mengupload berkas
                                                 </p>
                                             </div>
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseStrv" aria-expanded="false" aria-controls="collapseStrv">
+                                                    Upload ulang berkas
+                                                </button>
+                                            </div>
+                                            @if ($errors->first('strv'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('strv') }}
+                                            </div>
                                             @endif
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseStrv" aria-expanded="false" aria-controls="collapseStrv">
-                                                Upload ulang berkas
-                                            </button>
+                                            @endif
                                         </div>
                                         <div class="collapse" id="collapseStrv">
                                             <form method="POST" action="{{ url('uploadBerkas/' . $idDokter) }}" enctype="multipart/form-data">
@@ -429,6 +493,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('strv'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('strv') }}
+                                                </div>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
@@ -446,9 +515,9 @@
                                     <div class="card-body">
                                         <div class="gallery gallery-fw" data-item-height="200">
                                             @if (is_null($dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()))
-                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="No Image"></div>
                                             @else
-                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()) }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()) }}" data-title="SKDHI"></div>
                                             @endif
                                             @if(is_null($dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()))
                                             <form method="POST" action="{{ url('uploadBerkas') }}" enctype="multipart/form-data">
@@ -462,6 +531,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('skdhi'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('skdhi') }}
+                                                </div>
+                                                @endif
                                             </form>
                                             <div>
                                                 <p class="text-muted">Anda belum mengupload berkas
@@ -469,14 +543,14 @@
                                             </div>
                                             @else
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#skdhi">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('uploadBerkas/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{$dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()}}" name="namaFile">
@@ -490,12 +564,17 @@
                                                 <p class="text-muted">Anda sudah mengupload berkas
                                                 </p>
                                             </div>
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSkdhi" aria-expanded="false" aria-controls="collapseSkdhi">
+                                                    Upload ulang berkas
+                                                </button>
+                                            </div>
+                                            @if ($errors->first('skdhi'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('skdhi') }}
+                                            </div>
                                             @endif
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSkdhi" aria-expanded="false" aria-controls="collapseSkdhi">
-                                                Upload ulang berkas
-                                            </button>
+                                            @endif
                                         </div>
                                         <div class="collapse" id="collapseSkdhi">
                                             <form method="POST" action="{{ url('uploadBerkas/' . $idDokter) }}" enctype="multipart/form-data">
@@ -512,6 +591,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('skdhi'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('skdhi') }}
+                                                </div>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
@@ -531,9 +615,9 @@
                                     <div class="card-body">
                                         <div class="gallery gallery-fw" data-item-height="200">
                                             @if (is_null($dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()))
-                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="No Image"></div>
                                             @else
-                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()) }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()) }}" data-title="Bukti Tf. Pendaftaran"></div>
                                             @endif
                                             @if(is_null($dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()))
                                             <form method="POST" action="{{ url('uploadBerkas') }}" enctype="multipart/form-data">
@@ -547,6 +631,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('tf_daftar'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('tf_daftar') }}
+                                                </div>
+                                                @endif
                                             </form>
                                             <div>
                                                 <p class="text-muted">Anda belum mengupload berkas
@@ -554,14 +643,14 @@
                                             </div>
                                             @else
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#tf_daftar">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('uploadBerkas/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{$dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()}}" name="namaFile">
@@ -575,12 +664,17 @@
                                                 <p class="text-muted">Anda sudah mengupload berkas
                                                 </p>
                                             </div>
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTfDaftar" aria-expanded="false" aria-controls="collapseTfDaftar">
+                                                    Upload ulang berkas
+                                                </button>
+                                            </div>
+                                            @if ($errors->first('tf_daftar'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('tf_daftar') }}
+                                            </div>
                                             @endif
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTfDaftar" aria-expanded="false" aria-controls="collapseTfDaftar">
-                                                Upload ulang berkas
-                                            </button>
+                                            @endif
                                         </div>
                                         <div class="collapse" id="collapseTfDaftar">
                                             <form method="POST" action="{{ url('uploadBerkas/' . $idDokter) }}" enctype="multipart/form-data">
@@ -597,6 +691,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('tf_daftar'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('tf_daftar') }}
+                                                </div>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
@@ -614,9 +713,9 @@
                                     <div class="card-body">
                                         <div class="gallery gallery-fw" data-item-height="200" disabled>
                                             @if (is_null($dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()))
-                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/no_image.jpg') }}" data-title="No Image"></div>
                                             @else
-                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()) }}" data-title="Pas Foto"></div>
+                                            <div class="gallery-item" data-image="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()) }}" data-title="Bukti Tf. Keanggotaan"></div>
                                             @endif
                                             @if(is_null($dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()))
                                             <form method="POST" action="{{ url('uploadBerkas') }}" enctype="multipart/form-data">
@@ -630,6 +729,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('tf_registrasi'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('tf_registrasi') }}
+                                                </div>
+                                                @endif
                                             </form>
                                             <div>
                                                 <p class="text-muted">Anda belum mengupload berkas
@@ -637,14 +741,14 @@
                                             </div>
                                             @else
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#tf_registrasi">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('uploadBerkas/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{$dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()}}" name="namaFile">
@@ -658,12 +762,17 @@
                                                 <p class="text-muted">Anda sudah mengupload berkas
                                                 </p>
                                             </div>
+                                            <div class="row justify-content-center">
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTfRegistrasi" aria-expanded="false" aria-controls="collapseTfRegistrasi">
+                                                    Upload ulang berkas
+                                                </button>
+                                            </div>
+                                            @if ($errors->first('tf_registrasi'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('tf_registrasi') }}
+                                            </div>
                                             @endif
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTfRegistrasi" aria-expanded="false" aria-controls="collapseTfRegistrasi">
-                                                Upload ulang berkas
-                                            </button>
+                                            @endif
                                         </div>
                                         <div class="collapse" id="collapseTfRegistrasi">
                                             <form method="POST" action="{{ url('uploadBerkas/' . $idDokter) }}" enctype="multipart/form-data">
@@ -680,6 +789,11 @@
                                                 <button class="btn btn-primary mt-n4" type="submit">
                                                     Simpan Berkas
                                                 </button>
+                                                @if ($errors->first('tf_registrasi'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('tf_registrasi') }}
+                                                </div>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
@@ -704,7 +818,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt="{{ asset('img/no_image.jpg') }}" width="450px" height=500px">
+                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt="{{ asset('img/no_image.jpg') }}" width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -724,7 +838,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="500px">
+                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -743,7 +857,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="500px">
+                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -762,7 +876,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="500px">
+                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -781,7 +895,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="500px">
+                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -800,7 +914,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="500px">
+                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -819,7 +933,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="500px">
+                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -838,7 +952,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="500px">
+                <img src="{{ asset('img/berkas_dokter/'.$dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>

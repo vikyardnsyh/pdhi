@@ -10,7 +10,7 @@
             <h1>Ubah / Perpanjang Keanggotaan</h1>
         </div>
         <div class="row justify-content-around">
-            <div class="card col-6 col-md-6 col-lg-5 card-primary">
+            <div class="card col-8 col-md-8 col-lg-6">
                 <div class="card-header mb-2">
                     <h4>Form Detail Keanggotaan Dokter</h4>
                 </div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="card col-6 col-md-6 col-lg-6 card-primary">
+            <div class="card col-8 col-md-8 col-lg-5">
                 <div class="card-header">
                     <h4>Form Perpanjang & Ubah Domisili Anggota</h4>
                 </div>

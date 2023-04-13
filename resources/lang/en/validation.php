@@ -84,8 +84,8 @@ return [
         'string' => 'The :attribute must not be greater than :max characters.',
         'array' => 'The :attribute must not have more than :max items.',
     ],
-    'mimes' => 'The :attribute must be a file of type: :values.',
-    'mimetypes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => 'File :attribute hanya dapat berupa gambar.',
+    'mimetypes' => 'File :attribute hanya dapat berupa gambar.',
     'min' => [
         'numeric' => 'Kolom :attribute minimal :min digit angka.',
         'file' => 'The :attribute must be at least :min kilobytes.',

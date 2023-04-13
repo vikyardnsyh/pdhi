@@ -219,7 +219,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="card col-12 col-md-6 col-lg-11 card-primary mt-n3 shadow p-3 mb-5 bg-white rounded">
+                    <div class="card col-11 col-md-6 col-lg-11 card-primary mt-n3 shadow p-3 mb-5 bg-white rounded">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class="thead-dark">

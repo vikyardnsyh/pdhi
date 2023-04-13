@@ -112,6 +112,16 @@
     @endif
     <div class="page-break"></div>
     <u>
+        <h5>BERKAS ANGGOTA IJAZAH</h5>
+    </u>
+    <br>
+    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
+    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
+    @else
+    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" width="350"></center>
+    @endif
+    <div class="page-break"></div>
+    <u>
         <h5>BERKAS ANGGOTA KTP</h5>
     </u>
     <br>
@@ -129,16 +139,6 @@
     <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
     @else
     <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA IJAZAH</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" width="350"></center>
     @endif
     <div class="page-break"></div>
     <u>

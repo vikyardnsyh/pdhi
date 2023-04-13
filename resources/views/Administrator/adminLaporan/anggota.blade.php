@@ -31,7 +31,11 @@
             <td>{{$data->nama_lengkap}}</td>
             <td>{{$data->nama_panggilan}}</td>
             <td>{{$data->tempat_lahir}}</td>
-            <td>{{ date('d-M-Y', strtotime($data->tanggal_lahir)) }}</td>
+            @if (is_null($data->tanggal_lahir))
+            <td></td>
+            @else
+            <td>{{ date('d-M-Y', strtotime($data->tanggal_lahir))}}</td>
+            @endif
             <td>{{$data->jenis_kelamin}}</td>
             <td>{{$data->alumni}}</td>
             <td>{{$data->tahun_alumni}}</td>
@@ -44,8 +48,16 @@
             <td>{{$data->alamat_klinik}}</td>
             <td>{{$data->no_telp_klinik}}</td>
             <td>{{$data->domisili_anggota}}</td>
-            <td>{{ date('d-M-Y', strtotime($data->tanggal_terdaftar)) }}</td>
-            <td>{{ date('d-M-Y', strtotime($data->masa_aktif)) }}</td>
+            @if (is_null($data->tanggal_terdaftar))
+            <td></td>
+            @else
+            <td>{{ date('d-M-Y', strtotime($data->tanggal_terdaftar))}}</td>
+            @endif
+            @if (is_null($data->masa_aktif))
+            <td></td>
+            @else
+            <td>{{ date('d-M-Y', strtotime($data->masa_aktif))}}</td>
+            @endif
         </tr>
         @endforeach
     </tbody>

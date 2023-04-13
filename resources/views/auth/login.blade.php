@@ -32,30 +32,28 @@
             <div class="d-flex flex-wrap align-items-stretch">
                 <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
                     <div class="p-4 m-3 mt-n2">
-                        <img src="{{ asset('img/pdhi_logo.jpg') }}" alt="logo" width="60"
-                            class="shadow-lg bg-white rounded-circle mb-2 mt-2">
+                        <img src="{{ asset('img/pdhi_logo.jpg') }}" alt="logo" width="60" class="shadow-lg bg-white rounded-circle mb-2 mt-2">
                         <h4 class="text-dark font-weight-normal">Selamat datang, di <span class="font-weight-bold">PDHI
                                 Banten II</span></h4>
                         <div class="text-muted">Silahkan login terlebih dahulu, atau ajukan akun anda jika belum memiliki
                             akun PDHI Banten II dengan link yang tersedia dibawah</div>
 
                         @if (session('gagal_login'))
-                            <div class="alert alert-danger alert-dismissible show fade">
-                                <div class="alert-body">
-                                    <button class="close" data-dismiss="alert">
-                                        <span>&times;</span>
-                                    </button>
-                                    {{ session('gagal_login') }}
-                                </div>
+                        <div class="alert alert-danger alert-dismissible show fade">
+                            <div class="alert-body">
+                                <button class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                </button>
+                                {{ session('gagal_login') }}
                             </div>
+                        </div>
                         @endif
 
                         <form method="POST" action="{{ url('/login') }}" class="needs-validation" novalidate="">
                             @csrf
                             <div class="form-group mt-2">
                                 <label for="username">Username</label>
-                                <input id="username" type="username" class="form-control" name="username" tabindex="1"
-                                    required autofocus>
+                                <input id="username" type="username" class="form-control" name="username" tabindex="1" required autofocus>
                                 <div class="invalid-feedback">
                                     Mohon isi username akun anda
                                 </div>
@@ -65,12 +63,9 @@
                                     <label for="password" class="control-label">Password</label>
                                 </div>
                                 <div class="input-group">
-                                    <input id="password" type="password" class="form-control" name="password"
-                                        tabindex="2" required>
+                                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="showhide()"
-                                            data-toggle="tooltip" data-placement="top" title
-                                            data-original-title="Lihat / Sembunyikan Password"><i class="fa fa-eye"></i>
+                                        <button class="btn btn-primary" type="button" onclick="showhide()" data-toggle="tooltip" data-placement="top" title data-original-title="Lihat / Sembunyikan Password"><i class="fa fa-eye"></i>
                                         </button>
                                     </div>
                                     <div class="invalid-feedback">
@@ -85,8 +80,8 @@
                                     <label class="custom-control-label" for="remember-me">Ingat akun saya</label>
                                 </div> -->
                                 <a href="{{ route('lupaPassword') }}" class="float-left mt-n5">
-                                        Lupa Password?
-                                    </a>
+                                    Lupa Password?
+                                </a>
                             </div>
                             <div class="form-group text-right mt-4">
                                 <!-- @if (Route::has('password.request'))
@@ -94,7 +89,7 @@
                                         {{ __('Lupa Password?') }}
                                     </a>
                                 @endif -->
-                                
+
                                 <button type="submit" class="btn btn-primary btn-icon icon-right mt-n4" tabindex="4">
                                     Login
                                 </button>
@@ -110,20 +105,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-x position-relative"
-                    data-background="{{ asset('img/pets.jpg') }}">
-                    <div class="absolute-bottom-left index-2">
-                        <div class="text-light p-5 pb-2 mt-2">
-                            <div class="mb-1 pb-1">
-                                <h1 class="mb-2 display-4 font-weight-bold" style="text-shadow: 2px 2px 3px #424ea5">
+                <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-x position-relative" data-background="{{ asset('img/pets.jpg') }}">
+                    <div class="absolute-top-left index-2">
+                        <div class="text-light p-3 mt-2">
+                            <div>
+                                <h2 class="font-weight-bold" style="text-shadow: 2px 2px 3px #424ea5">
                                     {{ ucapan(date_default_timezone_set('Asia/Bangkok')) }}
-                                </h1>
-                                <h2 class="font-weight-normal text-light-transparent" style="text-shadow: 2px 2px 2px #424ea5">
-                                    {{ tanggal() }}
                                 </h2>
                                 <h4 class="font-weight-normal text-light-transparent" style="text-shadow: 2px 2px 2px #424ea5">
-                                    {{ jam() }}
+                                    {{ tanggal() }}
                                 </h4>
+                                <h5 class="font-weight-normal text-light-transparent" style="text-shadow: 2px 2px 2px #424ea5">
+                                    {{ jam() }}
+                                </h5>
                             </div>
                         </div>
                     </div>

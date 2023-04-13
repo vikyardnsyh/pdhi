@@ -118,18 +118,19 @@ class adminLaporanController extends Controller
         date_default_timezone_set('Asia/jakarta');
         $date = date('d-m-Y', strtotime("now"));
 
-
+        // dd($request->all());
         if ($request->has('anggota')) {
             $anggota = Dokter::select('Pengguna.username', 'Dokter.nama_lengkap', 'Dokter.nama_panggilan', 'Dokter.tempat_lahir', 'Dokter.tanggal_lahir', 'Dokter.jenis_kelamin', 'Dokter.alumni', 'Dokter.tahun_alumni', 'Dokter.nama_pasangan', 'Dokter.alamat_rumah', 'Dokter.no_telp', 'Dokter.email', 'Dokter.bidang_kerja', 'Klinik.nama_klinik', 'Klinik.alamat_klinik', 'Klinik.no_telp_klinik', 'Keanggotaan.domisili_anggota', 'keanggotaan.tanggal_terdaftar', 'keanggotaan.masa_aktif')->join('Pengguna', 'Dokter.username', '=', 'Pengguna.username')->where('id_kelas_pengguna', '1')->join('klinik', 'Dokter.id_klinik', '=', 'klinik.id')->join('Keanggotaan', 'Dokter.id_keanggotaan', '=', 'keanggotaan.id')->whereNotNull('keanggotaan.tanggal_terdaftar')->get();
             return Excel::download(new dokterExport($anggota), 'Anggota_PDHI_Banten2_' . $date . '.xlsx');
         } else {
             $anggota = Dokter::select('Pengguna.username', 'Dokter.nama_lengkap', 'Dokter.nama_panggilan', 'Dokter.tempat_lahir', 'Dokter.tanggal_lahir', 'Dokter.jenis_kelamin', 'Dokter.alumni', 'Dokter.tahun_alumni', 'Dokter.nama_pasangan', 'Dokter.alamat_rumah', 'Dokter.no_telp', 'Dokter.email', 'Dokter.bidang_kerja', 'Klinik.nama_klinik', 'Klinik.alamat_klinik', 'Klinik.no_telp_klinik', 'Keanggotaan.domisili_anggota', 'keanggotaan.tanggal_terdaftar', 'keanggotaan.masa_aktif')->join('Pengguna', 'Dokter.username', '=', 'Pengguna.username')->where('id_kelas_pengguna', '1')->join('klinik', 'Dokter.id_klinik', '=', 'klinik.id')->join('Keanggotaan', 'Dokter.id_keanggotaan', '=', 'keanggotaan.id')->whereNull('keanggotaan.tanggal_terdaftar')->get();
-            return Excel::download(new dokterExport($anggota), 'Anggota_PDHI_Banten2_' . $date . '.xlsx');
+            return Excel::download(new dokterExport($anggota), 'Non-Anggota_PDHI_Banten2_' . $date . '.xlsx');
         }
     }
 
     public function generatePDF(Request $request)
     {
+        // dd($request->all());
         $id = $request->id;
         $dataBerkas = DB::table('jenis_berkas_dokter')->leftJoin('berkas_dokter', function ($leftjoin) use ($id) {
             $leftjoin->on('jenis_berkas_dokter.id', '=', 'berkas_dokter.id_jenis_berkas')

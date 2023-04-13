@@ -28,36 +28,6 @@
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="fa fa-address-book fa-2x" style="color:white"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Anggota Tetap</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $anggotaTetap }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fa fa-check-circle fa-2x" style="color:white"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Anggota Aktif</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $anggotaAktif }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
                     <div class="card-icon bg-primary">
                         <i class="fa fa-user fa-2x" style="color:white"></i>
                     </div>
@@ -67,6 +37,21 @@
                         </div>
                         <div class="card-body">
                             {{ $akunUser }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-warning">
+                        <i class="fa fa-address-book fa-2x" style="color:white"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Anggota Tetap</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $anggotaTetap }}
                         </div>
                     </div>
                 </div>
@@ -89,6 +74,21 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-success">
+                        <i class="fa fa-check-circle fa-2x" style="color:white"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Anggota Aktif</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $anggotaAktif }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-success">
                         <i class="fa fa-minus-circle fa-2x" style="color:white"></i>
                     </div>
                     <div class="card-wrap">
@@ -103,7 +103,19 @@
             </div>
         </div>
         <div class="row justify-content-around">
-            <div class="col-lg-5 col-md-3 col-sm-3 col-1">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-4">
+                    <div class="card-icon bg-success">
+                        <h5 align='center' class="mt-1 text-white">Total Anggota</h5>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-body mb-n3">
+                            <h2 align='center' class="text-dark mt-n2">{{ $totalAnggota }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-4">
                     <div class="card-icon bg-danger">
                         <h5 align='center' class="mt-1 text-white">Total Non-Anggota</h5>
@@ -115,20 +127,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-3 col-sm-3 col-1">
-                    <div class="card card-statistic-4">
-                        <div class="card-icon bg-success">
-                            <h5 align='center' class="mt-1 text-white">Total Anggota</h5>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-body mb-n3">
-                                <h2 align='center' class="text-dark mt-n2">{{ $totalAnggota }}</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </section>
+</div>
+</section>
 </div>
 @endsection

@@ -111,14 +111,14 @@
                                                     <p>Dokter belum mengupload berkas ini</p>
                                                 </div>
                                                 @else
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#pasFoto">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2 ml-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('adminPendaftaran/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{ $dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first() }}" name="namaFile">
@@ -155,14 +155,14 @@
                                                     <p>Dokter belum mengupload berkas ini</p>
                                                 </div>
                                                 @else
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#ijazah">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2 ml-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('adminPendaftaran/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{ $dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first() }}" name="namaFile">
@@ -200,14 +200,14 @@
                                                     <p>Dokter belum mengupload berkas ini</p>
                                                 </div>
                                                 @else
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#ktp">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2 ml-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('adminPendaftaran/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{ $dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first() }}" name="namaFile">
@@ -245,14 +245,14 @@
                                                     <p>Dokter belum mengupload berkas ini</p>
                                                 </div>
                                                 @else
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#kta">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2 ml-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('adminPendaftaran/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{ $dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first() }}" name="namaFile">
@@ -290,14 +290,14 @@
                                                     <p>Dokter belum mengupload berkas ini</p>
                                                 </div>
                                                 @else
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#strv">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2 ml-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('adminPendaftaran/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{ $dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first() }}" name="namaFile">
@@ -335,14 +335,14 @@
                                                     <p>Dokter belum mengupload berkas ini</p>
                                                 </div>
                                                 @else
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#skdhi">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2 ml-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('adminPendaftaran/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{ $dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first() }}" name="namaFile">
@@ -379,14 +379,14 @@
                                                     <p>Dokter belum mengupload berkas ini</p>
                                                 </div>
                                                 @else
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#tf_daftar">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2 ml-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('adminPendaftaran/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{ $dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first() }}" name="namaFile">
@@ -423,14 +423,14 @@
                                                     <p>Dokter belum mengupload berkas ini</p>
                                                 </div>
                                                 @else
-                                                <div class="col-12 col-sm-12 col-lg-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <span data-toggle="modal" data-target="#tf_registrasi">
                                                         <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Perbesar gambar">
                                                             <i class="fa fa-search-plus"></i>
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-lg-2 ml-2">
+                                                <div class="col-2 col-sm-2 col-lg-2">
                                                     <form action="{{ url('adminPendaftaran/download') }}" method="GET">
                                                         @csrf
                                                         <input type="hidden" value="{{ $dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first() }}" name="namaFile">
@@ -453,7 +453,7 @@
         @foreach ($dataDokter as $key => $value)
         @if (is_null($value->tanggal_terdaftar))
         <div class="row justify-content-center">
-            <div class="card col-6 col-md-6 col-lg-8 card-primary">
+            <div class="card col-10 col-md-10 col-lg-8 card-primary">
                 <div class="card-header">
                     <h4>Form Aktivasi Anggota</h4>
                 </div>
@@ -470,7 +470,7 @@
                             <div class="form-group">
                                 <label class="mt-3">Tanggal Terdaftar</label><span class="text-danger">*</span>
                                 <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
-                                    <input type="text" class="form-control" name="tanggal_terdaftar">
+                                    <input type="text" class="form-control" name="tanggal_terdaftar" readonly="readonly">
                                     <div class="input-group-addon">
                                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                     </div>
@@ -500,7 +500,7 @@
                 </div>
                 @else
                 <div class="row justify-content-center">
-                    <div class="card col-6 col-md-6 col-lg-8 card-primary">
+                    <div class="card col-10 col-md-10 col-lg-8 card-primary">
                         <div class="card-header mb-2">
                             <h4>Detail Keanggotaan Dokter</h4>
                         </div>
@@ -560,7 +560,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt="{{ asset('img/no_image.jpg') }}" width="450px" height="550px">
+                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt="{{ asset('img/no_image.jpg') }}" width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -579,7 +579,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="550px">
+                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -598,7 +598,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="550px">
+                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -617,7 +617,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="550px">
+                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -636,7 +636,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="550px">
+                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -655,7 +655,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="550px">
+                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -674,7 +674,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="550px">
+                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
@@ -693,7 +693,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="450px" height="550px">
+                <img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()) }}" class="rounded mx-auto d-block" alt='_Berkas Tidak Ditemukan' width="320px" height=400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>

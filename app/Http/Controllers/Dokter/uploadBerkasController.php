@@ -52,8 +52,11 @@ class uploadBerkasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         if ($request->file('pas_foto')) {
+            $this->validate($request, [
+                'pas_foto' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('pas_foto');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -67,6 +70,9 @@ class uploadBerkasController extends Controller
             Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Ditambahkan');
             return redirect('/uploadBerkas');
         } elseif ($request->file('ijazah_drh')) {
+            $this->validate($request, [
+                'ijazah_drh' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('ijazah_drh');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -80,6 +86,9 @@ class uploadBerkasController extends Controller
             Alert::success('Selesai!', 'Data Berkas Ijazah Sudah Ditambahkan');
             return redirect('/uploadBerkas');
         } elseif ($request->file('ktp')) {
+            $this->validate($request, [
+                'ktp' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('ktp');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -93,6 +102,9 @@ class uploadBerkasController extends Controller
             Alert::success('Selesai!', 'Data Berkas KTP Sudah Ditambahkan');
             return redirect('/uploadBerkas');
         } elseif ($request->file('kta')) {
+            $this->validate($request, [
+                'kta' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('kta');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -106,6 +118,9 @@ class uploadBerkasController extends Controller
             Alert::success('Selesai!', 'Data Berkas KTA Sudah Ditambahkan');
             return redirect('/uploadBerkas');
         } elseif ($request->file('strv')) {
+            $this->validate($request, [
+                'strv' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('strv');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -119,6 +134,9 @@ class uploadBerkasController extends Controller
             Alert::success('Selesai!', 'Data Berkas STRV Sudah Ditambahkan');
             return redirect('/uploadBerkas');
         } elseif ($request->file('skdhi')) {
+            $this->validate($request, [
+                'skdhi' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('skdhi');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -132,6 +150,9 @@ class uploadBerkasController extends Controller
             Alert::success('Selesai!', 'Data Berkas SKDHI Sudah Ditambahkan');
             return redirect('/uploadBerkas');
         } elseif ($request->file('tf_daftar')) {
+            $this->validate($request, [
+                'tf_daftar' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('tf_daftar');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -145,6 +166,9 @@ class uploadBerkasController extends Controller
             Alert::success('Selesai!', 'Data Berkas Bukti Transfer Pendaftaran Sudah Ditambahkan');
             return redirect('/uploadBerkas');
         } elseif ($request->file('tf_registrasi')) {
+            $this->validate($request, [
+                'tf_registrasi' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('tf_registrasi');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -157,10 +181,11 @@ class uploadBerkasController extends Controller
             $berkasBaru->save();
             Alert::success('Selesai!', 'Data Berkas Bukti Transfer Anggota Sudah Ditambahkan');
             return redirect('/uploadBerkas');
-        } else {
-            Alert::error('File Belum Dipilih', 'Mohon upload file yang ada di perangkat anda');
-            return redirect('/uploadBerkas');
-        }
+        } 
+        // else {
+        //     Alert::error('File Belum Dipilih', 'Mohon upload file yang ada di perangkat anda');
+        //     return redirect('/uploadBerkas');
+        // }
     }
 
     /**
@@ -195,6 +220,9 @@ class uploadBerkasController extends Controller
     public function update(Request $request, $idDokter)
     {
         if ($request->file('pas_foto')){
+            $this->validate($request, [
+                'pas_foto' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('pas_foto');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -205,6 +233,9 @@ class uploadBerkasController extends Controller
             return redirect('/uploadBerkas');
         }
         elseif($request->file('ijazah_drh')){
+            $this->validate($request, [
+                'ijazah_drh' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('ijazah_drh');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -215,6 +246,9 @@ class uploadBerkasController extends Controller
             return redirect('/uploadBerkas');
         }
         elseif($request->file('ktp')){
+            $this->validate($request, [
+                'ktp' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('ktp');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -225,6 +259,9 @@ class uploadBerkasController extends Controller
             return redirect('/uploadBerkas');
         }
         elseif($request->file('kta')){
+            $this->validate($request, [
+                'kta' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('kta');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -235,6 +272,9 @@ class uploadBerkasController extends Controller
             return redirect('/uploadBerkas');
         }
         elseif($request->file('strv')){
+            $this->validate($request, [
+                'strv' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('strv');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -245,6 +285,9 @@ class uploadBerkasController extends Controller
             return redirect('/uploadBerkas');
         }
         elseif($request->file('skdhi')){
+            $this->validate($request, [
+                'skdhi' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('skdhi');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -255,6 +298,9 @@ class uploadBerkasController extends Controller
             return redirect('/uploadBerkas');
         }
         elseif($request->file('tf_daftar')){
+            $this->validate($request, [
+                'tf_daftar' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('tf_daftar');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);
@@ -265,6 +311,9 @@ class uploadBerkasController extends Controller
             return redirect('/uploadBerkas');
         }
         elseif($request->file('tf_registrasi')){
+            $this->validate($request, [
+                'tf_registrasi' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
+            ]);
             $file = $request->file('tf_registrasi');
             $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
             $file->move('img/berkas_dokter', $namaFile);

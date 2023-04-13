@@ -11,13 +11,16 @@
             <h1>Registrasi</h1>
         </div>
         <div class="row justify-content-center">
-            <div class="card col-12 col-md-6 col-lg-10 card-primary">
+            <div class="card col-11 col-md-6 col-lg-10 card-primary">
                 <div class="card-header">
                     <h4>Form Registrasi Anggota</h4>
                 </div>
                 <div class="card-body">
                     <span>Kolom dengan tanda * wajib diisi</span>
                     @foreach ($data as $key => $value)
+                    @php
+                        $tanggal_lahir2 = date('d-m-Y', strtotime($value->tanggal_lahir));
+                    @endphp
                     <form method="POST" action="{{ url('formRegistrasi/' . $id) }}">
                         @csrf
                         <div class="form-group">
@@ -48,7 +51,7 @@
                             <div class="form-group">
                                 <label>Tanggal Lahir</label><span class="text-danger">*</span>
                                 <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
-                                    <input type="text" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir', $value->tanggal_lahir) }}">
+                                    <input type="text" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir', $tanggal_lahir2) }}" readonly="readonly">
                                     <div class="input-group-addon">
                                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                     </div>

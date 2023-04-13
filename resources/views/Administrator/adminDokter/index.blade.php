@@ -12,19 +12,18 @@
         <div class="card">
             <div class="card-header">
                 <h4>Tabel Data Dokter</h4>
-
                 <div class="card-header-action">
-                    <form action="{{ url('adminDokter/') }}" method="GET">
-                        <div class="input-group">
-                            <input type="search" class="form-control" name="cariDokter" placeholder="Cari Nama Dokter">
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    <div class="row ml-1">
+                        <form action="{{ url('adminDokter/') }}" method="GET">
+                            <div class="input-group">
+                                <input type="search" class="form-control" name="cariDokter" placeholder="Cari Nama Dokter">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a class="btn btn-primary" href="/adminDokter" role="button" data-toggle="tooltip" data-placement="top" title data-original-title="Reset Pencarian"><i class="fa fa-power-off"></i></a>
+                        </form>
+                        <a class="btn btn-primary" href="/adminDokter" role="button" data-toggle="tooltip" data-placement="top" title data-original-title="Reset Pencarian"><i class="fa fa-power-off"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -34,11 +33,13 @@
                             <div class="btn-group float-right mb-2">
                                 <button class="btn btn-sm btn-light" type="submit" name="semua" value="semua">Semua</button>
                                 <button class="btn btn-sm btn-light" type="submit" name="terdaftar" value="terdaftar">Terdaftar</button>
-                                <button class="btn btn-sm btn-light" type="submit" name="belumterdaftar" value="belumterdaftar">Belum Terdaftar</button>
+                                <button class="btn btn-sm btn-light" type="submit" name="belumterdaftar" value="belumterdaftar">Belum_Terdaftar</button>
                             </div>
                         </form>
                     </div>
-                    <div class="col d-flex justify-content-end">
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-start">
                         Total data ditemukan : {{ $data->total() }}
                     </div>
                 </div>
@@ -49,7 +50,7 @@
                                 <th scope="col-md-15">No</th>
                                 <th scope="col">Nama Lengkap</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Tampilan Profil</th>
+                                <th scope="col">Tampilan Profile</th>
                                 <th scope="col">Nama Panggilan</th>
                                 <th scope="col">Tempat Lahir</th>
                                 <th scope="col">Tanggal Lahir</th>

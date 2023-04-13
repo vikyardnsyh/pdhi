@@ -10,7 +10,7 @@
             <h1>Ubah Password</h1>
         </div>
         <div class="row justify-content-center">
-            <div class="card col-6 col-md-6 col-lg-7 card-primary">
+            <div class="card col-9 col-md-9 col-lg-10 card-primary">
                 <div class="card-header mb-2">
                     <h4>Form Ubah Password</h4>
                 </div>
