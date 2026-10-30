@@ -35,12 +35,6 @@ Halaman login modern dengan maskot interaktif *puppy* dan *cat arm* yang respons
   <img src="public/img/screenshots/login_preview.png" alt="Login Preview PDHI Banten II" width="85%" style="border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);">
 </p>
 
-<p align="center">
-  <img src="public/img/puppy_stand.gif" alt="Mascot Puppy Stand" width="100">
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="public/img/puppy_jump.gif" alt="Mascot Puppy Jump" width="100">
-</p>
-
 ---
 
 ## ✨ Fitur-Fitur Utama
@@ -126,7 +120,3 @@ php artisan serve
 Akses aplikasi melalui browser di: `http://localhost:8000`
 
 ---
-
-## 📄 Lisensi
-
-Hak Cipta &copy; Perhimpunan Dokter Hewan Indonesia (PDHI) Cabang Banten II. Dikembangkan untuk keperluan administrasi dan layanan keanggotaan.
