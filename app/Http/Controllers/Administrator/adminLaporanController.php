@@ -26,7 +26,7 @@ class adminLaporanController extends Controller
 
         $data = null;
         if ($request->filled('cariDokter')) {
-            $data = Dokter::join('Keanggotaan', 'dokter.id_keanggotaan', '=', 'keanggotaan.id')
+            $data = Dokter::join('keanggotaan', 'dokter.id_keanggotaan', '=', 'keanggotaan.id')
                 ->where('dokter.nama_lengkap', 'LIKE', '%' . $request->cariDokter . '%')
                 ->select('dokter.id', 'nama_lengkap', 'username', 'masa_aktif')
                 ->paginate(10);
@@ -47,17 +47,17 @@ class adminLaporanController extends Controller
         $date = date('d-m-Y');
 
         $isAnggota = $request->has('anggota');
-        $query = Dokter::join('Pengguna', 'Dokter.username', '=', 'Pengguna.username')
+        $query = Dokter::join('pengguna', 'dokter.username', '=', 'pengguna.username')
             ->where('id_kelas_pengguna', '1')
-            ->join('klinik', 'Dokter.id_klinik', '=', 'klinik.id')
-            ->join('Keanggotaan', 'Dokter.id_keanggotaan', '=', 'keanggotaan.id')
+            ->join('klinik', 'dokter.id_klinik', '=', 'klinik.id')
+            ->join('keanggotaan', 'dokter.id_keanggotaan', '=', 'keanggotaan.id')
             ->select(
-                'Pengguna.username', 'Dokter.nama_lengkap', 'Dokter.nama_panggilan',
-                'Dokter.tempat_lahir', 'Dokter.tanggal_lahir', 'Dokter.jenis_kelamin',
-                'Dokter.alumni', 'Dokter.tahun_alumni', 'Dokter.nama_pasangan',
-                'Dokter.alamat_rumah', 'Dokter.no_telp', 'Dokter.email',
-                'Dokter.bidang_kerja', 'Klinik.nama_klinik', 'Klinik.alamat_klinik',
-                'Klinik.no_telp_klinik', 'Keanggotaan.domisili_anggota',
+                'pengguna.username', 'dokter.nama_lengkap', 'dokter.nama_panggilan',
+                'dokter.tempat_lahir', 'dokter.tanggal_lahir', 'dokter.jenis_kelamin',
+                'dokter.alumni', 'dokter.tahun_alumni', 'dokter.nama_pasangan',
+                'dokter.alamat_rumah', 'dokter.no_telp', 'dokter.email',
+                'dokter.bidang_kerja', 'klinik.nama_klinik', 'klinik.alamat_klinik',
+                'klinik.no_telp_klinik', 'keanggotaan.domisili_anggota',
                 'keanggotaan.tanggal_terdaftar', 'keanggotaan.masa_aktif'
             );
 
