@@ -69,7 +69,7 @@ Halaman login modern dengan maskot interaktif *puppy* dan *cat arm* yang respons
 
 ---
 
-## 🛠️ Tumpukan Teknologi
+## 🛠️ Tech Stack
 
 - **Backend**: [Laravel 8](https://laravel.com/)
 - **Bahasa Pemrograman**: PHP 8.x
