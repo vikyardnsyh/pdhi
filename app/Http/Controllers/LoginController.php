@@ -4,13 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Ui\Presets\React;
 
 class LoginController extends Controller
 {
+    use ThrottlesLogins;
+
+    /**
+     * Max login attempts before lockout.
+     */
+    protected $maxAttempts = 5;
+
+    /**
+     * Lockout duration in minutes.
+     */
+    protected $decayMinutes = 1;
+
     /**
      * Create a new controller instance.
      *
@@ -42,6 +53,13 @@ class LoginController extends Controller
     {
         $this->validateLogin($request);
 
+        // Check for too many failed login attempts
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+            return $this->sendLockoutResponse($request);
+        }
+
         $attemptLoginData = [
             'username' => $request->username,
             'password' => $request->password,
@@ -49,20 +67,27 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($attemptLoginData)) {
+            $request->session()->regenerate();
+            $this->clearLoginAttempts($request);
+
             // Autentikasi berhasil
             return redirect()->route('home');
         }
 
         // Autentikasi gagal
+        $this->incrementLoginAttempts($request);
+
         return $this->loginFailed();
     }
 
     /**
      * Log the user out of the application.
      */
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect()->route('login');
     }
@@ -86,9 +111,20 @@ class LoginController extends Controller
     /**
      * Redirect back after failed login.
      */
-    protected function loginFailed() {
+    protected function loginFailed()
+    {
         return back()
             ->withInput()
             ->with('gagal_login', 'Username atau password salah');
+    }
+
+    /**
+     * Username field name for throttling.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'username';
     }
 }

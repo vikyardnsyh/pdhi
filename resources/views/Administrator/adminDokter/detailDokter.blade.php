@@ -1,234 +1,178 @@
 @extends('layouts.administrator')
 @section('title', 'Detail Dokter')
-@section('sidebar')
-@endsection
 
 @section('content')
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Detail Dokter</h1>
-        </div>
-        <div class="section-body">
-            <div class="card">
-                @foreach ($DataDokter as $key => $value)
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-lg-7">
-                        <div class="card profile-widget card-primary shadow p-3 mb-5 bg-white rounded">
-                            <div class="profile-widget-header">
-                                @if (is_null($pasFoto))
-                                <img alt="image" src="{{ asset('img/no_image.jpg') }}" height="110" class="rounded-circle profile-widget-picture">
-                                @else
-                                <img alt="image" src="{{ asset('img/berkas_dokter/' . $pasFoto) }}" height="110" class="rounded-circle profile-widget-picture">
-                                @endif
-                                <div class="profile-widget-items">
-                                    <div class="profile-widget-item">
-                                        <div class="profile-widget-item-label">Status</div>
-                                        <div class="profile-widget-item-value sm">
-                                            @php
-                                            date_default_timezone_set('Asia/jakarta');
-                                            $now = new DateTime(date('Y-M-d'));
-                                            $expired = new DateTime($value->masa_aktif);
-                                            if(is_null($value->masa_aktif)) {
-                                                $status = '<span class="badge badge-pill badge-danger">Belum Terdaftar</span>';
-                                            } else{
-                                                if ($now > $expired) {
-                                                $status = '<span class="badge badge-pill badge-secondary">Non Aktif</span>';
-                                                } else {
-                                                $status = '<span class="badge badge-pill badge-success">Aktif</span>';
-                                                }
-                                            }
-
-                                            @endphp
-                                            {!! $status !!}
-                                        </div>
-                                    </div>
-                                    <div class="profile-widget-item">
-                                        <div class="profile-widget-item-label">Priode Aktif</div>
-                                        @if (is_null($value->masa_aktif))
-                                        <div class="profile-widget-item-value">-</div>
-                                        @else
-                                        <div class="profile-widget-item-value">
-                                            {{ date('d-M-Y', strtotime($value->masa_aktif)) }}
-                                        </div>
-                                        @endif
-                                    </div>
-                                    <div class="profile-widget-item">
-                                        <div class="profile-widget-item-label">Keanggotaan</div>
-                                        @if (is_null($value->domisili_anggota))
-                                        <div class="profile-widget-item-value">-</div>
-                                        @else
-                                        <div class="profile-widget-item-value">{{ $value->domisili_anggota }}
-                                        </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="profile-widget-description pb-0">
-                                <div class="profile-widget-name">
-                                    <h5><u>{{ $value->nama_lengkap }},</u></h5>
-                                </div>
-                                <table class="table">
-                                    <tr>
-                                        <td>Nama Panggilan</td>
-                                        <td>:</td>
-                                        @if (is_null($value->nama_panggilan))
-                                        <td>-</td>
-                                        @else
-                                        <td>{{ $value->nama_panggilan }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Jenis Kelamin</td>
-                                        <td>:</td>
-                                        @if (is_null($value->jenis_kelamin))
-                                        <td>-</td>
-                                        @else
-                                        <td>{{ $value->jenis_kelamin }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Tempat Lahir</td>
-                                        <td>:</td>
-                                        @if (is_null($value->tempat_lahir))
-                                        <td>-</td>
-                                        @else
-                                        <td>{{ $value->tempat_lahir }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Tanggal Lahir</td>
-                                        <td>:</td>
-                                        @if (is_null($value->tanggal_lahir))
-                                        <td>-</td>
-                                        @else
-                                        <td>{{ date('d-M-Y', strtotime($value->tanggal_lahir)) }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Alumni</td>
-                                        <td>:</td>
-                                        @if (is_null($value->alumni))
-                                        <td>-</td>
-                                        @else
-                                        <td>{{ $value->alumni }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Tahun Alumni</td>
-                                        <td>:</td>
-                                        @if (is_null($value->tahun_alumni))
-                                        <td>-</td>
-                                        @else
-                                        <td>{{ $value->tahun_alumni }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Nama Pasangan</td>
-                                        <td>:</td>
-                                        @if (is_null($value->nama_pasangan))
-                                        <td>-</td>
-                                        @else
-                                        <td>{{ $value->nama_pasangan }}</td>
-                                        @endif
-
-                                    </tr>
-                                    <tr>
-                                        <td>Alamat</td>
-                                        <td>:</td>
-                                        @if (is_null($value->nama_panggilan))
-                                        <td>-</td>
-                                        @else
-                                        <td>{{ $value->alamat_rumah }}</td>
-                                        @endif
-                                    </tr>
-                                </table>
-
-                            </div>
-                            <div class="card-footer text-center pt-0">
-                                <div class="font-weight-bold mb-2 text-small">Biodata Dokter</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-lg-5 mt-4 pt-2">
-                        <div class="card card-primary pt-4 shadow p-3 mb-5 bg-white rounded">
-                            <table class="table">
-                                <tr>
-                                    <td>No. Telp / HP</td>
-                                    <td>:</td>
-                                    @if (is_null($value->no_telp))
-                                    <td>-</td>
-                                    @else
-                                    <td>{{ $value->no_telp }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td>:</td>
-                                    @if (is_null($value->email))
-                                    <td>-</td>
-                                    @else
-                                    <td>{{ $value->email }}</td>
-                                    @endif
-                                </tr>
-                            </table>
-                            <div class="card-footer text-center pt-0">
-                                <div class="font-weight-bold mb-2 text-small">Kontak Dokter</div>
-                            </div>
-                        </div>
-                        <div class="card card-primary pt-4 shadow p-3 mb-5 bg-white rounded">
-                            <table class="table">
-                                <tr>
-                                    <td>Bidang Kerja Veteriner</td>
-                                    <td>:</td>
-                                    @if (is_null($value->bidang_kerja))
-                                    <td>-</td>
-                                    @else
-                                    <td>{{ $value->bidang_kerja }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    <td>Nama Klinik</td>
-                                    <td>:</td>
-                                    @if (is_null($value->nama_klinik))
-                                    <td>-</td>
-                                    @else
-                                    <td>{{ $value->nama_klinik }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    <td>Alamat Klinik</td>
-                                    <td>:</td>
-                                    @if (is_null($value->alamat_klinik))
-                                    <td>-</td>
-                                    @else
-                                    <td>{{ $value->alamat_klinik }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    <td>No. Telp / Fax Klinik</td>
-                                    <td>:</td>
-                                    @if (is_null($value->no_telp_klinik))
-                                    <td>-</td>
-                                    @else
-                                    <td>{{ $value->no_telp_klinik }}</td>
-                                    @endif
-                                </tr>
-                            </table>
-                            <div class="card-footer text-center pt-0">
-                                <div class="font-weight-bold mb-2 text-small">Info Profesi</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-center">
-                    <a class="btn btn-primary mr-4 mb-3" href="/adminDokter" role="button">Kembali</a>
-                </div>
-                @endforeach
+            <div>
+                <h1>Detail Profil Dokter</h1>
+                <small class="text-muted">Informasi lengkap biodata, kontak, dan profesi dokter</small>
             </div>
         </div>
-        <div class="section-footer">
 
+        <div class="section-body">
+            @foreach ($DataDokter as $key => $value)
+            <div class="row">
+                {{-- Profile & Biodata Column --}}
+                <div class="col-12 col-lg-7 mb-4">
+                    <div class="card profile-widget card-primary shadow-sm h-100">
+                        <div class="profile-widget-header">
+                            <img alt="Foto Dokter" src="{{ !empty($pasFoto) ? asset('img/berkas_dokter/' . $pasFoto) : asset('img/no_image.jpg') }}" height="110" width="110" class="rounded-circle profile-widget-picture object-fit-cover shadow-sm">
+                            <div class="profile-widget-items">
+                                <div class="profile-widget-item">
+                                    <div class="profile-widget-item-label">Status</div>
+                                    <div class="profile-widget-item-value">
+                                        @php
+                                        date_default_timezone_set('Asia/Jakarta');
+                                        $now = new DateTime(date('Y-m-d'));
+                                        $expired = !empty($value->masa_aktif) ? new DateTime($value->masa_aktif) : null;
+                                        if (is_null($expired)) {
+                                            $status = '<span class="badge badge-danger">Belum Terdaftar</span>';
+                                        } else {
+                                            $status = ($now > $expired)
+                                                ? '<span class="badge badge-secondary">Non Aktif</span>'
+                                                : '<span class="badge badge-success">Aktif</span>';
+                                        }
+                                        @endphp
+                                        {!! $status !!}
+                                    </div>
+                                </div>
+                                <div class="profile-widget-item">
+                                    <div class="profile-widget-item-label">Masa Aktif</div>
+                                    <div class="profile-widget-item-value">
+                                        {{ !empty($value->masa_aktif) ? date('d-M-Y', strtotime($value->masa_aktif)) : '-' }}
+                                    </div>
+                                </div>
+                                <div class="profile-widget-item">
+                                    <div class="profile-widget-item-label">Keanggotaan</div>
+                                    <div class="profile-widget-item-value text-capitalize">
+                                        {{ $value->domisili_anggota ?? '-' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-widget-description pb-2">
+                            <div class="profile-widget-name mb-3">
+                                <h5 class="text-primary font-weight-bold mb-1">{{ $value->nama_lengkap }}</h5>
+                                <span class="text-muted text-small"><i class="fas fa-user-tag mr-1"></i> Username: <strong>{{ $value->username }}</strong></span>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-weight-600" width="35%">Nama Panggilan</td>
+                                            <td width="5%">:</td>
+                                            <td>{{ $value->nama_panggilan ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-600">Jenis Kelamin</td>
+                                            <td>:</td>
+                                            <td>{{ $value->jenis_kelamin ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-600">Tempat, Tgl Lahir</td>
+                                            <td>:</td>
+                                            <td>{{ $value->tempat_lahir ?? '-' }}, {{ !empty($value->tanggal_lahir) ? date('d-M-Y', strtotime($value->tanggal_lahir)) : '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-600">Alumni Kampus</td>
+                                            <td>:</td>
+                                            <td>{{ $value->alumni ?? '-' }} (Tahun {{ $value->tahun_alumni ?? '-' }})</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-600">Nama Pasangan</td>
+                                            <td>:</td>
+                                            <td>{{ $value->nama_pasangan ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-600">Alamat Rumah</td>
+                                            <td>:</td>
+                                            <td>{{ $value->alamat_rumah ?? '-' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Contact & Clinic Information Column --}}
+                <div class="col-12 col-lg-5 mb-4">
+                    {{-- Kontak --}}
+                    <div class="card card-primary shadow-sm mb-3">
+                        <div class="card-header py-3">
+                            <h4 class="text-dark font-weight-bold"><i class="fas fa-address-book text-primary mr-2"></i> Kontak Dokter</h4>
+                        </div>
+                        <div class="card-body py-2">
+                            <table class="table table-sm mb-0">
+                                <tr>
+                                    <td class="font-weight-600" width="35%">No. Telp / HP</td>
+                                    <td width="5%">:</td>
+                                    <td>
+                                        @if(!empty($value->no_telp))
+                                            <a href="tel:{{ $value->no_telp }}">{{ $value->no_telp }}</a>
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-600">Email</td>
+                                    <td>:</td>
+                                    <td>
+                                        @if(!empty($value->email))
+                                            <a href="mailto:{{ $value->email }}">{{ $value->email }}</a>
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    {{-- Info Klinik & Profesi --}}
+                    <div class="card card-primary shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="text-dark font-weight-bold"><i class="fas fa-clinic-medical text-primary mr-2"></i> Info Tempat Kerja</h4>
+                        </div>
+                        <div class="card-body py-2">
+                            <table class="table table-sm mb-0">
+                                <tr>
+                                    <td class="font-weight-600" width="35%">Bidang Kerja</td>
+                                    <td width="5%">:</td>
+                                    <td>{{ $value->bidang_kerja ?? '-' }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-600">Nama Tempat</td>
+                                    <td width="5%">:</td>
+                                    <td>{{ $value->nama_klinik ?? '-' }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-600">Alamat Tempat</td>
+                                    <td width="5%">:</td>
+                                    <td>{{ $value->alamat_klinik ?? '-' }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-600">No. Telp/Fax</td>
+                                    <td width="5%">:</td>
+                                    <td>{{ $value->no_telp_klinik ?? '-' }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 text-right mt-2 mb-4">
+                    <a href="{{ url('/adminDokter') }}" class="btn btn-primary px-4 shadow-sm font-weight-600">
+                        <i class="fas fa-arrow-left mr-1"></i> Kembali ke Daftar Dokter
+                    </a>
+                </div>
+            </div>
+            @endforeach
         </div>
     </section>
 </div>

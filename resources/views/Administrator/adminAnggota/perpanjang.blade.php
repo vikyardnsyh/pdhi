@@ -1,93 +1,109 @@
 @extends('layouts.administrator')
-@section('title', 'Administrasi Anggota')
-@section('sidebar')
-@endsection
+@section('title', 'Perpanjang Keanggotaan')
 
 @section('content')
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Ubah / Perpanjang Keanggotaan</h1>
+            <div>
+                <h1>Kelola Keanggotaan</h1>
+                <small class="text-muted">Perpanjang masa aktif atau perbarui status domisili dokter</small>
+            </div>
         </div>
-        <div class="row justify-content-around">
-            <div class="card col-8 col-md-8 col-lg-6">
-                <div class="card-header mb-2">
-                    <h4>Form Detail Keanggotaan Dokter</h4>
-                </div>
-                <div class="card-body">
-                    <span>Dokter ini sudah teregistrasi sebagai anggota PDHI Banten II</span>
-                    @foreach($data as $key => $value)
-                    <form>
-                        <div class="form-group mt-5">
-                            <div class="form-group">
-                                <label>Domisili Keanggotaan</label>
-                                <input readonly type="text" class="form-control" value="{{ $value->domisili_anggota }}">
-                            </div>
-                            <div class="form-group">
-                                <label>Tanggal Terdaftar</label>
-                                <input readonly type="text" class="form-control" value="{{ date('d-M-Y', strtotime($value->tanggal_terdaftar)) }}">
-                            </div>
-                            <div class="form-group">
-                                <label>Aktif Hingga</label>
-                                <input readonly type="text" class="form-control" value="{{ date('d-M-Y', strtotime($value->masa_aktif)) }}">
-                            </div>
-                            <div class="form-group">
-                                <label>Status Saat Ini</label>
-                                @php
-                                date_default_timezone_set('Asia/jakarta');
-                                $now = new DateTime(date('Y-M-d'));
-                                $expired = new DateTime($value->masa_aktif);
 
-                                if ($now > $expired) {
-                                $status = '<span class="badge badge-pill badge-danger">Non Aktif</span>';
-                                } else {
-                                $status = '<span class="badge badge-pill badge-success">Aktif</span>';
-                                }
-                                @endphp
-                                <br>
-                                {!! $status !!}
-                            </div>
+        @foreach($data as $key => $value)
+        <div class="row">
+            {{-- Current Status Card --}}
+            <div class="col-12 col-lg-6 mb-4">
+                <div class="card card-primary shadow-sm h-100">
+                    <div class="card-header border-bottom py-3">
+                        <h4 class="text-dark font-weight-bold mb-0">
+                            <i class="fas fa-info-circle text-primary mr-2"></i> Status Keanggotaan Saat Ini
+                        </h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="form-group mb-3">
+                            <label class="font-weight-600">Domisili Keanggotaan</label>
+                            <input readonly type="text" class="form-control bg-light text-capitalize" value="{{ $value->domisili_anggota ?? '-' }}">
                         </div>
-                    </form>
-                    @endforeach
+                        <div class="form-group mb-3">
+                            <label class="font-weight-600">Tanggal Terdaftar</label>
+                            <input readonly type="text" class="form-control bg-light" value="{{ !empty($value->tanggal_terdaftar) ? date('d-M-Y', strtotime($value->tanggal_terdaftar)) : '-' }}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="font-weight-600">Aktif Hingga</label>
+                            <input readonly type="text" class="form-control bg-light" value="{{ !empty($value->masa_aktif) ? date('d-M-Y', strtotime($value->masa_aktif)) : '-' }}">
+                        </div>
+                        <div class="form-group mb-0">
+                            <label class="font-weight-600 d-block">Status Keaktifan</label>
+                            @php
+                            date_default_timezone_set('Asia/Jakarta');
+                            $now = new DateTime(date('Y-m-d'));
+                            $expired = !empty($value->masa_aktif) ? new DateTime($value->masa_aktif) : null;
+
+                            if (is_null($expired)) {
+                                $status = '<span class="badge badge-secondary">Belum Diatur</span>';
+                            } elseif ($now > $expired) {
+                                $status = '<span class="badge badge-danger">Kadaluarsa / Non Aktif</span>';
+                            } else {
+                                $status = '<span class="badge badge-success">Masih Aktif</span>';
+                            }
+                            @endphp
+                            {!! $status !!}
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card col-8 col-md-8 col-lg-5">
-                <div class="card-header">
-                    <h4>Form Perpanjang & Ubah Domisili Anggota</h4>
-                </div>
-                <div class="card-body">
-                    <span>Form ini diisi jika masa aktif dokter terkait hampir berakhir, status anggota tidak aktif ataupun untuk mengubah domisili. Masa perpanjangan dihitung dari :
-                        <br><b> Masa aktif terakhir + Masa aktif perpanjangan </b>
-                        <br>(Kolom dengan tanda * wajib diisi)
-                    </span><br>
-                    <form method="POST" action="{{ url('adminKeanggotaan/' . $value->id) }}">
-                        @csrf
-                        <div class="form-group mt-n1">
+            {{-- Extension & Update Form Card --}}
+            <div class="col-12 col-lg-6 mb-4">
+                <div class="card card-success shadow-sm h-100">
+                    <div class="card-header border-bottom py-3">
+                        <h4 class="text-success font-weight-bold mb-0">
+                            <i class="fas fa-calendar-plus mr-2"></i> Perpanjang / Ubah Domisili
+                        </h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="alert alert-light border mb-4 text-small">
+                            <i class="fas fa-clock mr-1 text-primary"></i> 
+                            Masa perpanjangan dihitung otomatis: <strong>Masa aktif terakhir + Periode perpanjangan</strong>.
+                        </div>
+
+                        <form method="POST" action="{{ url('adminKeanggotaan/' . $value->id) }}">
+                            @csrf
                             <input type="hidden" name="_method" value="PATCH">
-                        </div>
-                        <div class="form-group">
-                            <label>Ubah Domisili</label><span class="text-danger">*</span>
-                            <select name="domisili_anggota" class="form-control">
-                                <option value="Tetap">Tetap</option>>
-                                <option value="Tamu">Tamu</option>>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Masa Perpanjang</label><span class="text-danger">*</span>
-                            <select name="masa_aktif" class="form-control">
-                                <option value="0">Tidak Ada Perpanjangan</option>>
-                                <option value="4">4 Tahun</option>>
-                                <option value="2">2 Tahun</option>>
-                            </select>
-                        </div>
-                        <a class="btn btn-primary" href="/adminKeanggotaan" role="button">Kembali</a>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
+
+                            <div class="form-group mb-3">
+                                <label class="font-weight-600">Domisili Keanggotaan <span class="text-danger">*</span></label>
+                                <select name="domisili_anggota" class="form-control">
+                                    <option value="Tetap" {{ $value->domisili_anggota == 'Tetap' ? 'selected' : '' }}>Anggota Tetap</option>
+                                    <option value="Tamu" {{ $value->domisili_anggota == 'Tamu' ? 'selected' : '' }}>Anggota Tamu</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label class="font-weight-600">Tambah Masa Aktif <span class="text-danger">*</span></label>
+                                <select name="masa_aktif" class="form-control">
+                                    <option value="0">Tidak Ada Perpanjangan (Ubah Domisili Saja)</option>
+                                    <option value="4" selected>+ 4 Tahun (Standar Periode PDHI)</option>
+                                    <option value="2">+ 2 Tahun</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                                <a class="btn btn-outline-secondary" href="{{ url('/adminKeanggotaan') }}">
+                                    <i class="fas fa-times mr-1"></i> Batal
+                                </a>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-save mr-1"></i> Simpan Perubahan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        @endforeach
     </section>
 </div>
 @endsection

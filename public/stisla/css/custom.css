@@ -1,8 +1,1356 @@
 /**
- *
- * You can write your CSS code here, DO NOT touch the default JavaScript file
- * because it will make it harder for you to update.
- * 
+ * PDHI Banten II - Modern Responsive UI Enhancements
  */
 
-/*# sourceMappingURL=custom.css.map */
+:root {
+    /* ======================================================================
+       PDHI Brand Color Palette (Official Deep Violet / Imperial Purple)
+       ====================================================================== */
+    --pdhi-primary: #581c87;        /* PDHI Noble Royal Violet */
+    --pdhi-primary-hover: #4c1d95;  /* Deep Midnight Violet */
+    --pdhi-primary-dark: #3b0764;   /* Darkest Purple */
+    --pdhi-primary-vibrant: #6b21a8;/* Rich Imperial Violet */
+    --pdhi-primary-light: #f5f3ff;  /* Soft Lilac Tint for surfaces/hovers */
+    --pdhi-primary-border: #d8b4fe; /* Gentle Lavender Border */
+    --pdhi-primary-shadow: rgba(88, 28, 135, 0.22);
+
+    /* Harmonized Secondary / Neutral Palette */
+    --pdhi-text-main: #1e1b4b;      /* Deep Slate Violet for headings */
+    --pdhi-text-body: #334155;      /* Crisp Slate Body Text */
+    --pdhi-text-muted: #64748b;     /* Slate Muted */
+    --pdhi-surface: #ffffff;
+    --pdhi-surface-subtle: #faf5ff; /* Subtle violet-tinted surface */
+    --pdhi-border: #e2e8f0;
+
+    /* Harmonized Functional Family (No Clashing / Jumping Colors) */
+    --pdhi-success: #059669;        /* Botanical Emerald (Aktif/Terdaftar) */
+    --pdhi-success-hover: #047857;
+    --pdhi-success-light: #ecfdf5;
+    --pdhi-success-text: #065f46;
+
+    --pdhi-warning: #d97706;        /* Warm Ochre Amber (Tamu/Tinjau/Perpanjang) */
+    --pdhi-warning-hover: #b45309;
+    --pdhi-warning-light: #fffbeb;
+    --pdhi-warning-text: #92400e;
+
+    --pdhi-danger: #dc2626;         /* Muted Ruby Wine (Kadaluarsa/Nonaktif) */
+    --pdhi-danger-hover: #b91c1c;
+    --pdhi-danger-light: #fef2f2;
+    --pdhi-danger-text: #991b1b;
+
+    --pdhi-info: #7c3aed;           /* Purple Iris (Detail/Unduh/Pratinjau) */
+    --pdhi-info-hover: #6d28d9;
+    --pdhi-info-light: #f5f3ff;
+    --pdhi-info-text: #5b21b6;
+
+    --pdhi-dark: #1e1b4b;
+    --pdhi-light: #f8fafc;
+    --pdhi-card-radius: 12px;
+}
+
+/* Global Smooth Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    color: #495057;
+    font-size: 14px;
+}
+
+/* Section Header Structure */
+.section .section-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 18px 25px !important;
+    border-radius: var(--pdhi-card-radius) !important;
+    margin-bottom: 25px !important;
+}
+
+.section .section-header h1 {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+}
+
+.section .section-header small.text-muted {
+    display: block !important;
+    font-size: 13px !important;
+    color: #64748b !important;
+    margin-top: 4px !important;
+    line-height: 1.4 !important;
+}
+
+/* Card Modernization */
+.card {
+    border-radius: var(--pdhi-card-radius) !important;
+    border: none !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.25s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+.card.card-primary {
+    border-top: 4px solid var(--pdhi-primary) !important;
+}
+
+/* Card Statistic 1 Alignment */
+.card.card-statistic-1 {
+    border-radius: var(--pdhi-card-radius) !important;
+    overflow: hidden;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 16px 20px !important;
+    min-height: 96px !important;
+}
+
+.card.card-statistic-1 .card-icon {
+    border-radius: 12px !important;
+    margin: 0 16px 0 0 !important;
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    float: none !important;
+    line-height: normal !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
+}
+
+.card.card-statistic-1 .card-icon i {
+    font-size: 26px !important;
+    color: #fff !important;
+}
+
+.card.card-statistic-1 .card-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    flex: 1 !important;
+}
+
+.card.card-statistic-1 .card-header {
+    padding: 0 !important;
+    margin-bottom: 2px !important;
+    height: auto !important;
+    min-height: auto !important;
+}
+
+.card.card-statistic-1 .card-header h4 {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #8c98a4 !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0.3px !important;
+}
+
+.card.card-statistic-1 .card-body {
+    padding: 0 !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #1c252c !important;
+    line-height: 1.2 !important;
+}
+
+/* Sidebar Active State Enhancements */
+.main-sidebar .sidebar-menu li.active > a {
+    color: var(--pdhi-primary) !important;
+    font-weight: 700 !important;
+    background-color: #f0f3ff !important;
+    border-left: 4px solid var(--pdhi-primary);
+}
+
+.main-sidebar .sidebar-menu li.active > a i {
+    color: var(--pdhi-primary) !important;
+}
+
+.main-sidebar .sidebar-brand a img {
+    transition: transform 0.2s ease;
+}
+
+.main-sidebar .sidebar-brand a:hover img {
+    transform: scale(1.05);
+}
+
+/* Responsive Navbar & User Menu */
+.navbar .nav-link-user {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-weight: 600;
+}
+
+/* High-Contrast Striped Table Rows */
+.table-responsive {
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+}
+
+.table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+.table th {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    color: #3b0764 !important;
+    background-color: #f5f0fa !important;
+    border-top: none !important;
+    border-bottom: 2px solid #e9d5ff !important;
+    padding: 12px 14px !important;
+    white-space: nowrap;
+}
+
+.table td {
+    vertical-align: middle !important;
+    font-size: 13.5px;
+    padding: 11px 14px !important;
+    border-top: 1px solid #f1e8f8 !important;
+    color: #334155;
+}
+
+/* Distinct zebra striping with PDHI harmony */
+.table tbody tr:nth-of-type(odd) td {
+    background-color: #ffffff !important;
+}
+
+.table tbody tr:nth-of-type(even) td {
+    background-color: #faf7fd !important;
+}
+
+/* Password Visibility Toggle Button */
+.btn-password-toggle,
+.input-group-append button[onclick*="togglePasswordVisibility"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-color: #d1d5db !important;
+    background-color: #f8fafc !important;
+    color: #64748b !important;
+    transition: all 0.2s ease-in-out;
+}
+.btn-password-toggle:hover,
+.btn-password-toggle:focus,
+.input-group-append button[onclick*="togglePasswordVisibility"]:hover,
+.input-group-append button[onclick*="togglePasswordVisibility"]:focus {
+    background-color: var(--pdhi-primary-light) !important;
+    color: var(--pdhi-primary) !important;
+    border-color: var(--pdhi-primary-border) !important;
+}
+
+/* Subtle, smooth hover highlight in lilac */
+.table tbody tr:hover td {
+    background-color: #f3e8ff !important;
+    color: #1e1b4b !important;
+}
+
+/* Empty Table State Centering */
+.table-empty-state {
+    padding: 35px 20px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.table-empty-state .empty-state-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 50% !important;
+    background-color: #f1f5f9 !important;
+    color: #94a3b8 !important;
+    font-size: 24px !important;
+    margin: 0 auto 12px auto !important;
+}
+
+.table-empty-state .empty-state-text {
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    color: #64748b !important;
+    margin: 0 !important;
+}
+
+/* Table Control Bar & Total Counter */
+.table-control-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.table-control-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-control-count {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* Force Table Control Bar to stack cleanly on mobile so total is always placed underneath across all pages */
+@media (max-width: 767.98px) {
+    .table-control-bar {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+
+    .table-control-tools {
+        width: 100% !important;
+        justify-content: flex-start !important;
+    }
+
+    .table-control-count {
+        width: 100% !important;
+        padding-top: 4px !important;
+        border-top: 1px dashed #e2e8f0 !important;
+    }
+}
+.card-header-responsive {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px 25px;
+}
+
+.card-header-responsive h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--pdhi-dark);
+}
+
+.card-header-responsive .card-header-action {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+/* Responsive Badges */
+.badge {
+    padding: 6px 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-radius: 30px;
+    font-size: 11px;
+}
+
+.badge-pill {
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
+/* Form Modernization */
+.form-control, .custom-select {
+    border-radius: 8px;
+    border: 1px solid #e4e6fc;
+    min-height: 42px;
+    font-size: 13.5px;
+    transition: all 0.2s;
+}
+
+.form-control:focus, .custom-select:focus {
+    border-color: var(--pdhi-primary);
+    box-shadow: 0 0 0 3px rgba(103, 119, 239, 0.15);
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #34395e;
+    margin-bottom: 6px;
+}
+
+/* Action Buttons & Button Groups */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 8px 16px;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-sm {
+    padding: 5px 12px;
+    font-size: 12px;
+    min-height: 32px;
+}
+
+/* Monotone Action Group with Pipe Separator */
+.action-cluster {
+    display: inline-flex;
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+    padding: 4px 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.action-cluster-btn {
+    background: none;
+    border: none;
+    padding: 2px 8px;
+    color: #64748b;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    outline: none !important;
+}
+
+.action-cluster-btn:hover {
+    transform: scale(1.3);
+}
+
+.action-cluster-btn.btn-action-edit:hover {
+    color: #3b82f6 !important;
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
+}
+
+.action-cluster-btn.btn-action-reset:hover {
+    color: #eab308 !important;
+    filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.6));
+}
+
+.action-cluster-btn.btn-action-delete:hover {
+    color: #ef4444 !important;
+    filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.6));
+}
+
+.action-cluster-sep {
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 300;
+    user-select: none;
+    padding: 0 2px;
+}
+
+/* Doctor Table Column Adjustments */
+.col-doctor-no {
+    width: 60px !important;
+    min-width: 60px !important;
+}
+
+.col-doctor-name {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 320px !important;
+    white-space: normal !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+}
+
+.col-doctor-status {
+    width: 140px !important;
+    min-width: 140px !important;
+}
+
+.col-doctor-action {
+    width: 120px !important;
+    min-width: 120px !important;
+    padding-left: 14px !important;
+    padding-right: 18px !important;
+}
+
+.col-doctor-action .btn {
+    padding: 6px 14px !important;
+}
+
+/* Desktop Only: Sticky Columns */
+@media (min-width: 992px) {
+    .table-freeze-dokter {
+        position: relative;
+        border-collapse: separate !important;
+    }
+
+    .table-freeze-dokter th.sticky-col-1,
+    .table-freeze-dokter td.sticky-col-1 {
+        position: sticky !important;
+        left: 0 !important;
+        z-index: 2 !important;
+    }
+
+    .table-freeze-dokter th.sticky-col-2,
+    .table-freeze-dokter td.sticky-col-2 {
+        position: sticky !important;
+        left: 60px !important;
+        z-index: 2 !important;
+    }
+
+    .table-freeze-dokter th.sticky-col-3,
+    .table-freeze-dokter td.sticky-col-3 {
+        position: sticky !important;
+        left: 310px !important;
+        z-index: 2 !important;
+    }
+
+    .table-freeze-dokter th.sticky-col-4,
+    .table-freeze-dokter td.sticky-col-4 {
+        position: sticky !important;
+        left: 450px !important;
+        z-index: 2 !important;
+        box-shadow: 4px 0 8px -2px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .table-freeze-dokter th.sticky-col-1,
+    .table-freeze-dokter th.sticky-col-2,
+    .table-freeze-dokter th.sticky-col-3,
+    .table-freeze-dokter th.sticky-col-4 {
+        z-index: 3 !important;
+        background-color: #e2e8f0 !important;
+    }
+
+    .table-freeze-dokter tbody tr:nth-of-type(odd) td.sticky-col-1,
+    .table-freeze-dokter tbody tr:nth-of-type(odd) td.sticky-col-2,
+    .table-freeze-dokter tbody tr:nth-of-type(odd) td.sticky-col-3,
+    .table-freeze-dokter tbody tr:nth-of-type(odd) td.sticky-col-4 {
+        background-color: #ffffff !important;
+    }
+
+    .table-freeze-dokter tbody tr:nth-of-type(even) td.sticky-col-1,
+    .table-freeze-dokter tbody tr:nth-of-type(even) td.sticky-col-2,
+    .table-freeze-dokter tbody tr:nth-of-type(even) td.sticky-col-3,
+    .table-freeze-dokter tbody tr:nth-of-type(even) td.sticky-col-4 {
+        background-color: #f1f5f9 !important;
+    }
+
+    .table-freeze-dokter tbody tr:hover td.sticky-col-1,
+    .table-freeze-dokter tbody tr:hover td.sticky-col-2,
+    .table-freeze-dokter tbody tr:hover td.sticky-col-3,
+    .table-freeze-dokter tbody tr:hover td.sticky-col-4 {
+        background-color: #e2e8f0 !important;
+    }
+}
+
+/* Mobile: Non-sticky, free natural horizontal scrolling */
+@media (max-width: 991.98px) {
+    .table-freeze-dokter th.sticky-col-1,
+    .table-freeze-dokter td.sticky-col-1,
+    .table-freeze-dokter th.sticky-col-2,
+    .table-freeze-dokter td.sticky-col-2,
+    .table-freeze-dokter th.sticky-col-3,
+    .table-freeze-dokter td.sticky-col-3,
+    .table-freeze-dokter th.sticky-col-4,
+    .table-freeze-dokter td.sticky-col-4 {
+        position: static !important;
+        box-shadow: none !important;
+    }
+}
+
+/* Document Checklist Grid on Mobile */
+.doc-checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.doc-checklist-card {
+    background: #fff;
+    border: 1px solid #edf0f5;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.doc-checklist-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.doc-checklist-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Mobile Overlay for Sidebar */
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 888;
+    backdrop-filter: blur(2px);
+    transition: opacity 0.2s ease;
+}
+
+body.sidebar-show .sidebar-backdrop {
+    display: block;
+}
+
+/* Mobile Screens (< 768px) */
+@media (max-width: 767.98px) {
+    .main-content {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        padding-top: 75px !important;
+    }
+
+    .section .section-header {
+        margin-bottom: 20px !important;
+        padding: 15px 18px !important;
+        border-radius: 10px !important;
+    }
+
+    .section .section-header h1 {
+        font-size: 20px !important;
+    }
+
+    .card-header-responsive {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+
+    .card-header-responsive .card-header-action {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .card-header-responsive .card-header-action form {
+        flex: 1;
+    }
+
+    .card-header-responsive .card-header-action .input-group {
+        width: 100% !important;
+    }
+
+    .doc-checklist-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-widget .profile-widget-header {
+        text-align: center;
+    }
+
+    .profile-widget .profile-widget-picture {
+        float: none !important;
+        margin: 0 auto 15px auto !important;
+        display: block;
+    }
+
+    .profile-widget .profile-widget-items {
+        justify-content: space-around;
+    }
+
+    .profile-widget-item {
+        padding: 8px 10px;
+    }
+
+    .profile-widget-item-value {
+        font-size: 13px !important;
+    }
+
+    .login-brand img {
+        width: 70px;
+    }
+
+    /* Modal adjustments */
+    .modal-dialog {
+        margin: 10px;
+    }
+
+    .modal-content {
+        border-radius: 12px;
+    }
+}
+
+/* ==========================================================================
+   Slim Minimized Footer
+   ========================================================================== */
+.main-footer {
+    padding: 12px 30px 12px 280px !important;
+    margin-top: 20px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    color: #94a3b8 !important;
+    background-color: #f8fafc !important;
+    border-top: 1px solid #e2e8f0 !important;
+}
+
+body.sidebar-gone .main-footer,
+body.sidebar-mini .main-footer {
+    padding-left: 30px !important;
+}
+
+@media (max-width: 1024px) {
+    .main-footer {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .main-footer {
+        padding: 10px 15px !important;
+        margin-top: 15px !important;
+        font-size: 11px !important;
+        text-align: center !important;
+    }
+    .main-footer .footer-left,
+    .main-footer .footer-right {
+        float: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-bottom: 4px !important;
+    }
+}
+
+/* ==========================================================================
+   Bootstrap Datepicker Modern Styling & Auto-Dismiss Polish
+   ========================================================================== */
+.datepicker.datepicker-dropdown {
+    z-index: 9999 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+    padding: 12px !important;
+    background-color: #ffffff !important;
+}
+
+.datepicker table {
+    margin: 0 !important;
+}
+
+.datepicker table tr td,
+.datepicker table tr th {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+}
+
+.datepicker table tr td.active,
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active.disabled:hover {
+    background-color: var(--pdhi-primary) !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+}
+
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover {
+    background-color: var(--pdhi-primary-light) !important;
+    color: var(--pdhi-primary) !important;
+    border-radius: 6px !important;
+}
+
+.datepicker table tr td.day:hover {
+    background-color: var(--pdhi-primary-light) !important;
+    color: var(--pdhi-primary) !important;
+    border-radius: 6px !important;
+}
+
+.datepicker th.datepicker-switch {
+    font-weight: 700 !important;
+    color: var(--pdhi-primary-dark) !important;
+    font-size: 14px !important;
+}
+
+.datepicker .prev,
+.datepicker .next {
+    cursor: pointer !important;
+    border-radius: 6px !important;
+    color: var(--pdhi-primary) !important;
+}
+
+.datepicker .prev:hover,
+.datepicker .next:hover {
+    background-color: var(--pdhi-primary-light) !important;
+}
+
+.input-group.date .input-group-text {
+    cursor: pointer !important;
+    background-color: #f8fafc !important;
+    border-color: #d1d5db !important;
+    color: var(--pdhi-primary) !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-group.date:hover .input-group-text {
+    background-color: var(--pdhi-primary-light) !important;
+    color: var(--pdhi-primary-hover) !important;
+}
+
+/* ==========================================================================
+   PDHI Unified Brand Color System & Anti-Distraction Harmonization
+   ========================================================================== */
+
+/* 1. Global Typography & Links */
+a {
+    color: var(--pdhi-primary);
+    transition: color 0.15s ease-in-out;
+}
+a:hover {
+    color: var(--pdhi-primary-hover);
+    text-decoration: none;
+}
+::selection {
+    background-color: #e9d5ff !important;
+    color: #3b0764 !important;
+}
+
+/* 2. Brand Navbar (Imperial PDHI Violet) */
+.navbar-bg {
+    background: linear-gradient(135deg, #3b0764 0%, #581c87 45%, #6b21a8 100%) !important;
+    box-shadow: 0 4px 14px rgba(59, 7, 100, 0.28) !important;
+}
+
+/* 3. Button Hierarchy Harmonization */
+/* Primary Buttons */
+.btn-primary,
+.btn-primary:disabled {
+    background-color: var(--pdhi-primary) !important;
+    border-color: var(--pdhi-primary) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px var(--pdhi-primary-shadow) !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+    background-color: var(--pdhi-primary-hover) !important;
+    border-color: var(--pdhi-primary-hover) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(76, 29, 149, 0.35) !important;
+}
+
+.btn-outline-primary {
+    color: var(--pdhi-primary) !important;
+    border-color: var(--pdhi-primary) !important;
+    background-color: transparent !important;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    background-color: var(--pdhi-primary) !important;
+    border-color: var(--pdhi-primary) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px var(--pdhi-primary-shadow) !important;
+}
+
+/* Success Buttons (Refined Botanical Emerald) */
+.btn-success,
+.btn-success:disabled {
+    background-color: var(--pdhi-success) !important;
+    border-color: var(--pdhi-success) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(5, 150, 105, 0.2) !important;
+}
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+    background-color: var(--pdhi-success-hover) !important;
+    border-color: var(--pdhi-success-hover) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3) !important;
+}
+.btn-outline-success {
+    color: var(--pdhi-success) !important;
+    border-color: var(--pdhi-success) !important;
+    background-color: transparent !important;
+}
+.btn-outline-success:hover {
+    background-color: var(--pdhi-success) !important;
+    border-color: var(--pdhi-success) !important;
+    color: #ffffff !important;
+}
+
+/* Warning Buttons (Warm Ochre Amber) */
+.btn-warning,
+.btn-warning:disabled {
+    background-color: var(--pdhi-warning) !important;
+    border-color: var(--pdhi-warning) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(217, 119, 6, 0.2) !important;
+}
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+    background-color: var(--pdhi-warning-hover) !important;
+    border-color: var(--pdhi-warning-hover) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3) !important;
+}
+.btn-outline-warning {
+    color: var(--pdhi-warning) !important;
+    border-color: var(--pdhi-warning) !important;
+    background-color: transparent !important;
+}
+.btn-outline-warning:hover {
+    background-color: var(--pdhi-warning) !important;
+    border-color: var(--pdhi-warning) !important;
+    color: #ffffff !important;
+}
+
+/* Danger Buttons (Muted Ruby Wine) */
+.btn-danger,
+.btn-danger:disabled {
+    background-color: var(--pdhi-danger) !important;
+    border-color: var(--pdhi-danger) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2) !important;
+}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+    background-color: var(--pdhi-danger-hover) !important;
+    border-color: var(--pdhi-danger-hover) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3) !important;
+}
+.btn-outline-danger {
+    color: var(--pdhi-danger) !important;
+    border-color: var(--pdhi-danger) !important;
+    background-color: transparent !important;
+}
+.btn-outline-danger:hover {
+    background-color: var(--pdhi-danger) !important;
+    border-color: var(--pdhi-danger) !important;
+    color: #ffffff !important;
+}
+
+/* Info Buttons (Purple Iris - directly in the PDHI palette family) */
+.btn-info,
+.btn-info:disabled {
+    background-color: var(--pdhi-info) !important;
+    border-color: var(--pdhi-info) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(124, 58, 237, 0.2) !important;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active {
+    background-color: var(--pdhi-info-hover) !important;
+    border-color: var(--pdhi-info-hover) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3) !important;
+}
+.btn-outline-info {
+    color: var(--pdhi-info) !important;
+    border-color: var(--pdhi-info) !important;
+    background-color: transparent !important;
+}
+.btn-outline-info:hover {
+    background-color: var(--pdhi-info) !important;
+    border-color: var(--pdhi-info) !important;
+    color: #ffffff !important;
+}
+
+/* 4. Background Utilities */
+.bg-primary {
+    background-color: var(--pdhi-primary) !important;
+    color: #ffffff !important;
+}
+.bg-success {
+    background-color: var(--pdhi-success) !important;
+    color: #ffffff !important;
+}
+.bg-warning {
+    background-color: var(--pdhi-warning) !important;
+    color: #ffffff !important;
+}
+.bg-danger {
+    background-color: var(--pdhi-danger) !important;
+    color: #ffffff !important;
+}
+.bg-info {
+    background-color: var(--pdhi-info) !important;
+    color: #ffffff !important;
+}
+
+/* 5. Text Utilities */
+.text-primary,
+a.text-primary {
+    color: var(--pdhi-primary) !important;
+}
+.text-primary:hover,
+a.text-primary:hover {
+    color: var(--pdhi-primary-hover) !important;
+}
+.text-success {
+    color: var(--pdhi-success) !important;
+}
+.text-warning {
+    color: var(--pdhi-warning) !important;
+}
+.text-danger {
+    color: var(--pdhi-danger) !important;
+}
+.text-info {
+    color: var(--pdhi-info) !important;
+}
+
+/* 6. Badges Harmonized */
+.badge {
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+    padding: 5px 10px !important;
+    border-radius: 6px !important;
+}
+.badge-primary {
+    background-color: var(--pdhi-primary) !important;
+    color: #ffffff !important;
+}
+.badge-success {
+    background-color: var(--pdhi-success) !important;
+    color: #ffffff !important;
+}
+.badge-warning {
+    background-color: var(--pdhi-warning) !important;
+    color: #ffffff !important;
+}
+.badge-danger {
+    background-color: var(--pdhi-danger) !important;
+    color: #ffffff !important;
+}
+.badge-info {
+    background-color: var(--pdhi-info) !important;
+    color: #ffffff !important;
+}
+.badge-secondary {
+    background-color: #64748b !important;
+    color: #ffffff !important;
+}
+
+/* 7. Card & Component Borders */
+.card.card-primary {
+    border-top: 4px solid var(--pdhi-primary) !important;
+}
+.card.card-success {
+    border-top: 4px solid var(--pdhi-success) !important;
+}
+.card.card-warning {
+    border-top: 4px solid var(--pdhi-warning) !important;
+}
+.card.card-danger {
+    border-top: 4px solid var(--pdhi-danger) !important;
+}
+.card.card-info {
+    border-top: 4px solid var(--pdhi-info) !important;
+}
+
+.border-primary { border-color: var(--pdhi-primary) !important; }
+.border-success { border-color: var(--pdhi-success) !important; }
+.border-warning { border-color: var(--pdhi-warning) !important; }
+.border-danger  { border-color: var(--pdhi-danger) !important; }
+.border-info    { border-color: var(--pdhi-info) !important; }
+
+/* 8. Forms & Inputs Focus Rings */
+.form-control:focus,
+.custom-select:focus {
+    border-color: var(--pdhi-primary-border) !important;
+    box-shadow: 0 0 0 0.2rem var(--pdhi-primary-shadow) !important;
+}
+
+/* 9. Pagination Harmonization */
+.page-item.active .page-link {
+    background-color: var(--pdhi-primary) !important;
+    border-color: var(--pdhi-primary) !important;
+    color: #ffffff !important;
+}
+.page-link {
+    color: var(--pdhi-primary) !important;
+}
+.page-link:hover {
+    color: var(--pdhi-primary-hover) !important;
+    background-color: var(--pdhi-primary-light) !important;
+    border-color: var(--pdhi-primary-border) !important;
+}
+
+/* 10. Action Cluster Polish */
+.action-cluster-icon:hover {
+    color: var(--pdhi-primary) !important;
+    text-shadow: 0 0 8px var(--pdhi-primary-shadow) !important;
+}
+.action-cluster-icon.action-edit:hover {
+    color: var(--pdhi-primary) !important;
+}
+.action-cluster-icon.action-reset:hover {
+    color: var(--pdhi-warning) !important;
+}
+.action-cluster-icon.action-delete:hover {
+    color: var(--pdhi-danger) !important;
+}
+
+/* ==========================================================================
+   11. Compact Auth / Login Layout Polishing
+   ========================================================================== */
+.login-brand {
+    margin: 8px 0 12px 0 !important;
+}
+
+.login-brand img {
+    width: 68px !important;
+    height: 68px !important;
+    object-fit: contain;
+}
+
+.login-brand h5 {
+    font-size: 1.15rem !important;
+    margin-bottom: 2px !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+}
+
+.login-brand .text-small,
+.login-brand small,
+.login-brand span {
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+}
+
+.simple-footer {
+    margin-top: 14px !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 0 !important;
+    font-size: 11.5px !important;
+}
+
+/* ==========================================================================
+   12. Puppy Paw Trail Cursor Chaser (Desktop Web Only)
+   ========================================================================== */
+.paw-trail-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99999;
+    overflow: hidden;
+}
+
+.paw-trail-print {
+    position: fixed;
+    pointer-events: none;
+    font-size: 14px;
+    color: var(--pdhi-primary, #6b21a8);
+    opacity: 0.55;
+    transform-origin: center center;
+    animation: pawTrailFade 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    user-select: none;
+    will-change: transform, opacity;
+}
+
+@keyframes pawTrailFade {
+    0% {
+        opacity: 0.65;
+        transform: translate(-50%, -50%) rotate(var(--paw-rot, 0deg)) scale(1.1);
+    }
+    30% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) rotate(var(--paw-rot, 0deg)) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(var(--paw-rot, 0deg)) scale(0.6);
+    }
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .paw-trail-container,
+    .paw-trail-print {
+        display: none !important;
+    }
+}
+
+/* ==========================================================================
+   13. Interactive Login Mascots (Side-POV Puppy Peek & Frame-Swap Cat Grab)
+   ========================================================================== */
+.login-card-wrapper {
+    position: relative;
+}
+
+.login-mascot {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    will-change: transform, opacity;
+}
+
+/* Left: Playful Animated Puppy */
+.login-mascot-left {
+    left: 0;
+    top: 48%;
+    transform: translate(30px, -50%) rotate(-3deg) scale(0.85);
+    opacity: 0;
+    transition: opacity 0.22s ease-out, transform 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: 90% 60%;
+}
+
+.login-mascot-left.is-peeking {
+    opacity: 1;
+    transform: translate(var(--puppy-x, -65px), calc(-50% + var(--puppy-y, 0px))) rotate(var(--puppy-rot, 0deg)) scale(1);
+}
+
+.puppy-img-container {
+    position: relative;
+    width: 220px;
+    height: 260px;
+    transition: transform 0.15s ease-out;
+}
+
+.puppy-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+}
+
+.puppy-img-stand {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.12s ease-out;
+}
+
+.puppy-img-jump {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.12s ease-out;
+}
+
+/* When cursor is beyond reach: switch from standing tail-wag to excited jump! */
+.login-mascot-left.is-max-reach .puppy-img-stand {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.login-mascot-left.is-max-reach .puppy-img-jump {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Right: Playful Cat Arm Reach & Frame-Swap Grab */
+.login-mascot-right {
+    right: 0;
+    top: 36%;
+    transform: translate(-30px, -50%) rotate(6deg) scale(0.85);
+    opacity: 0;
+    transition: opacity 0.22s ease-out, transform 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: 10% center;
+}
+
+.login-mascot-right.is-reaching {
+    opacity: 1;
+    transform: translate(var(--cat-x, 65px), calc(-50% + var(--cat-y, 0px))) rotate(var(--cat-rot, 0deg)) scale(1);
+}
+
+.cat-arm-svg {
+    filter: drop-shadow(4px 7px 12px rgba(88, 28, 135, 0.22));
+    transform-origin: 20px 60px;
+}
+
+/* Frame Swap Mechanism: Open Hand vs Clenched Fist */
+.paw-frame-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.04s linear;
+}
+
+.paw-frame-closed {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.04s linear;
+}
+
+.login-mascot-right.is-max-reach .paw-frame-open {
+    animation: frameSwapOpen 0.32s steps(1) infinite;
+}
+
+.login-mascot-right.is-max-reach .paw-frame-closed {
+    animation: frameSwapClosed 0.32s steps(1) infinite;
+}
+
+.login-mascot-right.is-max-reach .cat-arm-svg {
+    animation: catGrabSnatch 0.32s ease-in-out infinite alternate;
+}
+
+@keyframes frameSwapOpen {
+    0%, 49.9% {
+        opacity: 1;
+        visibility: visible;
+    }
+    50%, 100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes frameSwapClosed {
+    0%, 49.9% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    50%, 100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes catGrabSnatch {
+    0% {
+        transform: scale(1) translateX(0);
+    }
+    100% {
+        transform: scale(0.96) translateX(-14px);
+    }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 991.98px), (prefers-reduced-motion: reduce) {
+    .login-mascot {
+        display: none !important;
+    }
+}

@@ -57,12 +57,4 @@ Route::resource('/syaratPendaftaran', syaratPendaftaranController::class)->middl
 // Ubah Password
 Route::resource('/ubahPassword', ubahPasswordController::class)->middleware('autentikasi:1');
 
-
-//lokasi register : C:\laragon\www\pdhi-banten\app\Http\Controllers\Auth\RegisterController.php
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-
-Route::resource('/pengguna', PenggunaController::class);
-
-Route::resource('/dokter', DokterController::class);
-Route::resource('/dokter-tambah', DokterController::class)->middleware('autentikasi:2');
-

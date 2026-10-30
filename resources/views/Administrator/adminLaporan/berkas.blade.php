@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <style>
         .page-break {
@@ -9,12 +8,11 @@
     </style>
     <title>Berkas Dokter</title>
 </head>
-
 <body>
     <table>
         <tr>
             <td width="30"></td>
-            <td><img src="{{ asset('img/pdhi_logo.jpg') }}" width="130"></td>
+            <td><img src="{{ public_path('img/pdhi_logo.jpg') }}" width="130"></td>
             <td width="30"></td>
             <td style='text-align:center; vertical-align:middle'>
                 <u>PERHIMPUNAN DOKTER HEWAN INDONESIA</u><br>
@@ -28,9 +26,10 @@
         </tr>
     </table>
     <hr>
-    <center><u>
-            <h4>FORMULIR PENDAFTARAN ANGGOTA PDHI BANTEN II</h4>
-        </u></center>
+    <center>
+        <u><h4>FORMULIR PENDAFTARAN ANGGOTA PDHI BANTEN II</h4></u>
+    </center>
+
     @foreach ($data as $key => $value)
     <table cellpadding="7">
         <tr>
@@ -42,56 +41,44 @@
             <td>: {{ $value->nama_panggilan }}</td>
         </tr>
         <tr>
-            <td>Nama Lengkap</td>
-            <td>: {{ $value->nama_lengkap }}</td>
-        </tr>
-        <tr>
             <td>Tempat/Tanggal Lahir</td>
-            @if(is_null($value->tempat_lahir))
-            <td> </td>
-            @else
-            <td>: {{ $value->tempat_lahir }}, {{ date('d-M-Y', strtotime($value->tanggal_lahir)) }}</td>
-            @endif
+            <td>: {{ !empty($value->tempat_lahir) ? $value->tempat_lahir . ', ' . date('d-M-Y', strtotime($value->tanggal_lahir)) : '-' }}</td>
         </tr>
         <tr>
             <td>Alumni</td>
-            <td>: {{ $value->alumni }}</td>
+            <td>: {{ $value->alumni ?? '-' }}</td>
         </tr>
         <tr>
             <td>Tahun Alumni</td>
-            <td>: {{ $value->tahun_alumni }}</td>
+            <td>: {{ $value->tahun_alumni ?? '-' }}</td>
         </tr>
         <tr>
             <td>Nama Pasangan</td>
-            <td>: {{ $value->nama_pasangan }}</td>
+            <td>: {{ $value->nama_pasangan ?? '-' }}</td>
         </tr>
         <tr>
             <td>Alamat Rumah</td>
-            <td>: {{ $value->alamat_rumah }}</td>
+            <td>: {{ $value->alamat_rumah ?? '-' }}</td>
         </tr>
         <tr>
             <td>No. Telp</td>
-            <td>: {{ $value->no_telp }}</td>
+            <td>: {{ $value->no_telp ?? '-' }}</td>
         </tr>
         <tr>
             <td>Email</td>
-            <td>: {{ $value->email }}</td>
+            <td>: {{ $value->email ?? '-' }}</td>
         </tr>
         <tr>
             <td>Bidang Kerja Veteriner</td>
-            <td>: {{ $value->bidang_kerja }}</td>
+            <td>: {{ $value->bidang_kerja ?? '-' }}</td>
         </tr>
         <tr>
             <td>Nama & Alamat Tempat Kerja</td>
-            @if(is_null($value->nama_klinik))
-            <td>: </td>
-            @else
-            <td>: {{ $value->nama_klinik }}, {{ $value->alamat_klinik }}</td>
-            @endif
+            <td>: {{ !empty($value->nama_klinik) ? $value->nama_klinik . ', ' . ($value->alamat_klinik ?? '') : '-' }}</td>
         </tr>
         <tr>
             <td>No. Telp/Fax</td>
-            <td>: {{ $value->no_telp_klinik }}</td>
+            <td>: {{ $value->no_telp_klinik ?? '-' }}</td>
         </tr>
     </table>
     <br><br><br><br><br>
@@ -99,87 +86,37 @@
     <p style="text-align: right;">Tertanda,</p>
     <br><br><br>
     <p style="text-align: right;">{{ $value->nama_lengkap }}</p><br>
-    @endforeach 
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA PAS FOTO</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','pas_foto')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA IJAZAH</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','ijazah')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA KTP</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA KTA</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','kta')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA STRV</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','strv')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA SKDHI</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','skdhi')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA BUKTI TF. DAFTAR</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','tf_daftar')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-    <div class="page-break"></div>
-    <u>
-        <h5>BERKAS ANGGOTA BUKTI TF. KEANGGOTAAN</h5>
-    </u>
-    <br>
-    @if(is_null($dataBerkas->where('jenis_berkas','ktp')->pluck('nama_berkas')->first()))
-    <center><img src="{{ asset('img/no_image.jpg') }}" width="350"></center>
-    @else
-    <center><img src="{{ asset('img/berkas_dokter/' . $dataBerkas->where('jenis_berkas','tf_registrasi')->pluck('nama_berkas')->first()) }}" width="350"></center>
-    @endif
-</body>
+    @endforeach
 
+    @php
+    $berkasTitles = [
+        'pas_foto'      => 'PAS FOTO',
+        'ijazah'        => 'IJAZAH',
+        'ktp'           => 'KTP',
+        'kta'           => 'KTA',
+        'strv'          => 'STRV',
+        'skdhi'         => 'SKDHI',
+        'tf_daftar'     => 'BUKTI TF. DAFTAR',
+        'tf_registrasi' => 'BUKTI TF. KEANGGOTAAN',
+    ];
+    @endphp
+
+    @foreach ($berkasTitles as $jenis => $title)
+        @php
+            $file = $dataBerkas->where('jenis_berkas', $jenis)->pluck('nama_berkas')->first();
+            $filePath = !empty($file) ? public_path('img/berkas_dokter/' . $file) : null;
+            $hasValidImage = $filePath && file_exists($filePath) && !str_ends_with(strtolower($file), '.pdf');
+        @endphp
+        <div class="page-break"></div>
+        <u><h5>BERKAS ANGGOTA {{ $title }}</h5></u>
+        <br>
+        <center>
+            @if ($hasValidImage)
+                <img src="{{ $filePath }}" width="350">
+            @else
+                <img src="{{ public_path('img/no_image.jpg') }}" width="350">
+            @endif
+        </center>
+    @endforeach
+</body>
 </html>

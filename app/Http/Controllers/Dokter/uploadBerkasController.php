@@ -3,20 +3,30 @@
 namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UploadBerkasRequest;
 use Illuminate\Http\Request;
 use App\Models\Dokter;
-use App\Models\Pengguna;
 use App\Models\Berkas;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-
 class uploadBerkasController extends Controller
 {
+    /**
+     * Map form input field names to jenis_berkas_dokter ID and human-readable titles.
+     */
+    protected $jenisBerkasMapping = [
+        'pas_foto'      => ['id' => 1, 'nama' => 'Pas Foto'],
+        'ijazah_drh'    => ['id' => 2, 'nama' => 'Ijazah'],
+        'ktp'           => ['id' => 3, 'nama' => 'KTP'],
+        'kta'           => ['id' => 4, 'nama' => 'KTA'],
+        'strv'          => ['id' => 5, 'nama' => 'STRV'],
+        'skdhi'         => ['id' => 6, 'nama' => 'SKDHI'],
+        'tf_daftar'     => ['id' => 7, 'nama' => 'Bukti Transfer Pendaftaran'],
+        'tf_registrasi' => ['id' => 8, 'nama' => 'Bukti Transfer Anggota'],
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -24,25 +34,17 @@ class uploadBerkasController extends Controller
      */
     public function index()
     {
-        $Akun = Auth::user()->username;
-        $NamaDokter = Dokter::where('username', $Akun)->value('nama_panggilan');
-        $idDokter = Dokter::where('username', $Akun)->value('id');
-        $dataBerkas = DB::table('jenis_berkas_dokter')->leftJoin('berkas_dokter', function ($leftjoin) use ($idDokter) {
-            $leftjoin->on('jenis_berkas_dokter.id', '=', 'berkas_dokter.id_jenis_berkas')
-                ->where('berkas_dokter.id_dokter', $idDokter);
-        })->get();
+        $dokter = Dokter::where('username', Auth::user()->username)->first();
+        $NamaDokter = $dokter->nama_panggilan ?? '';
+        $idDokter = $dokter->id ?? null;
+
+        $dataBerkas = DB::table('jenis_berkas_dokter')
+            ->leftJoin('berkas_dokter', function ($leftjoin) use ($idDokter) {
+                $leftjoin->on('jenis_berkas_dokter.id', '=', 'berkas_dokter.id_jenis_berkas')
+                    ->where('berkas_dokter.id_dokter', $idDokter);
+            })->get();
 
         return view('Dokter.uploadBerkas', compact('NamaDokter', 'dataBerkas', 'idDokter'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *  
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -52,299 +54,90 @@ class uploadBerkasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
-        if ($request->file('pas_foto')) {
-            $this->validate($request, [
-                'pas_foto' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('pas_foto');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $Akun = Auth::user()->username;
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $berkasBaru = new Berkas;
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->id_jenis_berkas = '1';
-            $berkasBaru->id_dokter = $idDokter;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Ditambahkan');
-            return redirect('/uploadBerkas');
-        } elseif ($request->file('ijazah_drh')) {
-            $this->validate($request, [
-                'ijazah_drh' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('ijazah_drh');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $Akun = Auth::user()->username;
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $berkasBaru = new Berkas;
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->id_jenis_berkas = '2';
-            $berkasBaru->id_dokter = $idDokter;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Ijazah Sudah Ditambahkan');
-            return redirect('/uploadBerkas');
-        } elseif ($request->file('ktp')) {
-            $this->validate($request, [
-                'ktp' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('ktp');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $Akun = Auth::user()->username;
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $berkasBaru = new Berkas;
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->id_jenis_berkas = '3';
-            $berkasBaru->id_dokter = $idDokter;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas KTP Sudah Ditambahkan');
-            return redirect('/uploadBerkas');
-        } elseif ($request->file('kta')) {
-            $this->validate($request, [
-                'kta' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('kta');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $Akun = Auth::user()->username;
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $berkasBaru = new Berkas;
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->id_jenis_berkas = '4';
-            $berkasBaru->id_dokter = $idDokter;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas KTA Sudah Ditambahkan');
-            return redirect('/uploadBerkas');
-        } elseif ($request->file('strv')) {
-            $this->validate($request, [
-                'strv' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('strv');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $Akun = Auth::user()->username;
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $berkasBaru = new Berkas;
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->id_jenis_berkas = '5';
-            $berkasBaru->id_dokter = $idDokter;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas STRV Sudah Ditambahkan');
-            return redirect('/uploadBerkas');
-        } elseif ($request->file('skdhi')) {
-            $this->validate($request, [
-                'skdhi' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('skdhi');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $Akun = Auth::user()->username;
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $berkasBaru = new Berkas;
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->id_jenis_berkas = '6';
-            $berkasBaru->id_dokter = $idDokter;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas SKDHI Sudah Ditambahkan');
-            return redirect('/uploadBerkas');
-        } elseif ($request->file('tf_daftar')) {
-            $this->validate($request, [
-                'tf_daftar' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('tf_daftar');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $Akun = Auth::user()->username;
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $berkasBaru = new Berkas;
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->id_jenis_berkas = '7';
-            $berkasBaru->id_dokter = $idDokter;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Bukti Transfer Pendaftaran Sudah Ditambahkan');
-            return redirect('/uploadBerkas');
-        } elseif ($request->file('tf_registrasi')) {
-            $this->validate($request, [
-                'tf_registrasi' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('tf_registrasi');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $Akun = Auth::user()->username;
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $berkasBaru = new Berkas;
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->id_jenis_berkas = '8';
-            $berkasBaru->id_dokter = $idDokter;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Bukti Transfer Anggota Sudah Ditambahkan');
-            return redirect('/uploadBerkas');
-        } 
-        // else {
-        //     Alert::error('File Belum Dipilih', 'Mohon upload file yang ada di perangkat anda');
-        //     return redirect('/uploadBerkas');
-        // }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
     {
-        //
-    }
+        $dokter = Dokter::where('username', Auth::user()->username)->first();
+        if (!$dokter) {
+            Alert::error('Gagal', 'Data dokter tidak ditemukan.');
+            return redirect('/uploadBerkas');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        // 
+        return $this->handleFileUpload($request, $dokter->id, 'Ditambahkan');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $idDokter
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $idDokter)
     {
-        if ($request->file('pas_foto')){
-            $this->validate($request, [
-                'pas_foto' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('pas_foto');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','1')->first();
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
-            return redirect('/uploadBerkas');
-        }
-        elseif($request->file('ijazah_drh')){
-            $this->validate($request, [
-                'ijazah_drh' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('ijazah_drh');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','2')->first();
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
-            return redirect('/uploadBerkas');
-        }
-        elseif($request->file('ktp')){
-            $this->validate($request, [
-                'ktp' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('ktp');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','3')->first();
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
-            return redirect('/uploadBerkas');
-        }
-        elseif($request->file('kta')){
-            $this->validate($request, [
-                'kta' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('kta');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','4')->first();
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
-            return redirect('/uploadBerkas');
-        }
-        elseif($request->file('strv')){
-            $this->validate($request, [
-                'strv' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('strv');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','5')->first();
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
-            return redirect('/uploadBerkas');
-        }
-        elseif($request->file('skdhi')){
-            $this->validate($request, [
-                'skdhi' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('skdhi');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','6')->first();
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
-            return redirect('/uploadBerkas');
-        }
-        elseif($request->file('tf_daftar')){
-            $this->validate($request, [
-                'tf_daftar' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('tf_daftar');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','7')->first();
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
-            return redirect('/uploadBerkas');
-        }
-        elseif($request->file('tf_registrasi')){
-            $this->validate($request, [
-                'tf_registrasi' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:6000'],
-            ]);
-            $file = $request->file('tf_registrasi');
-            $namaFile = str_replace("-", "", str::uuid()) . ".jpeg";
-            $file->move('img/berkas_dokter', $namaFile);
-            $berkasBaru = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas','8')->first();
-            $berkasBaru->nama_berkas = $namaFile;
-            $berkasBaru->save();
-            Alert::success('Selesai!', 'Data Berkas Pas Foto Sudah Diubah');
-            return redirect('/uploadBerkas');
-        }
-        else {
-            Alert::error('File Belum Dipilih', 'Mohon upload file yang ada di perangkat anda');
-            return redirect('/uploadBerkas');
-        }
+        return $this->handleFileUpload($request, $idDokter, 'Diubah');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Common handler for storing or updating uploaded document files.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idDokter
+     * @param  string  $actionText
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    protected function handleFileUpload(Request $request, $idDokter, $actionText = 'Disimpan')
     {
-        //
+        foreach ($this->jenisBerkasMapping as $field => $info) {
+            if ($request->hasFile($field)) {
+                $request->validate([
+                    $field => ['required', 'file', 'mimes:jpeg,png,jpg,pdf', 'max:6000'],
+                ]);
+
+                $file = $request->file($field);
+                $ext = strtolower($file->getClientOriginalExtension()) ?: 'jpeg';
+                $namaFile = str_replace('-', '', Str::uuid()) . '.' . $ext;
+
+                $destination = public_path('img' . DIRECTORY_SEPARATOR . 'berkas_dokter');
+                if (!file_exists($destination)) {
+                    mkdir($destination, 0755, true);
+                }
+
+                $file->move($destination, $namaFile);
+
+                $berkas = Berkas::firstOrNew([
+                    'id_dokter' => $idDokter,
+                    'id_jenis_berkas' => (string)$info['id'],
+                ]);
+                $berkas->nama_berkas = $namaFile;
+                $berkas->save();
+
+                Alert::success('Selesai!', "Data Berkas {$info['nama']} Sudah {$actionText}");
+                return redirect('/uploadBerkas');
+            }
+        }
+
+        Alert::error('File Belum Dipilih', 'Mohon upload file yang ada di perangkat anda');
+        return redirect('/uploadBerkas');
     }
 
-    // Download Berkas
+    /**
+     * Secure Download of doctor documents with path traversal protection.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\RedirectResponse
+     */
     public function download(Request $request)
     {
-        $namaFile = $request->namaFile;
-        $pathToFile = public_path('img\\berkas_dokter\\' . $namaFile);
+        $namaFile = basename($request->namaFile);
+        if (empty($namaFile)) {
+            abort(400, 'Nama file tidak valid.');
+        }
+
+        $pathToFile = public_path('img' . DIRECTORY_SEPARATOR . 'berkas_dokter' . DIRECTORY_SEPARATOR . $namaFile);
+        if (!file_exists($pathToFile)) {
+            Alert::error('Gagal', 'Berkas tidak ditemukan di server');
+            return back();
+        }
+
         return response()->download($pathToFile);
     }
 }

@@ -5,123 +5,43 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Pengguna;
 use App\Models\Dokter;
-use App\Models\Berkas;
 use App\Models\Keanggotaan;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\pendaftaranDokterRequest;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-
 
 class adminPendaftaranController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        if ($request->has('cariDokter')) {
-            $Akun = Auth::user()->username;
-            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
+        $Akun = Auth::user()->username;
+        $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
 
-            $data = DB::table('dokter')
-                ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
-                ->where('id_kelas_pengguna', '1')
-                ->leftJoin('berkas_dokter', 'dokter.id', '=', 'berkas_dokter.id_dokter')
-                ->leftJoin('keanggotaan', 'id_keanggotaan', '=', 'keanggotaan.id')
-                ->select('dokter.id', 'nama_lengkap', 'nama_panggilan', 'id_dokter', 'nama_berkas', 'tanggal_terdaftar')
-                ->where('nama_lengkap', 'LIKE', '%' . $request->cariDokter . '%')
-                ->get()
-                ->groupBy('nama_lengkap')
-                ->paginate(10);
+        $query = DB::table('dokter')
+            ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
+            ->where('pengguna.id_kelas_pengguna', '1')
+            ->leftJoin('berkas_dokter', 'dokter.id', '=', 'berkas_dokter.id_dokter')
+            ->leftJoin('keanggotaan', 'dokter.id_keanggotaan', '=', 'keanggotaan.id')
+            ->select('dokter.id', 'nama_lengkap', 'nama_panggilan', 'id_dokter', 'nama_berkas', 'tanggal_terdaftar');
 
-
-            return view('Administrator.adminPendaftaran.index', compact('NamaAdmin', 'data'));
+        if ($request->filled('cariDokter')) {
+            $query->where('nama_lengkap', 'LIKE', '%' . $request->cariDokter . '%');
         } elseif ($request->has('terverifikasi')) {
-            $Akun = Auth::user()->username;
-            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-
-            $data = DB::table('dokter')
-                ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
-                ->where('id_kelas_pengguna', '1')
-                ->leftJoin('berkas_dokter', 'dokter.id', '=', 'berkas_dokter.id_dokter')
-                ->leftJoin('keanggotaan', 'id_keanggotaan', '=', 'keanggotaan.id')
-                ->select('dokter.id', 'nama_lengkap', 'nama_panggilan', 'id_dokter', 'nama_berkas', 'tanggal_terdaftar')
-                ->whereNotNull('tanggal_terdaftar')
-                ->get()
-                ->groupBy('nama_lengkap')
-                ->paginate(10);
-
-            return view('Administrator.adminPendaftaran.index', compact('NamaAdmin', 'data'));
+            $query->whereNotNull('tanggal_terdaftar');
         } elseif ($request->has('tinjau')) {
-            $Akun = Auth::user()->username;
-            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-
-            $data = DB::table('dokter')
-                ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
-                ->where('id_kelas_pengguna', '1')
-                ->leftJoin('berkas_dokter', 'dokter.id', '=', 'berkas_dokter.id_dokter')
-                ->leftJoin('keanggotaan', 'id_keanggotaan', '=', 'keanggotaan.id')
-                ->select('dokter.id', 'nama_lengkap', 'nama_panggilan', 'id_dokter', 'nama_berkas', 'tanggal_terdaftar')
-                ->whereNull('tanggal_terdaftar')
-                ->get()
-                ->groupBy('nama_lengkap')
-                ->paginate(10);
-
-            return view('Administrator.adminPendaftaran.index', compact('NamaAdmin', 'data'));
-        } else {
-            $Akun = Auth::user()->username;
-            $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-
-            $data = DB::table('dokter')
-                ->join('pengguna', 'dokter.username', '=', 'pengguna.username')
-                ->where('id_kelas_pengguna', '1')
-                ->leftJoin('berkas_dokter', 'dokter.id', '=', 'berkas_dokter.id_dokter')
-                ->leftJoin('keanggotaan', 'id_keanggotaan', '=', 'keanggotaan.id')
-                ->select('dokter.id', 'nama_lengkap', 'nama_panggilan', 'id_dokter', 'nama_berkas', 'tanggal_terdaftar')
-                ->get()
-                ->groupBy('nama_lengkap')
-                ->paginate(10);
-
-            return view('Administrator.adminPendaftaran.index', compact('NamaAdmin', 'data'));
+            $query->whereNull('tanggal_terdaftar');
         }
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $data = $query->get()->groupBy('nama_lengkap')->paginate(10);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return view('Administrator.adminPendaftaran.index', compact('NamaAdmin', 'data'));
     }
 
     /**
@@ -149,44 +69,44 @@ class adminPendaftaranController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\pendaftaranDokterRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(pendaftaranDokterRequest $request, $id)
     {
-        if ($request->masa_aktif == '4') {
-            $masa_aktif = date('Y-m-d', strtotime('+4 year', strtotime($request->tanggal_terdaftar)));
-        } else {
-            $masa_aktif = date('Y-m-d', strtotime('+2 year', strtotime($request->tanggal_terdaftar)));
-        }
+        $years = (int)$request->masa_aktif ?: 2;
+        $tanggalTerdaftar = date('Y-m-d', strtotime($request->tanggal_terdaftar));
+        $masa_aktif = date('Y-m-d', strtotime("+{$years} year", strtotime($tanggalTerdaftar)));
 
-        $keanggotaanBaru = Keanggotaan::find($id);
+        $keanggotaanBaru = Keanggotaan::findOrFail($id);
         $keanggotaanBaru->domisili_anggota = $request->domisili_anggota;
-        $keanggotaanBaru->tanggal_terdaftar = date('Y-m-d', strtotime($request->tanggal_terdaftar));
+        $keanggotaanBaru->tanggal_terdaftar = $tanggalTerdaftar;
         $keanggotaanBaru->masa_aktif = $masa_aktif;
         $keanggotaanBaru->save();
-        Alert::success('Selesai!', 'Data keanggotaan dokter terkait telah ditambahkan');
 
+        Alert::success('Selesai!', 'Data keanggotaan dokter terkait telah ditambahkan');
         return redirect('/adminPendaftaran');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Download Berkas with path traversal protection.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
-    {
-        //
-    }
-
-    // Download Berkas
     public function download(Request $request)
     {
-        $namaFile = $request->namaFile;
-        $pathToFile = public_path('img\\berkas_dokter\\' . $namaFile);
+        $namaFile = basename($request->namaFile);
+        if (empty($namaFile)) {
+            abort(400, 'Nama file tidak valid.');
+        }
+
+        $pathToFile = public_path('img' . DIRECTORY_SEPARATOR . 'berkas_dokter' . DIRECTORY_SEPARATOR . $namaFile);
+        if (!file_exists($pathToFile)) {
+            return back()->with('error', 'Berkas tidak ditemukan.');
+        }
+
         return response()->download($pathToFile);
     }
 }

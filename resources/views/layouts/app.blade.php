@@ -13,8 +13,45 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts & Styles -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('common/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
+    <script src="{{ asset('common/js/bootstrap.min.js') }}"></script>
+    <script>
+        function togglePasswordVisibility(button) {
+            if (!button) return;
+            var now = Date.now();
+            if (button._lastToggleTime && (now - button._lastToggleTime) < 250) return;
+            button._lastToggleTime = now;
+
+            var targetSelector = button.getAttribute('data-target') || '#password';
+            var input = document.querySelector(targetSelector);
+            if (!input) return;
+
+            var willShowText = (input.type === 'password');
+            input.type = willShowText ? 'text' : 'password';
+
+            var icon = button.querySelector('i, svg');
+            if (icon) {
+                if (icon.tagName.toLowerCase() === 'svg') {
+                    var newI = document.createElement('i');
+                    newI.className = willShowText ? 'fas fa-eye-slash' : 'fas fa-eye';
+                    icon.parentNode.replaceChild(newI, icon);
+                    if (window.FontAwesome && window.FontAwesome.dom && window.FontAwesome.dom.i2svg) {
+                        window.FontAwesome.dom.i2svg({ node: button });
+                    }
+                } else {
+                    if (willShowText) {
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                }
+            }
+        }
+        window.togglePasswordVisibility = togglePasswordVisibility;
+    </script>
 </head>
 <body>
     <div id="app">
@@ -93,22 +130,3 @@
   <script src="{{ asset('js/custom.js') }}"></script>
 </body>
 </html>
-
-
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6">
-      <form>
-  <div class="form-group">
-    <label>Password</label>
-    <div class="input-group" id="show_hide_password">
-      <input class="form-control" type="password">
-      <div class="input-group-addon">
-        <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-      </div>
-    </div>
-  </div>
-</form>
-    </div>
-  </div>
-</div>

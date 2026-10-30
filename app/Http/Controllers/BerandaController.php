@@ -10,119 +10,71 @@ use App\Models\Pengguna;
 use App\Models\Berkas;
 use App\Models\Keanggotaan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-
-use function PHPUnit\Framework\isNull;
 
 class BerandaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display dashboard home depending on user role.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $Akun = Auth::user()->username;
-        $IdKelasPengguna = Auth::user()->id_kelas_pengguna;
+        $user = Auth::user();
+        $Akun = $user->username;
+        $IdKelasPengguna = $user->id_kelas_pengguna;
 
         if ($IdKelasPengguna == Constants::ID_KELAS_PENGGUNA_ADMIN) {
-            date_default_timezone_set('Asia/jakarta');
+            date_default_timezone_set('Asia/Jakarta');
             $NamaAdmin = Dokter::where('username', $Akun)->value('nama_lengkap');
-            $totalAnggota = Pengguna::where('id_kelas_pengguna','1')->join('dokter','pengguna.username','=','dokter.username')->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')->whereNotNull('tanggal_terdaftar')->count();
-            $totalNonAnggota = Pengguna::where('id_kelas_pengguna','1')->join('dokter','pengguna.username','=','dokter.username')->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')->whereNull('tanggal_terdaftar')->count();
+
+            $baseQuery = Pengguna::where('id_kelas_pengguna', '1')
+                ->join('dokter', 'pengguna.username', '=', 'dokter.username')
+                ->join('keanggotaan', 'dokter.id_keanggotaan', '=', 'keanggotaan.id');
+
+            $totalAnggota = (clone $baseQuery)->whereNotNull('tanggal_terdaftar')->count();
+            $totalNonAnggota = (clone $baseQuery)->whereNull('tanggal_terdaftar')->count();
+
+            $today = date('Y-m-d');
             $anggotaTetap = Keanggotaan::where('domisili_anggota', 'tetap')->count();
             $anggotaTamu = Keanggotaan::where('domisili_anggota', 'tamu')->count();
-            $anggotaAktif = Keanggotaan::where('masa_aktif','>', date('Y-m-d'))->count();
-            $anggotaNonAktif = Keanggotaan::where('masa_aktif','<', date('Y-m-d'))->count();
+            $anggotaAktif = Keanggotaan::where('masa_aktif', '>', $today)->count();
+            $anggotaNonAktif = Keanggotaan::where('masa_aktif', '<', $today)->count();
+
             $akunAdmin = Pengguna::where('id_kelas_pengguna', '2')->count();
             $akunUser = Pengguna::where('id_kelas_pengguna', '1')->count();
-            return view('Administrator.beranda', compact('totalAnggota','totalNonAnggota','anggotaTetap','anggotaTamu','NamaAdmin','anggotaAktif','anggotaNonAktif','akunAdmin','akunUser'));
+
+            return view('Administrator.beranda', compact(
+                'totalAnggota', 'totalNonAnggota', 'anggotaTetap', 'anggotaTamu',
+                'NamaAdmin', 'anggotaAktif', 'anggotaNonAktif', 'akunAdmin', 'akunUser'
+            ));
         } else {
-            $Akun = Auth::user()->username;
-            $NamaDokter = Dokter::where('username', $Akun)->value('nama_panggilan');
+            $dokter = Dokter::where('username', $Akun)->first();
+            $NamaDokter = $dokter->nama_panggilan ?? '';
+            $idDokter = $dokter->id ?? null;
+
             $DataDokter = DB::table('dokter')
-            ->where('username',$Akun)
-            ->join('klinik', 'dokter.id_klinik', '=', 'klinik.id')
-            ->join('keanggotaan','dokter.id_keanggotaan','=','keanggotaan.id')
-            ->get();
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $pasFoto = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '1')->value('nama_berkas');
-            $idDokter = Dokter::where('username', $Akun)->value('id');
-            $ijazah = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '2')->value('nama_berkas');
-            $ktp = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '3')->value('nama_berkas');
-            $kta = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '4')->value('nama_berkas');
-            $strv = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '5')->value('nama_berkas');
-            $skdhi = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '6')->value('nama_berkas');
-            $tf_daftar = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '7')->value('nama_berkas');
-            $tf_registrasi = Berkas::where('id_dokter',$idDokter)->where('id_jenis_berkas', '8')->value('nama_berkas');
-            return view('Dokter.index', compact('NamaDokter','DataDokter','pasFoto','ijazah','ktp','kta','strv','skdhi','tf_daftar','tf_registrasi'));
+                ->where('dokter.username', $Akun)
+                ->join('klinik', 'dokter.id_klinik', '=', 'klinik.id')
+                ->join('keanggotaan', 'dokter.id_keanggotaan', '=', 'keanggotaan.id')
+                ->get();
+
+            // Fetch all doctor files in a single indexed query instead of 8 separate queries
+            $berkasMap = Berkas::where('id_dokter', $idDokter)->pluck('nama_berkas', 'id_jenis_berkas');
+
+            $pasFoto       = $berkasMap['1'] ?? null;
+            $ijazah        = $berkasMap['2'] ?? null;
+            $ktp           = $berkasMap['3'] ?? null;
+            $kta           = $berkasMap['4'] ?? null;
+            $strv          = $berkasMap['5'] ?? null;
+            $skdhi         = $berkasMap['6'] ?? null;
+            $tf_daftar     = $berkasMap['7'] ?? null;
+            $tf_registrasi = $berkasMap['8'] ?? null;
+
+            return view('Dokter.index', compact(
+                'NamaDokter', 'DataDokter', 'pasFoto', 'ijazah', 'ktp', 'kta',
+                'strv', 'skdhi', 'tf_daftar', 'tf_registrasi'
+            ));
         }
-    }
-
-        /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

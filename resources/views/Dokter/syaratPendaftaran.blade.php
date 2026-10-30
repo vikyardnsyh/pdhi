@@ -1,105 +1,105 @@
 @extends('layouts.pengguna')
-@section('title', 'Syarat Pendaftaran')
-@section('sidebar')
-@endsection
+@section('title', 'Syarat Pendaftaran Anggota')
 
 @section('content')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Syarat Pendaftaran Anggota</h1>
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <div>
+                <h1>Syarat Pendaftaran</h1>
+                <small class="text-muted">Ketentuan & Persyaratan Pendaftaran Anggota PDHI Cabang Banten II</small>
             </div>
-            <div class="section-body">
-                <div class="card card-primary">
+        </div>
 
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-lg-2">
-                            <div class="p-3 ml-5">
-                                <img src="{{ asset('img/pdhi_logo.jpg') }}" width="140px" alt="">
-                            </div>
+        <div class="section-body">
+            {{-- Official Letterhead Card --}}
+            <div class="card card-primary shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+                            <img src="{{ asset('img/pdhi_logo.jpg') }}" width="110" height="110" alt="Logo PDHI" class="rounded-circle shadow-sm">
                         </div>
-                        <div class="col-12 col-sm-6 col-lg-10">
-                            <div class="text-center text-dark mt-2">
-                                <u>
-                                    <h5>PERHIMPUNAN DOKTER HEWAN INDONESIA</h5>
-                                </u>
-                            </div>
-                            <div class="text-center text-dark mt-n2">
-                                <b>
-                                    <h6>INDONESIAN VETERINARY MEDICAL ASSOCIATION</h6>
-                                </b>
-                            </div>
-                            <div class="text-center text-dark mt-n1">
-                                <strong>
-                                    <h5>CABANG BANTEN 2</h5>
-                                </strong>
-                            </div>
-                            <div class="text-center text-muted mt-n1">
-                                <h6>Sekretariat : Boulevard Orlin Arcade 2. JB03. Lt.2 Graha Raya</h6>
-                                <h6 class="mt-n2">Paku Jaya-Tangerang Selatan</h6>
-                                <h6 class="mt-n2">HP/WA : 087871017429</h6>
-                                <h6 class="mt-n2">Email : <a
-                                        href="mailto:pdhicabangbanten2@gmail.com">pdhicabangbanten2@gmail.com</a> atau
-                                    <a href="https://banten2.pdhi.or.id/">banten2@pdhi.or.id</a>
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-12 col-sm-6 col-lg-6">
-                            <div class="card shadow p-3 mb-5 bg-white rounded">
-                                <h6 class="text-center text-dark p-3"><u>ANGGOTA TETAP</u></h6>
-                                <ol>
-                                    <li>Mengisi formulir keanggotaan</li>
-                                    <li>Melampirkan fotocopy ijazah Dokter Hewan yang dilegalisir 1 lembar</li>
-                                    <li>Melampirkan 2 lembar pas foto berwarna 4x6 dengan ketentuan untuk laki-laki
-                                        dengan
-                                        latar belakang MERAH dan untuk perempuan dengan latar belakang BIRU MUDA yang
-                                        tidak dirusak/terlubangi stapler</li>
-                                    <li>Melampirkan fotocopy KTP 1 lembar</li>
-                                    <li>Melampirkan fotocopy KTA online</li>
-                                    <li>Melampirkan fotocopy STRV 1 lembar</li>
-                                    <li>Melampirkan fotocopy SKDHI 1 lembar</li>
-                                    <li>Membayar uang pendaftaran sebesar Rp. 100.000,-</li>
-                                    <li>Membayar uang keanggotan selama 4 tahun sebesar Rp. 1.200.000,-
-                                        (Rp.300.000/tahun)</li>
-                                    <li>Semua biaya-biaya pada poin 8 dan 9 ditransfer ke rek PDHI Banten II (Bank BCA
-                                        No.
-                                        Rek. 8330011981 a.n. Ida Rosmaida) dan selanjutnya bukti transfer diserahkan ke
-                                        sekretariat saat mendaftar.</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-6">
-                            <div class="card shadow p-3 mb-5 bg-white rounded">
-                                <h6 class="text-center text-dark p-3"><u>ANGGOTA TAMU</u></h6>
-                                <ol>
-                                    <li>Mengisi formulir keanggotaan</li>
-                                    <li>Melampirkan fotocopy ijazah Dokter Hewan yang dilegalisir 1 lembar</li>
-                                    <li>Melampirkan 2 lembar pas foto berwarna 4x6 dengan ketentuan untuk laki-laki
-                                        dengan
-                                        latar belakang MERAH dan untuk perempuan dengan latar belakang BIRU MUDA yang
-                                        tidak dirusak/terlubangi stapler</li>
-                                    <li>Melampirkan fotocopy KTP 1 lembar</li>
-                                    <li>Melampirkan fotocopy KTA online</li>
-                                    <li>Melampirkan fotocopy STRV 1 lembar</li>
-                                    <li>Melampirkan fotocopy SKDHI 1 lembar</li>
-                                    <li>Membayar uang keanggotan selama 4 tahun sebesar Rp. 2.000.000,-
-                                        (Rp.500.000/tahun)</li>
-                                    <li>Semua biaya-biaya pada poin 8 ditransfer ke rek PDHI Banten II (Bank BCA
-                                        No.
-                                        Rek. 8330011981 a.n. Ida Rosmaida) dan selanjutnya bukti transfer diserahkan ke
-                                        sekretariat saat mendaftar.</li>
-                                </ol>
+                        <div class="col-12 col-md-9 text-center text-md-left">
+                            <h5 class="text-dark font-weight-bold mb-1">PERHIMPUNAN DOKTER HEWAN INDONESIA</h5>
+                            <h6 class="text-muted font-weight-bold mb-1">INDONESIAN VETERINARY MEDICAL ASSOCIATION</h6>
+                            <h5 class="text-primary font-weight-bold mb-2">CABANG BANTEN II</h5>
+                            <p class="text-muted text-small mb-1">
+                                Sekretariat: Boulevard Orlin Arcade 2, JB03 Lt. 2 Graha Raya, Paku Jaya - Tangerang Selatan
+                            </p>
+                            <div class="text-small">
+                                <span class="mr-3"><i class="fab fa-whatsapp text-success mr-1"></i> 0878-7101-7429</span>
+                                <span class="mr-3"><i class="fas fa-envelope text-primary mr-1"></i> pdhicabangbanten2@gmail.com</span>
+                                <span><i class="fas fa-globe text-info mr-1"></i> <a href="https://banten2.pdhi.or.id/" target="_blank">banten2.pdhi.or.id</a></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-    </div>
+
+            {{-- Requirements Grid: Anggota Tetap vs Anggota Tamu --}}
+            <div class="row">
+                {{-- Anggota Tetap --}}
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="card h-100 shadow-sm border" style="border-top: 4px solid #47c363 !important;">
+                        <div class="card-header bg-light d-flex justify-content-between align-items-center py-3">
+                            <h5 class="font-weight-bold text-success mb-0">
+                                <i class="fas fa-user-check mr-2"></i> ANGGOTA TETAP
+                            </h5>
+                            <span class="badge badge-success">Domisili Banten</span>
+                        </div>
+                        <div class="card-body p-4">
+                            <ol class="pl-3 mb-3 text-dark" style="line-height: 1.8;">
+                                <li>Mengisi formulir keanggotaan lengkap.</li>
+                                <li>Melampirkan fotocopy ijazah Dokter Hewan yang dilegalisir (1 lembar).</li>
+                                <li>Melampirkan 2 lembar pas foto berwarna 4x6 (ketentuan: laki-laki berlatar belakang <strong>MERAH</strong>, perempuan berlatar belakang <strong>BIRU MUDA</strong>, tidak dirusak/stapler).</li>
+                                <li>Melampirkan fotocopy KTP (1 lembar).</li>
+                                <li>Melampirkan fotocopy KTA online PDHI Pusat.</li>
+                                <li>Melampirkan fotocopy STRV (1 lembar).</li>
+                                <li>Melampirkan fotocopy SKDHI (1 lembar).</li>
+                                <li>Membayar uang pendaftaran sebesar <strong>Rp. 100.000,-</strong></li>
+                                <li>Membayar iuran keanggotaan selama 4 tahun sebesar <strong>Rp. 1.200.000,-</strong> (Rp. 300.000,- / tahun).</li>
+                            </ol>
+
+                            <div class="alert alert-light border rounded p-3 text-small">
+                                <i class="fas fa-university text-primary mr-1"></i> <strong>Rekening Pembayaran:</strong><br>
+                                Bank BCA: <strong>8330011981</strong> a.n. <strong>Ida Rosmaida</strong><br>
+                                <small class="text-muted">Simpan dan unggah bukti transfer ke sistem pada menu Upload Berkas.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Anggota Tamu --}}
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="card h-100 shadow-sm border" style="border-top: 4px solid #ffa426 !important;">
+                        <div class="card-header bg-light d-flex justify-content-between align-items-center py-3">
+                            <h5 class="font-weight-bold text-warning mb-0">
+                                <i class="fas fa-user-clock mr-2"></i> ANGGOTA TAMU
+                            </h5>
+                            <span class="badge badge-warning">Luar Domisili</span>
+                        </div>
+                        <div class="card-body p-4">
+                            <ol class="pl-3 mb-3 text-dark" style="line-height: 1.8;">
+                                <li>Mengisi formulir keanggotaan lengkap.</li>
+                                <li>Melampirkan fotocopy ijazah Dokter Hewan yang dilegalisir (1 lembar).</li>
+                                <li>Melampirkan 2 lembar pas foto berwarna 4x6 (ketentuan: laki-laki berlatar belakang <strong>MERAH</strong>, perempuan berlatar belakang <strong>BIRU MUDA</strong>, tidak dirusak/stapler).</li>
+                                <li>Melampirkan fotocopy KTP (1 lembar).</li>
+                                <li>Melampirkan fotocopy KTA online PDHI Pusat.</li>
+                                <li>Melampirkan fotocopy STRV (1 lembar).</li>
+                                <li>Melampirkan fotocopy SKDHI (1 lembar).</li>
+                                <li>Membayar iuran keanggotaan selama 4 tahun sebesar <strong>Rp. 2.000.000,-</strong> (Rp. 500.000,- / tahun).</li>
+                            </ol>
+
+                            <div class="alert alert-light border rounded p-3 text-small">
+                                <i class="fas fa-university text-primary mr-1"></i> <strong>Rekening Pembayaran:</strong><br>
+                                Bank BCA: <strong>8330011981</strong> a.n. <strong>Ida Rosmaida</strong><br>
+                                <small class="text-muted">Simpan dan unggah bukti transfer ke sistem pada menu Upload Berkas.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    </div>
-
-
+</div>
 @endsection

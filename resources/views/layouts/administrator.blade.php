@@ -16,7 +16,44 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/css/components.css') }}">
-    <link rel="stylesheet" href="{{ asset('common/css/bootstrap-datepicker3.css') }}">
+    <link rel="stylesheet" href="{{ asset('common/css/bootstrap-datepicker3.css') }}?v={{ filemtime(public_path('common/css/bootstrap-datepicker3.css')) }}">
+    <link rel="stylesheet" href="{{ asset('stisla/css/custom.css') }}?v={{ filemtime(public_path('stisla/css/custom.css')) }}">
+    <script>
+        function togglePasswordVisibility(button) {
+            if (!button) return;
+            var now = Date.now();
+            if (button._lastToggleTime && (now - button._lastToggleTime) < 250) return;
+            button._lastToggleTime = now;
+
+            var targetSelector = button.getAttribute('data-target') || '#password';
+            var input = document.querySelector(targetSelector);
+            if (!input) return;
+
+            var willShowText = (input.type === 'password');
+            input.type = willShowText ? 'text' : 'password';
+
+            var icon = button.querySelector('i, svg');
+            if (icon) {
+                if (icon.tagName.toLowerCase() === 'svg') {
+                    var newI = document.createElement('i');
+                    newI.className = willShowText ? 'fas fa-eye-slash' : 'fas fa-eye';
+                    icon.parentNode.replaceChild(newI, icon);
+                    if (window.FontAwesome && window.FontAwesome.dom && window.FontAwesome.dom.i2svg) {
+                        window.FontAwesome.dom.i2svg({ node: button });
+                    }
+                } else {
+                    if (willShowText) {
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                }
+            }
+        }
+        window.togglePasswordVisibility = togglePasswordVisibility;
+    </script>
     <style>
         .vl {
             border-left: 6px solid white;
@@ -57,20 +94,20 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Beranda</li>
-                        <li><a class="nav-link" href="/"><i class="fa fa-briefcase mr-2"></i>
+                        <li class="{{ Request::is('/') ? 'active' : '' }}"><a class="nav-link" href="/"><i class="fa fa-briefcase mr-2"></i>
                                 <span>Dashboard</span></a></li>
                         <li class="menu-header">Administrasi Data</li>
-                        <li><a class="nav-link" href="/AdminAkun"><i class="fa fa-key mr-2"></i>
+                        <li class="{{ Request::is('AdminAkun*') ? 'active' : '' }}"><a class="nav-link" href="/AdminAkun"><i class="fa fa-key mr-2"></i>
                                 <span>Administrasi Data Akun</span></a></li>
-                        <li><a class="nav-link" href="/adminDokter"><i class="fa fa-folder-open mr-2"></i>
+                        <li class="{{ Request::is('adminDokter*') ? 'active' : '' }}"><a class="nav-link" href="/adminDokter"><i class="fa fa-folder-open mr-2"></i>
                                 <span>Administrasi Data Dokter</span></a></li>
                         <li class="menu-header">Administrasi Keanggotaan</li>
-                        <li><a class="nav-link" href="/adminPendaftaran"><i class="fa fa-address-book mr-2"></i>
+                        <li class="{{ Request::is('adminPendaftaran*') ? 'active' : '' }}"><a class="nav-link" href="/adminPendaftaran"><i class="fa fa-address-book mr-2"></i>
                                 <span>Administrasi Pendaftaran</span></a></li>
-                        <li><a class="nav-link" href="/adminKeanggotaan"><i class="fa fa-user-circle mr-2"></i>
+                        <li class="{{ Request::is('adminKeanggotaan*') ? 'active' : '' }}"><a class="nav-link" href="/adminKeanggotaan"><i class="fa fa-user-circle mr-2"></i>
                                 <span>Administrasi Anggota</span></a></li>
                         <li class="menu-header">Laporan</li>
-                        <li><a class="nav-link" href="/adminLaporan"><i class="fa fa-book mr-2"></i> <span>Download
+                        <li class="{{ Request::is('adminLaporan*') ? 'active' : '' }}"><a class="nav-link" href="/adminLaporan"><i class="fa fa-book mr-2"></i> <span>Download
                                     Laporan</span></a></li>
                     </ul>
                 </aside>
@@ -94,14 +131,14 @@
     <script src="{{ asset('common/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('common/js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('common/js/moment.min.js') }}"></script>
-    <script src="{{ asset('common/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('common/js/bootstrap-datepicker.min.js') }}?v={{ filemtime(public_path('common/js/bootstrap-datepicker.min.js')) }}"></script>
 
     <script src="{{ asset('fontawesome/js/all.min.js') }}"></script>
     <script src="{{ asset('stisla/js/stisla.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js') }}"></script>
-    <script src="{{ asset('stisla/js/custom.js') }}"></script>
+    <script src="{{ asset('stisla/js/custom.js') }}?v={{ filemtime(public_path('stisla/js/custom.js')) }}"></script>
     <script src="{{ asset('common/js/sweetalert.min.js') }}"></script>
 
     <script type="text/javascript">
