@@ -1,65 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="public/img/pdhi_logo.jpg" alt="Logo PDHI Cabang Banten II" width="120" height="120" style="border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
 </p>
 
-## About Laravel
+<h1 align="center">Sistem Administrasi Anggota PDHI Cabang Banten II</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  Platform administrasi keanggotaan terintegrasi untuk <strong>Perhimpunan Dokter Hewan Indonesia (PDHI) Cabang Banten II</strong>.
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-8.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 8">
+  <img src="https://img.shields.io/badge/PHP-8.x-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8">
+  <img src="https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/Bootstrap-4.6-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap">
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge" alt="Status">
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📌 Tentang Aplikasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Aplikasi ini dirancang untuk memodernisasi dan mengotomatiskan pengelolaan keanggotaan dokter hewan di lingkungan **PDHI Cabang Banten II**, mulai dari pendaftaran anggota baru, verifikasi berkas digital, pelacakan masa aktif keanggotaan, hingga penyusunan laporan resmi (PDF dan Excel).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Dilengkapi dengan desain antarmuka modern bernuansa warna khas PDHI (*Imperial Violet*), interaksi pengguna responsif, dan maskot interaktif yang ramah.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 📸 Pratinjau Tampilan (Screenshots)
 
-### Premium Partners
+### Halaman Login Interaktif
+Halaman login modern dengan maskot interaktif *puppy* dan *cat arm* yang responsif mengikuti gerakan kursor pengguna, efek jejak kaki (*paw trail*), serta fitur lihat/sembunyikan password.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+<p align="center">
+  <img src="public/img/screenshots/login_preview.png" alt="Login Preview PDHI Banten II" width="85%" style="border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);">
+</p>
 
-## Contributing
+<p align="center">
+  <img src="public/img/puppy_stand.gif" alt="Mascot Puppy Stand" width="100">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="public/img/puppy_jump.gif" alt="Mascot Puppy Jump" width="100">
+</p>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## ✨ Fitur-Fitur Utama
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 👨‍💼 Panel Administrator
+- **Dashboard & Statistik Real-Time**: Ringkasan data anggota aktif, pendaftaran baru, permohonan perpanjangan, serta berkas yang perlu diverifikasi.
+- **Manajemen Akun Pengguna**: Penambahan akun, edit profil, pengelolaan role (Admin/Dokter), aktivasi/penonaktifan, dan reset password mandiri oleh admin.
+- **Data Master Dokter Hewan**: Informasi lengkap profil dokter, nomor kontak, klinik/tempat praktik, asal perguruan tinggi (alumni), dan riwayat status keanggotaan.
+- **Verifikasi & Approval Berkas**: Validasi berkas persyaratan pendaftaran anggota baru dengan pratinjau dokumen digital.
+- **Manajemen Keanggotaan & Perpanjangan**: Pembaruan status masa aktif anggota serta perpanjangan keanggotaan berkala.
+- **Pusat Laporan & Ekspor Data**:
+  - Ekspor data anggota ke format **Excel (.xlsx)**.
+  - Cetak laporan resmi berformat **PDF** siap cetak.
 
-## Security Vulnerabilities
+### 🩺 Panel Dokter Hewan (Anggota)
+- **Formulir Registrasi Mandiri**: Input data dokter hewan (biodata, nomor kontak, riwayat pendidikan alumni, informasi klinik atau tempat praktik).
+- **Pengelolaan Berkas Digital**: Unggah dan kelola berkas persyaratan keanggotaan (Ijazah, Sertifikat Kompetensi, SKPB, Surat Rekomendasi/Izin Praktik, KTP, dan Pas Foto).
+- **Syarat & Ketentuan Keanggotaan**: Panduan lengkap persyaratan pendaftaran cabang.
+- **Keamanan Akun**: Fitur ubah kata sandi akun secara mandiri dan aman.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 🎨 Peningkatan UI/UX
+- **Palet Warna Harmonis PDHI**: Warna utama *Noble Royal Violet* (`#581c87`), *Lilac Tint*, dan indikator status semantik yang nyaman di mata.
+- **Tabel Responsif Modern**: Striping kontras tinggi, penataan kolom rapi, *action cluster buttons*, dan *sticky columns* pada tampilan desktop.
+- **Komponen Datepicker Halus**: Integrasi Bootstrap Datepicker dengan auto-dismiss saat memilih tanggal.
+- **Desain Adaptif**: Tampilan tetap rapi dan mudah diakses melalui desktop, tablet, maupun ponsel pintar.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🛠️ Tumpukan Teknologi
+
+- **Backend**: [Laravel 8](https://laravel.com/)
+- **Bahasa Pemrograman**: PHP 8.x
+- **Basis Data**: MySQL / MariaDB
+- **Frontend**: Blade Templating, Bootstrap 4, jQuery, Stisla UI, FontAwesome 5
+- **Export & Document Generator**: `maatwebsite/excel`, `barryvdh/laravel-dompdf`
+
+---
+
+## 🚀 Panduan Instalasi Lokal
+
+### 1. Prasyarat Sistem
+- PHP >= 8.0
+- Composer
+- MySQL >= 5.7 atau MariaDB >= 10.3
+- Web Server (Apache / Nginx / Laragon / XAMPP)
+
+### 2. Kloning Repositori
+```bash
+git clone https://github.com/vikyardnsyh/pdhi.git
+cd pdhi
+```
+
+### 3. Instal Dependensi
+```bash
+composer install
+```
+
+### 4. Konfigurasi Lingkungan (`.env`)
+Salin file template lingkungan dan sesuaikan kredensial basis data:
+```bash
+cp .env.example .env
+```
+Buka file `.env` dan atur konfigurasi database:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pdhi_banten
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Generate Application Key & Jalankan Migrasi
+```bash
+php artisan key:generate
+php artisan migrate --seed
+```
+
+### 6. Jalankan Server Pengembangan
+```bash
+php artisan serve
+```
+Akses aplikasi melalui browser di: `http://localhost:8000`
+
+---
+
+## 📄 Lisensi
+
+Hak Cipta &copy; Perhimpunan Dokter Hewan Indonesia (PDHI) Cabang Banten II. Dikembangkan untuk keperluan administrasi dan layanan keanggotaan.
